@@ -1,15 +1,13 @@
-################################################################################
-#
-#
-#   Script for cleaning mp1 dataset abstracted from ALSPAC drive
-#
-#   Author:       Flo Martin
-#   Date:         26/10/2020
-#   Description:  This script describes the data cleaning processes for the data
-#                 being used in mini project 1 describing and investigating 
-#                 menstrual and premenstrual symptoms
-#
-################################################################################
+#################################################################################################################################################################
+#                                                                                                                                                               #
+#   Script for cleaning mp1 dataset abstracted from ALSPAC drive                                                                                                #
+#                                                                                                                                                               #
+#   Author:       Flo Martin                                                                                                                                    #
+#   Date:         26/10/2020                                                                                                                                    #
+#   Description:  This script describes the data cleaning processes for the data being used in mini project 1 describing and investigating menstrual and        #
+#                 premenstrual symptoms                                                                                                                         #
+#                                                                                                                                                               #
+################################################################################################################################################################# 
 
 # Using ncol I can see how many columns I have in mp1
 ncol(mp1)
@@ -20,8 +18,7 @@ class(mp1[,4])
 # What the names of all the columns are
 colnames(mp1)
 
-# Now, I can change the names of the columns from variable names to something
-# more indicative of what they are showing
+# Now, I can change the names of the columns from variable names to something more indicative of what they are showing
 colnames(mp1) [4] <- "men_age_mo"
 colnames(mp1) [5] <- "men_age_y"
 colnames(mp1) [6] <- "mat_edu"
@@ -185,8 +182,9 @@ table(mp1$no_of_wines_last30days_16yr)
 
 # Variable for number of spirits in the last 30 days, using D1422_CCS.pdf the labels are as shown below:
 table(mp1$no_of_spirits_last30days_16yr)
-mp1$no_of_spirits_last30days_16yr <- factor(mp1$no_of_spirits_last30days_16yr, levels = c(-10,-1,1,2,3,4,5,6,7), labels = c("Missing","No response","Zero","1-2","3-5",
-                                                                                                                        "6-9","10-19","20-39","40 or more"))
+mp1$no_of_spirits_last30days_16yr <- factor(mp1$no_of_spirits_last30days_16yr, levels = c(-10,-1,1,2,3,4,5,6,7), labels = c("Missing","No response","Zero","1-2",
+                                                                                                                            "3-5","6-9","10-19","20-39",
+                                                                                                                            "40 or more"))
 table(mp1$no_of_spirits_last30days_16yr)
 
 # Variable for whether the young woman is currently using the contraceptive pill (yes or no), using D1456_CCXF.pdf the labels are as shown below:
@@ -206,7 +204,8 @@ table(mp1$contraceptive_implant_19yr)
 
 # Variable for whether the young woman is currently using the contraceptive coil (yes or no), using D1456_CCXF.pdf the labels are as shown below:
 table(mp1$contraceptive_hormonal_coil_19yr)
-mp1$contraceptive_hormonal_coil_19yr <- factor(mp1$contraceptive_hormonal_coil_19yr, levels = c(-10,-3,-1,1,2), labels = c("Not completed","Male","Not known","Yes","No"))
+mp1$contraceptive_hormonal_coil_19yr <- factor(mp1$contraceptive_hormonal_coil_19yr, levels = c(-10,-3,-1,1,2), labels = c("Not completed","Male","Not known","Yes",
+                                                                                                                           "No"))
 table(mp1$contraceptive_hormonal_coil_19yr)
 
 # Variable for whether the young woman is currently using the contraceptive patch (yes or no), using D1456_CCXF.pdf the labels are as shown below:
@@ -221,9 +220,8 @@ table(mp1$given_pill_for_periods_19yr)
 
 # Variable for what age young woman were given the pill to regulate her period (age in years), using D1456_CCXF.pdf the labels are as shown below:
 table(mp1$age_given_pill_for_periods_19yr)
-mp1$age_given_pill_for_periods_19yr <- factor(mp1$age_given_pill_for_periods_19yr, levels = c(-10,-3,-1,11,12,13,14,15,16,17,18,19,20), labels = c("Not completed",
-                                                                                                                                                   "Male","Not known",11,12,13,14,
-                                                                                                                                                   15,16,17,18,19,20))
+mp1$age_given_pill_for_periods_19yr <- factor(mp1$age_given_pill_for_periods_19yr, levels = c(-10,-3,-1,11,12,13,14,15,16,17,18,19,20), 
+                                              labels = c("Not completed","Male","Not known",11,12,13,14,15,16,17,18,19,20))
 table(mp1$age_given_pill_for_periods_19yr)
 
 save(mp1,file="mp1.Rda") # Saved the data set at this point at the end of the day (26/10/20) in MP1 file OneDrive
