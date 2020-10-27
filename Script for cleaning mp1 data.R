@@ -229,7 +229,8 @@ table(mp1$sex)
 table(mp1$sex,mp1$cramps_15yr)  # Used this table to deduce which number was male - no. 1 had no answers for this part of the questionnaire => 2 is female
 mp1$sex <- factor(mp1$sex, levels = c(-1,1,2), labels =c("Missing","Male","Female"))
 table(mp1$sex)
-table(mp1$sex,mp1$cramps_15yr)  # Check the labels in the context of a period-related variable to make sure there aren't lots of answers for men which there are not!
+table(mp1$sex,mp1$cramps_15yr)  # Check the labels in the context of a period-related variable to make sure there aren't lots of answers for men which there are 
+                                # not!
 
 # Variable for having ever tried cigarettes at 8 years old, using D2103_F08.pdf, labels are as shown below:
 table(mp1$ever_tried_cigs_8yr)
@@ -238,31 +239,36 @@ table(mp1$ever_tried_cigs_8yr)
 
 # Variable for whether the child has smoked a cigarette at 10 years old, using D2105_F10.pdf, labels are as shown:
 table(mp1$child_tried_smoking_10yr)
-mp1$child_tried_smoking_10yr <- factor(mp1$child_tried_smoking_10yr, levels = c(-9,-4,-2,-1,1,2), labels = c("Did not do F&S","Child refused","Did not start task","Missing",
-                                                                                                             "Yes","No"))
+mp1$child_tried_smoking_10yr <- factor(mp1$child_tried_smoking_10yr, levels = c(-9,-4,-2,-1,1,2), labels = c("Did not do F&S","Child refused","Did not start task",
+                                                                                                             "Missing","Yes","No"))
 table(mp1$child_tried_smoking_10yr)
 
 # Variable for the frequency that the child has smoked cigarettes at 10 years old, using D2105_F10.pdf, labels are as shown:
 table(mp1$freq_child_smokes_10yr)
-mp1$freq_child_smokes_10yr <- factor(mp1$freq_child_smokes_10yr, levels = c(-9,-3,-2,-1,1,2,3), labels = c("Did not do F&S","Child not done","Did not start task","Missing",
-                                                                                                           "Once a week in the last 6 months","More than 4 times in the last 6 months",
+mp1$freq_child_smokes_10yr <- factor(mp1$freq_child_smokes_10yr, levels = c(-9,-3,-2,-1,1,2,3), labels = c("Did not do F&S","Child not done","Did not start task",
+                                                                                                           "Missing","Once a week in the last 6 months",
+                                                                                                           "More than 4 times in the last 6 months",
                                                                                                            "Less than 3 times in the last 6 months"))
 table(mp1$freq_child_smokes_10yr)
 
 # Variable for whether the child has drunk alcohol at 10 years old, using D2105_F10.pdf, labels are as shown:
 table(mp1$child_drunk_alcohol_10yr)
-mp1$child_drunk_alcohol_10yr <- factor(mp1$child_drunk_alcohol_10yr, levels = c(-9,-2,-1,1,2), labels = c("Did not do F&S","Did not start task","Missing","Yes","No"))
+mp1$child_drunk_alcohol_10yr <- factor(mp1$child_drunk_alcohol_10yr, levels = c(-9,-2,-1,1,2), labels = c("Did not do F&S","Did not start task","Missing","Yes",
+                                                                                                          "No"))
 table(mp1$child_drunk_alcohol_10yr)
 
 # Variable for the frequency that the child has drunk alcohol at 10 years old, using D2105_F10.pdf, labels are as shown:
 table(mp1$freq_child_drinks_alc_10yr)
-mp1$freq_child_drinks_alc_10yr <- factor(mp1$freq_child_drinks_alc_10yr, levels = c(-9,-5,-3,-2,-1,1,2,3), labels = c("Did not do F&S","Child said don't know","Child not done","Did not start task",
-                                                                                                                      "Missing","1 time per week","More than 4 times","1-3 times"))
+mp1$freq_child_drinks_alc_10yr <- factor(mp1$freq_child_drinks_alc_10yr, levels = c(-9,-5,-3,-2,-1,1,2,3), labels = c("Did not do F&S","Child said don't know",
+                                                                                                                      "Child not done","Did not start task",
+                                                                                                                      "Missing","1 time per week",
+                                                                                                                      "More than 4 times","1-3 times"))
 table(mp1$freq_child_drinks_alc_10yr)
 
 # Variable for whether a child has drunk alcohol at 9 years old from parents point of view, using D1318_KU.pdf, labels are as shown:
 table(mp1$child_drunk_alcohol_9yr)
-mp1$child_drunk_alcohol_9yr <- factor(mp1$child_drunk_alcohol_9yr, levels = c(-10,-1,1,2,3,4), labels = c("Not known","Missing","Yes parents know","Probably","Possibly","Don't know"))
+mp1$child_drunk_alcohol_9yr <- factor(mp1$child_drunk_alcohol_9yr, levels = c(-10,-1,1,2,3,4), labels = c("Not known","Missing","Yes parents know","Probably",
+                                                                                                          "Possibly","Don't know"))
 table(mp1$child_drunk_alcohol_9yr)
 
 # Variable for maternal social class based on occupation (can't find the categories at the moment)
@@ -275,7 +281,8 @@ table(mp1$bmi_8yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_8yr)
-mp1$vigorous_exercise_8yr <- factor(mp1$vigorous_exercise_8yr, levels = c(-7,-1,1,2,3,4,5), labels = c(-7,"Missing","None","Less than once a week","1-3 times a week","4-6 times a week",
+mp1$vigorous_exercise_8yr <- factor(mp1$vigorous_exercise_8yr, levels = c(-7,-1,1,2,3,4,5), labels = c(-7,"Missing","None","Less than once a week",
+                                                                                                       "1-3 times a week","4-6 times a week",
                                                                                                        "Daily"))
 table(mp1$vigorous_exercise_8yr)
 
@@ -311,8 +318,8 @@ table(mp1$cramps_all_month_8yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_8yr)
-mp1$dr_cramps_all_month_8yr <- factor(mp1$dr_cramps_all_month_8yr, levels = c(-10,-3,-2,-1,1), labels = c("Male","No period type pains","Not started periods","Missing",
-                                                                                                          "Yes"))
+mp1$dr_cramps_all_month_8yr <- factor(mp1$dr_cramps_all_month_8yr, levels = c(-10,-3,-2,-1,1), labels = c("Male","No period type pains","Not started periods",
+                                                                                                          "Missing","Yes"))
 table(mp1$dr_cramps_all_month_8yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
@@ -332,8 +339,8 @@ table(mp1$bmi_9yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_9yr)
-mp1$vigorous_exercise_9yr <- factor(mp1$vigorous_exercise_9yr, levels = c(-1,1,2,3,4,5), labels = c("Missing","None","Less than once a week","1-3 times a week","4-6 times a week",
-                                                                                                       "Daily"))
+mp1$vigorous_exercise_9yr <- factor(mp1$vigorous_exercise_9yr, levels = c(-1,1,2,3,4,5), labels = c("Missing","None","Less than once a week","1-3 times a week",
+                                                                                                    "4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_9yr)
 
 # Variable for whether child has started her period yet:
@@ -348,29 +355,33 @@ table(mp1$hmb_9yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_9yr)
-mp1$dr_hmb_9yr <- factor(mp1$dr_hmb_9yr, levels = c(-10,-6,-3,-2,-1,2), labels = c("Male","Missing whole menstruation section","No heavy bleeding","Not started period","Missing","No"))
+mp1$dr_hmb_9yr <- factor(mp1$dr_hmb_9yr, levels = c(-10,-6,-3,-2,-1,2), labels = c("Male","Missing whole menstruation section","No heavy bleeding",
+                                                                                   "Not started period","Missing","No"))
 table(mp1$dr_hmb_9yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_9yr)
-mp1$cramps_9yr <- factor(mp1$cramps_9yr, levels = c(-10,-6,-2,-1,1,2), labels = c("Male","Missing whole menstruation section","Not started periods","Missing","Yes","No"))
+mp1$cramps_9yr <- factor(mp1$cramps_9yr, levels = c(-10,-6,-2,-1,1,2), labels = c("Male","Missing whole menstruation section","Not started periods","Missing",
+                                                                                  "Yes","No"))
 table(mp1$cramps_9yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_9yr)
-mp1$dr_cramps_9yr <- factor(mp1$dr_cramps_9yr, levels = c(-10,-6,-3,-2,-1,1,2), labels = c("Male","Missing whole menstruation section","No severe cramps","Not started period","Missing",
-                                                                                           "Yes","No"))
+mp1$dr_cramps_9yr <- factor(mp1$dr_cramps_9yr, levels = c(-10,-6,-3,-2,-1,1,2), labels = c("Male","Missing whole menstruation section","No severe cramps",
+                                                                                           "Not started period","Missing","Yes","No"))
 table(mp1$dr_cramps_9yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_9yr)
-mp1$cramps_all_month_9yr <- factor(mp1$cramps_all_month_9yr, levels = c(-10,-6,-2,-1,1,2), labels = c("Male","Missing whole menstruation section","Not started periods","Missing","Yes","No"))
+mp1$cramps_all_month_9yr <- factor(mp1$cramps_all_month_9yr, levels = c(-10,-6,-2,-1,1,2), labels = c("Male","Missing whole menstruation section",
+                                                                                                      "Not started periods","Missing","Yes","No"))
 table(mp1$cramps_all_month_9yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_9yr)
-mp1$dr_cramps_all_month_9yr <- factor(mp1$dr_cramps_all_month_9yr, levels = c(-10,-6,-3,-2,-1,2), labels = c("Male","Missing whole menstruation section","No period type pains",
-                                                                                                             "Not started periods","Missing","No"))
+mp1$dr_cramps_all_month_9yr <- factor(mp1$dr_cramps_all_month_9yr, levels = c(-10,-6,-3,-2,-1,2), labels = c("Male","Missing whole menstruation section",
+                                                                                                             "No period type pains","Not started periods",
+                                                                                                             "Missing","No"))
 table(mp1$dr_cramps_all_month_9yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
@@ -390,8 +401,8 @@ table(mp1$bmi_10yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_10yr)
-mp1$vigorous_exercise_10yr <- factor(mp1$vigorous_exercise_10yr, levels = c(-10,-1,1,2,3,4,5), labels = c(-10,"Missing","None","Less than once a week","1-3 times a week","4-6 times a week",
-                                                                                                    "Daily"))
+mp1$vigorous_exercise_10yr <- factor(mp1$vigorous_exercise_10yr, levels = c(-10,-1,1,2,3,4,5), labels = c(-10,"Missing","None","Less than once a week",
+                                                                                                          "1-3 times a week","4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_10yr)
 
 # Variable for whether child has started her period yet:
@@ -401,41 +412,45 @@ table(mp1$started_period_10yr)
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_10yr)
-mp1$hmb_10yr <- factor(mp1$hmb_10yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8a omitted","Not started periods","Yes","No"))
+mp1$hmb_10yr <- factor(mp1$hmb_10yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8a omitted",
+                                                                                 "Not started periods","Yes","No"))
 table(mp1$hmb_10yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_10yr)
-mp1$dr_hmb_10yr <- factor(mp1$dr_hmb_10yr, levels = c(-10,-7,-6,-5,-3,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8a omitted","No heavy bleeding",
-                                                                                          "Not started period","Yes","No"))
+mp1$dr_hmb_10yr <- factor(mp1$dr_hmb_10yr, levels = c(-10,-7,-6,-5,-3,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8a omitted",
+                                                                                          "No heavy bleeding","Not started period","Yes","No"))
 table(mp1$dr_hmb_10yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_10yr)
-mp1$cramps_10yr <- factor(mp1$cramps_10yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8b omitted","Not started periods","Yes","No"))
+mp1$cramps_10yr <- factor(mp1$cramps_10yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8b omitted",
+                                                                                       "Not started periods","Yes","No"))
 table(mp1$cramps_10yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_10yr)
-mp1$dr_cramps_10yr <- factor(mp1$dr_cramps_10yr, levels = c(-10,-7,-6,-5,-3,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8b","No severe cramps",
-                                                                                                "Not started period","Yes","No"))
+mp1$dr_cramps_10yr <- factor(mp1$dr_cramps_10yr, levels = c(-10,-7,-6,-5,-3,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8b",
+                                                                                                "No severe cramps","Not started period","Yes","No"))
 table(mp1$dr_cramps_10yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_10yr)
-mp1$cramps_all_month_10yr <- factor(mp1$cramps_all_month_10yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8c omitted",
-                                                                                                           "Not started periods","Yes","No"))
+mp1$cramps_all_month_10yr <- factor(mp1$cramps_all_month_10yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section",
+                                                                                                           "Question A8c omitted","Not started periods","Yes","No"))
 table(mp1$cramps_all_month_10yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_10yr)
-mp1$dr_cramps_all_month_10yr <- factor(mp1$dr_cramps_all_month_10yr, levels = c(-10,-7,-6,-5,-3,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8c omitted",
-                                                                                                                    "No period type pains","Not started periods","Yes","No"))
+mp1$dr_cramps_all_month_10yr <- factor(mp1$dr_cramps_all_month_10yr, levels = c(-10,-7,-6,-5,-3,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section",
+                                                                                                                    "Question A8c omitted","No period type pains",
+                                                                                                                    "Not started periods","Yes","No"))
 table(mp1$dr_cramps_all_month_10yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_10yr)
-mp1$oral_contraceptives_pastyr_10yr <- factor(mp1$oral_contraceptives_pastyr_10yr, levels = c(-10,-7,-6,-2,-1,2), labels = c(-10,"Male","Missing whole menstruation section",
+mp1$oral_contraceptives_pastyr_10yr <- factor(mp1$oral_contraceptives_pastyr_10yr, levels = c(-10,-7,-6,-2,-1,2), labels = c(-10,"Male",
+                                                                                                                             "Missing whole menstruation section",
                                                                                                                              "Not started periods","Missing","No"))
 table(mp1$oral_contraceptives_pastyr_10yr)
 
@@ -451,8 +466,8 @@ table(mp1$bmi_11yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_11yr)
-mp1$vigorous_exercise_11yr <- factor(mp1$vigorous_exercise_11yr, levels = c(-10,-1,1,2,3,4,5), labels = c(-10,"Missing","None","Less than once a week","1-3 times a week","4-6 times a week",
-                                                                                                          "Daily"))
+mp1$vigorous_exercise_11yr <- factor(mp1$vigorous_exercise_11yr, levels = c(-10,-1,1,2,3,4,5), labels = c(-10,"Missing","None","Less than once a week",
+                                                                                                          "1-3 times a week","4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_11yr)
 
 # Variable for whether child has started her period yet:
@@ -462,42 +477,49 @@ table(mp1$started_period_11yr)
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_11yr)
-mp1$hmb_11yr <- factor(mp1$hmb_11yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8a omitted","Not started periods","Yes","No"))
+mp1$hmb_11yr <- factor(mp1$hmb_11yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8a omitted",
+                                                                                 "Not started periods","Yes","No"))
 table(mp1$hmb_11yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_11yr)
-mp1$dr_hmb_11yr <- factor(mp1$dr_hmb_11yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8a omitted","No heavy bleeding",
-                                                                                          "Not started period","Not stated","Yes","No"))
+mp1$dr_hmb_11yr <- factor(mp1$dr_hmb_11yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8a omitted",
+                                                                                             "No heavy bleeding","Not started period","Not stated","Yes","No"))
 table(mp1$dr_hmb_11yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_11yr)
-mp1$cramps_11yr <- factor(mp1$cramps_11yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8b omitted","Not started periods","Yes","No"))
+mp1$cramps_11yr <- factor(mp1$cramps_11yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8b omitted",
+                                                                                       "Not started periods","Yes","No"))
 table(mp1$cramps_11yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_11yr)
-mp1$dr_cramps_11yr <- factor(mp1$dr_cramps_11yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8b","No severe cramps",
-                                                                                                "Not started period","Not stated","Yes","No"))
+mp1$dr_cramps_11yr <- factor(mp1$dr_cramps_11yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8b",
+                                                                                                   "No severe cramps","Not started period","Not stated","Yes","No"))
 table(mp1$dr_cramps_11yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_11yr)
-mp1$cramps_all_month_11yr <- factor(mp1$cramps_all_month_11yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8c omitted",
-                                                                                                           "Not started periods","Yes","No"))
+mp1$cramps_all_month_11yr <- factor(mp1$cramps_all_month_11yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Missing whole menstruation section",
+                                                                                                           "Question A8c omitted","Not started periods","Yes","No"))
 table(mp1$cramps_all_month_11yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_11yr)
-mp1$dr_cramps_all_month_11yr <- factor(mp1$dr_cramps_all_month_11yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Missing whole menstruation section","Question A8c omitted",
-                                                                                                                    "No period type pains","Not started periods","Not stated","Yes","No"))
+mp1$dr_cramps_all_month_11yr <- factor(mp1$dr_cramps_all_month_11yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male",
+                                                                                                                       "Missing whole menstruation section",
+                                                                                                                       "Question A8c omitted",
+                                                                                                                       "No period type pains","Not started periods",
+                                                                                                                       "Not stated","Yes","No"))
 table(mp1$dr_cramps_all_month_11yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_11yr)
-mp1$oral_contraceptives_pastyr_11yr <- factor(mp1$oral_contraceptives_pastyr_11yr, levels = c(-10,-7,-6,-2,-1,1,2), labels = c(-10,"Male","Missing whole menstruation section",
-                                                                                                                             "Not started periods","Not stated","Yes","No"))
+mp1$oral_contraceptives_pastyr_11yr <- factor(mp1$oral_contraceptives_pastyr_11yr, levels = c(-10,-7,-6,-2,-1,1,2), labels = c(-10,"Male",
+                                                                                                                               "Missing whole menstruation section",
+                                                                                                                               "Not started periods","Not stated",
+                                                                                                                               "Yes","No"))
 table(mp1$oral_contraceptives_pastyr_11yr)
 
 # Variable for whether child has a thyroid problem:
@@ -512,8 +534,9 @@ table(mp1$bmi_13yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_13yr)
-mp1$vigorous_exercise_13yr <- factor(mp1$vigorous_exercise_13yr, levels = c(-10,-6,-1,1,2,3,4,5), labels = c(-10,"Section A omitted","Not stated","None","Less than once a week",
-                                                                                                             "1-3 times a week","4-6 times a week","Daily"))
+mp1$vigorous_exercise_13yr <- factor(mp1$vigorous_exercise_13yr, levels = c(-10,-6,-1,1,2,3,4,5), labels = c(-10,"Section A omitted","Not stated","None",
+                                                                                                             "Less than once a week","1-3 times a week",
+                                                                                                             "4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_13yr)
 
 # Variable for whether child has started her period yet:
@@ -528,13 +551,14 @@ table(mp1$hmb_13yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_13yr)
-mp1$dr_hmb_13yr <- factor(mp1$dr_hmb_13yr, levels = c(-10,-7,-6,-3,-2,-1,1,2), labels = c(-10,"Male","Section A omitted","No heavy bleeding","Not started period","Not stated",
-                                                                                          "Yes","No"))
+mp1$dr_hmb_13yr <- factor(mp1$dr_hmb_13yr, levels = c(-10,-7,-6,-3,-2,-1,1,2), labels = c(-10,"Male","Section A omitted","No heavy bleeding","Not started period",
+                                                                                          "Not stated","Yes","No"))
 table(mp1$dr_hmb_13yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_13yr)
-mp1$cramps_13yr <- factor(mp1$cramps_13yr, levels = c(-10,-7,-6,-2,-1,1,2), labels = c(-10,"Male","Section A omitted","Not started periods","Not stated","Yes","No"))
+mp1$cramps_13yr <- factor(mp1$cramps_13yr, levels = c(-10,-7,-6,-2,-1,1,2), labels = c(-10,"Male","Section A omitted","Not started periods","Not stated","Yes",
+                                                                                       "No"))
 table(mp1$cramps_13yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
@@ -545,20 +569,22 @@ table(mp1$dr_cramps_13yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_13yr)
-mp1$cramps_all_month_13yr <- factor(mp1$cramps_all_month_13yr, levels = c(-10,-7,-6,-2,-1,1,2), labels = c(-10,"Male","Section A omitted","Not started periods","Not stated",
-                                                                                                        "Yes","No"))
+mp1$cramps_all_month_13yr <- factor(mp1$cramps_all_month_13yr, levels = c(-10,-7,-6,-2,-1,1,2), labels = c(-10,"Male","Section A omitted","Not started periods",
+                                                                                                           "Not stated","Yes","No"))
 table(mp1$cramps_all_month_13yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_13yr)
-mp1$dr_cramps_all_month_13yr <- factor(mp1$dr_cramps_all_month_13yr, levels = c(-10,-7,-6,-3,-2,-1,1,2), labels = c(-10,"Male","Section A omitted","No period type pains",
-                                                                                                                    "Not started periods","Not stated","Yes","No"))
+mp1$dr_cramps_all_month_13yr <- factor(mp1$dr_cramps_all_month_13yr, levels = c(-10,-7,-6,-3,-2,-1,1,2), labels = c(-10,"Male","Section A omitted",
+                                                                                                                    "No period type pains","Not started periods",
+                                                                                                                    "Not stated","Yes","No"))
 table(mp1$dr_cramps_all_month_13yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_13yr)
 mp1$oral_contraceptives_pastyr_13yr <- factor(mp1$oral_contraceptives_pastyr_13yr, levels = c(-10,-7,-6,-2,-1,1,2), labels = c(-10,"Male","Section A omitted",
-                                                                                                                               "Not started periods","Not stated","Yes","No"))
+                                                                                                                               "Not started periods","Not stated",
+                                                                                                                               "Yes","No"))
 table(mp1$oral_contraceptives_pastyr_13yr)
 
 # Variable for whether child has a thyroid problem:
@@ -573,8 +599,9 @@ table(mp1$bmi_14yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_14yr)
-mp1$vigorous_exercise_14yr <- factor(mp1$vigorous_exercise_14yr, levels = c(-10,-6,-1,1,2,3,4,5), labels = c(-10,"Section A omitted","Not stated","None","Less than once a week",
-                                                                                                             "1-3 times a week","4-6 times a week","Daily"))
+mp1$vigorous_exercise_14yr <- factor(mp1$vigorous_exercise_14yr, levels = c(-10,-6,-1,1,2,3,4,5), labels = c(-10,"Section A omitted","Not stated","None",
+                                                                                                             "Less than once a week","1-3 times a week",
+                                                                                                             "4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_14yr)
 
 # Variable for whether child has started her period yet:
@@ -618,8 +645,8 @@ table(mp1$dr_cramps_all_month_14yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_14yr)
-mp1$oral_contraceptives_pastyr_14yr <- factor(mp1$oral_contraceptives_pastyr_14yr, levels = c(-10,-7,-2,-1,1,2,9), labels = c(-10,"Male","Not started periods","Not stated",
-                                                                                                                              "Yes","No","Don't know"))
+mp1$oral_contraceptives_pastyr_14yr <- factor(mp1$oral_contraceptives_pastyr_14yr, levels = c(-10,-7,-2,-1,1,2,9), labels = c(-10,"Male","Not started periods",
+                                                                                                                              "Not stated","Yes","No","Don't know"))
 table(mp1$oral_contraceptives_pastyr_14yr)
 
 # Variable for whether child has a thyroid problem:
@@ -642,49 +669,57 @@ table(mp1$started_period_15yr)
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_15yr)
-mp1$hmb_15yr <- factor(mp1$hmb_15yr, levels = c(-10,-7,-6,-5,-2,-1,1,2), labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6a omitted","Not started periods",
-                                                                                    "Not stated","Yes","No"))
+mp1$hmb_15yr <- factor(mp1$hmb_15yr, levels = c(-10,-7,-6,-5,-2,-1,1,2), labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6a omitted",
+                                                                                    "Not started periods","Not stated","Yes","No"))
 table(mp1$hmb_15yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_15yr)
-mp1$dr_hmb_15yr <- factor(mp1$dr_hmb_15yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6a omitted","No heavy bleeding",
-                                                                                             "Not started period","Not stated","Yes","No"))
+mp1$dr_hmb_15yr <- factor(mp1$dr_hmb_15yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6a omitted",
+                                                                                             "No heavy bleeding","Not started period","Not stated","Yes","No"))
 table(mp1$dr_hmb_15yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_15yr)
-mp1$cramps_15yr <- factor(mp1$cramps_15yr, levels = c(-10,-7,-6,-2,-1,1,2), labels = c(-10,"Male","Questions A2 to A7 omitted","Not started periods","Not stated","Yes","No"))
+mp1$cramps_15yr <- factor(mp1$cramps_15yr, levels = c(-10,-7,-6,-2,-1,1,2), labels = c(-10,"Male","Questions A2 to A7 omitted","Not started periods","Not stated",
+                                                                                       "Yes","No"))
 table(mp1$cramps_15yr)
 
 # Variable for severity of cramps associated with period:
 table(mp1$severity_cramps_15yr)
-mp1$severity_cramps_15yr <- factor(mp1$severity_cramps_15yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2,3), labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6b omitted",
-                                                                                                                 "No pain","Periods not started","Not stated","Mild","Moderate","Severe"))
+mp1$severity_cramps_15yr <- factor(mp1$severity_cramps_15yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2,3), labels = c(-10,"Male","Questions A2 to A7 omitted",
+                                                                                                                 "Question A6b omitted","No pain",
+                                                                                                                 "Periods not started","Not stated","Mild",
+                                                                                                                 "Moderate","Severe"))
 table(mp1$severity_cramps_15yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_15yr)
-mp1$dr_cramps_15yr <- factor(mp1$dr_cramps_15yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6b omitted","No severe cramps",
-                                                                                             "Not started period","Not stated","Yes","No"))
+mp1$dr_cramps_15yr <- factor(mp1$dr_cramps_15yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6b omitted",
+                                                                                                   "No severe cramps","Not started period","Not stated","Yes","No"))
 table(mp1$dr_cramps_15yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_15yr)
-mp1$cramps_all_month_15yr <- factor(mp1$cramps_all_month_15yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6c omitted","Not started periods",
-                                                                                                              "Yes","No"))
+mp1$cramps_all_month_15yr <- factor(mp1$cramps_all_month_15yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A2 to A7 omitted",
+                                                                                                           "Question A6c omitted","Not started periods","Yes","No"))
 table(mp1$cramps_all_month_15yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_15yr)
-mp1$dr_cramps_all_month_15yr <- factor(mp1$dr_cramps_all_month_15yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6c omitted",
-                                                                                                                       "No period type pains","Not started periods","Not stated","Yes","No"))
+mp1$dr_cramps_all_month_15yr <- factor(mp1$dr_cramps_all_month_15yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A2 to A7 omitted",
+                                                                                                                       "Question A6c omitted",
+                                                                                                                       "No period type pains","Not started periods",
+                                                                                                                       "Not stated","Yes","No"))
 table(mp1$dr_cramps_all_month_15yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_15yr)
-mp1$oral_contraceptives_pastyr_15yr <- factor(mp1$oral_contraceptives_pastyr_15yr, levels = c(-10,-7,-6,-2,-1,1,2,9), labels = c(-10,"Male","Questions A2 to A7 omitted","Not started periods",
-                                                                                                                                 "Not stated","Yes","No","Don't know"))
+mp1$oral_contraceptives_pastyr_15yr <- factor(mp1$oral_contraceptives_pastyr_15yr, levels = c(-10,-7,-6,-2,-1,1,2,9), labels = c(-10,"Male",
+                                                                                                                                 "Questions A2 to A7 omitted",
+                                                                                                                                 "Not started periods",
+                                                                                                                                 "Not stated","Yes","No",
+                                                                                                                                 "Don't know"))
 table(mp1$oral_contraceptives_pastyr_15yr)
 
 # Variable for whether child has a thyroid problem:
@@ -710,43 +745,49 @@ table(mp1$started_period_16yr)
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_16yr)
-mp1$hmb_16yr <- factor(mp1$hmb_16yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8a omitted","Not started periods",
-                                                                                    "Yes","No"))
+mp1$hmb_16yr <- factor(mp1$hmb_16yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8a omitted",
+                                                                                 "Not started periods","Yes","No"))
 table(mp1$hmb_16yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_16yr)
-mp1$dr_hmb_16yr <- factor(mp1$dr_hmb_16yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8a omitted","No heavy bleeding",
-                                                                                             "Not started period","Not stated","Yes","No"))
+mp1$dr_hmb_16yr <- factor(mp1$dr_hmb_16yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8a omitted",
+                                                                                             "No heavy bleeding","Not started period","Not stated","Yes","No"))
 table(mp1$dr_hmb_16yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_16yr)
-mp1$cramps_16yr <- factor(mp1$cramps_16yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8b omitted","Not started periods","Yes","No"))
+mp1$cramps_16yr <- factor(mp1$cramps_16yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8b omitted",
+                                                                                       "Not started periods","Yes","No"))
 table(mp1$cramps_16yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_16yr)
-mp1$dr_cramps_16yr <- factor(mp1$dr_cramps_16yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8b omitted","No severe cramps",
-                                                                                                   "Not started period","Not stated","Yes","No"))
+mp1$dr_cramps_16yr <- factor(mp1$dr_cramps_16yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8b omitted",
+                                                                                                   "No severe cramps","Not started period","Not stated","Yes","No"))
 table(mp1$dr_cramps_16yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_16yr)
-mp1$cramps_all_month_16yr <- factor(mp1$cramps_all_month_16yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8c omitted","Not started periods",
-                                                                                                           "Yes","No"))
+mp1$cramps_all_month_16yr <- factor(mp1$cramps_all_month_16yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted",
+                                                                                                           "Question A8c omitted","Not started periods","Yes","No"))
 table(mp1$cramps_all_month_16yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_16yr)
-mp1$dr_cramps_all_month_16yr <- factor(mp1$dr_cramps_all_month_16yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8c omitted",
-                                                                                                                       "No period type pains","Not started periods","Not stated","Yes","No"))
+mp1$dr_cramps_all_month_16yr <- factor(mp1$dr_cramps_all_month_16yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted",
+                                                                                                                       "Question A8c omitted",
+                                                                                                                       "No period type pains",
+                                                                                                                       "Not started periods","Not stated","Yes",
+                                                                                                                       "No"))
 table(mp1$dr_cramps_all_month_16yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_16yr)
-mp1$oral_contraceptives_pastyr_16yr <- factor(mp1$oral_contraceptives_pastyr_16yr, levels = c(-10,-7,-6,-2,-1,1,2,9), labels = c(-10,"Male","Questions A4 to A9 omitted","Not started periods",
-                                                                                                                                 "Not stated","Yes","No","Don't know"))
+mp1$oral_contraceptives_pastyr_16yr <- factor(mp1$oral_contraceptives_pastyr_16yr, levels = c(-10,-7,-6,-2,-1,1,2,9), labels = c(-10,"Male",
+                                                                                                                                 "Questions A4 to A9 omitted",
+                                                                                                                                 "Not started periods","Not stated",
+                                                                                                                                 "Yes","No","Don't know"))
 table(mp1$oral_contraceptives_pastyr_16yr)
 
 # Variable for whether child has a thyroid problem:
@@ -772,43 +813,49 @@ table(mp1$started_period_17yr)
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_17yr)
-mp1$hmb_17yr <- factor(mp1$hmb_17yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8a omitted","Not started periods",
-                                                                                 "Yes","No"))
+mp1$hmb_17yr <- factor(mp1$hmb_17yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8a omitted",
+                                                                                 "Not started periods","Yes","No"))
 table(mp1$hmb_17yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_17yr)
-mp1$dr_hmb_17yr <- factor(mp1$dr_hmb_17yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8a omitted","No heavy bleeding",
-                                                                                             "Not started period","Not stated","Yes","No"))
+mp1$dr_hmb_17yr <- factor(mp1$dr_hmb_17yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8a omitted",
+                                                                                             "No heavy bleeding","Not started period","Not stated","Yes","No"))
 table(mp1$dr_hmb_17yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_17yr)
-mp1$cramps_17yr <- factor(mp1$cramps_17yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8b omitted","Not started periods","Yes","No"))
+mp1$cramps_17yr <- factor(mp1$cramps_17yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8b omitted",
+                                                                                       "Not started periods","Yes","No"))
 table(mp1$cramps_17yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_17yr)
-mp1$dr_cramps_17yr <- factor(mp1$dr_cramps_17yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8b omitted","No severe cramps",
-                                                                                                   "Not started period","Not stated","Yes","No"))
+mp1$dr_cramps_17yr <- factor(mp1$dr_cramps_17yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8b omitted",
+                                                                                                   "No severe cramps","Not started period","Not stated","Yes","No"))
 table(mp1$dr_cramps_17yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_17yr)
-mp1$cramps_all_month_17yr <- factor(mp1$cramps_all_month_17yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8c omitted","Not started periods",
-                                                                                                           "Yes","No"))
+mp1$cramps_all_month_17yr <- factor(mp1$cramps_all_month_17yr, levels = c(-10,-7,-6,-5,-2,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted",
+                                                                                                           "Question A8c omitted","Not started periods","Yes","No"))
 table(mp1$cramps_all_month_17yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_17yr)
-mp1$dr_cramps_all_month_17yr <- factor(mp1$dr_cramps_all_month_17yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8c omitted",
-                                                                                                                       "No period type pains","Not started periods","Not stated","Yes","No"))
+mp1$dr_cramps_all_month_17yr <- factor(mp1$dr_cramps_all_month_17yr, levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), labels = c(-10,"Male","Questions A4 to A9 omitted",
+                                                                                                                       "Question A8c omitted",
+                                                                                                                       "No period type pains","Not started periods",
+                                                                                                                       "Not stated","Yes","No"))
 table(mp1$dr_cramps_all_month_17yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_17yr)
-mp1$oral_contraceptives_pastyr_17yr <- factor(mp1$oral_contraceptives_pastyr_17yr, levels = c(-10,-7,-6,-2,-1,1,2,9), labels = c(-10,"Male","Questions A4 to A9 omitted","Not started periods",
-                                                                                                                                 "Not stated","Yes","No","Don't know"))
+mp1$oral_contraceptives_pastyr_17yr <- factor(mp1$oral_contraceptives_pastyr_17yr, levels = c(-10,-7,-6,-2,-1,1,2,9), labels = c(-10,"Male",
+                                                                                                                                 "Questions A4 to A9 omitted",
+                                                                                                                                 "Not started periods",
+                                                                                                                                 "Not stated","Yes","No",
+                                                                                                                                 "Don't know"))
 table(mp1$oral_contraceptives_pastyr_17yr)
 
 # Variable for whether child has a thyroid problem:
