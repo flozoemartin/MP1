@@ -70,6 +70,6 @@ vars
 
 # Now that the list of variables is in the required format I can extract them. I need the R:/Data drive mapped to the computer whilst connected to the VPN.
 # Extract the variables from the R drive:
-setDataDir("/Volumes/Data-3")
-mp1 <- extractVars(vars)
-mp1
+setDataDir("/Volumes/Data")
+flo_26oct <- extractVars(vars)
+flo_26oct
