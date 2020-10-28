@@ -7,7 +7,7 @@ Author: Flo Martin
 Dr Gemma Sharp (lead), Dr Kayleigh Easey, Dr Abi Fraser, Dr Laura Howe & Professor Deborah Lawlor
 
 # Rationale
-Menstrual pain, heavy menstrual bleeding (menorrhagia), irregular periods (metrorrhagia) and premenstrual syndrome (PMS) are thought to affect a high proportion of
+Menstrual pain, heavy menstrual bleeding (menorrhagia), irregular periods (metrorrhagia), painful periods (dysmenorrhea) and premenstrual syndrome (PMS) are thought to affect a high proportion of
 menstruating women, and there is some evidence that these symptoms are associated with poor health, quality of life and productivity at school and work.
 
 It is unclear to what extent these symptoms co-exist and whether different symptoms are associated with different exposures and health outcomes.
