@@ -111,3 +111,6 @@ Useful for identifying methylated sits/regions that might be causally associated
     - Cell proportion ~ dysmenorrhea
     - Cell proportion ~ menorrhagia + age + BMI + contraception + smoking + mother's education + mother's occupation
     - Cell proportion ~ dysmenorrhea + age + BMI + contraception + smoking + mother's education + mother's occupation
+  
+### References
+  1. Relton CL, Gaunt T, McArdle W, et al. Data Resource Profile: Accessible Resource for Integrated Epigenomic Studies (ARIES). Int J Epidemiol. 2015;44(4):1181-1190.
