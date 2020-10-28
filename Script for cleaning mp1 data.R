@@ -1,11 +1,10 @@
 #################################################################################################################################################################
 #                                                                                                                                                               #
-#   Script for cleaning mp1 dataset abstracted from ALSPAC drive                                                                                                #
+#   Script for cleaning labels in mp1 dataset abstracted from ALSPAC drive                                                                                      #
 #                                                                                                                                                               #
 #   Author:       Flo Martin                                                                                                                                    #
 #   Start Date:   26/10/2020                                                                                                                                    #
-#   Description:  This script describes the data cleaning processes for the data being used in mini project 1 describing and investigating menstrual and        #
-#                 premenstrual symptoms                                                                                                                         #
+#   Description:  This script describes changing column labels from raw variable names to recognisable labels and changing category labels within variables     #
 #                                                                                                                                                               #
 ################################################################################################################################################################# 
 
