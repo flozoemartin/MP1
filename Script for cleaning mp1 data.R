@@ -156,143 +156,221 @@ colnames(mp1) [136] <- "teen_has_smoked_12yr"
 colnames(mp1) [137] <- "teen_has_smoked_13yr"
 colnames(mp1) [138] <- "teen_has_drunk_13yr"
 colnames(mp1) [140] <- "teen_smoked_since_15th_bday"
-# Label the categories within each variable:
+
+# Now, explore each of the variables:
 # Variable maternal education is coded -1, 1, 2, 3, 4, 5 using D1104_C.pdf the labels are as shown below:
 table(mp1$mat_edu)
+mp1$mat_edu <- ifelse(mp1$mat_edu == 1,1, 
+                      ifelse(mp1$mat_edu == 2,2, 
+                             ifelse(mp1$mat_edu == 3,3, 
+                                    ifelse(mp1$mat_edu == 4,4, 
+                                           ifelse(mp1$mat_edu == 5,5, NA)))))
 mp1$mat_edu <- factor(mp1$mat_edu, 
-                      levels = c(-1,1,2,3,4,5), 
-                      labels = c("Missing","CSE/none","Vocational","O level","A level","Degree"))
+                      levels = c(1,2,3,4,5), 
+                      labels = c("CSE/none","Vocational","O level","A level","Degree"))
 table(mp1$mat_edu)
 
 # Variable for smoked since 14th birthday (yes or no), using D1421_CCR.pdf the labels are as shown below:
 table(mp1$smoked_since_14th_bday)
+mp1$smoked_since_14th_bday <- ifelse(mp1$smoked_since_14th_bday == 1,1, 
+                                     ifelse(mp1$smoked_since_14th_bday == 2,2, NA))
 mp1$smoked_since_14th_bday <- factor(mp1$smoked_since_14th_bday, 
-                                     levels = c(-10,-1,1,2), 
-                                     labels = c("Not completed","No response","Yes","No"))
+                                     levels = c(1,2), 
+                                     labels = c("Yes","No"))
 table(mp1$smoked_since_14th_bday)
 
 # Variable for number of beers in the last 30 days, using D1422_CCS.pdf the labels are as shown below:
 table(mp1$no_of_beers_last30days_16yr)
+mp1$no_of_beers_last30days_16yr <- ifelse(mp1$no_of_beers_last30days_16yr == 1,1, 
+                                          ifelse(mp1$no_of_beers_last30days_16yr == 2,2, 
+                                                 ifelse(mp1$no_of_beers_last30days_16yr == 3,3,
+                                                        ifelse(mp1$no_of_beers_last30days_16yr == 4,4, 
+                                                               ifelse(mp1$no_of_beers_last30days_16yr == 5,5,
+                                                                      ifelse(mp1$no_of_beers_last30days_16yr == 6,6,
+                                                                             ifelse(mp1$no_of_beers_last30days_16yr == 7,7, NA)))))))
 mp1$no_of_beers_last30days_16yr <- factor(mp1$no_of_beers_last30days_16yr, 
-                                          levels = c(-10,-1,1,2,3,4,5,6,7), 
-                                          labels = c("Missing","No response","Zero","1-2","3-5","6-9","10-19","20-39","40 or more"))
+                                          levels = c(1,2,3,4,5,6,7), 
+                                          labels = c("Zero","1-2","3-5","6-9","10-19","20-39","40 or more"))
 table(mp1$no_of_beers_last30days_16yr)
 
-# Variable for number of beers in the last 30 days, using D1422_CCS.pdf the labels are as shown below:
+# Variable for number of wines in the last 30 days, using D1422_CCS.pdf the labels are as shown below:
 table(mp1$no_of_wines_last30days_16yr)
+mp1$no_of_wines_last30days_16yr <- ifelse(mp1$no_of_wines_last30days_16yr == 1,1, 
+                                          ifelse(mp1$no_of_wines_last30days_16yr == 2,2, 
+                                                 ifelse(mp1$no_of_wines_last30days_16yr == 3,3,
+                                                        ifelse(mp1$no_of_wines_last30days_16yr == 4,4, 
+                                                               ifelse(mp1$no_of_wines_last30days_16yr == 5,5,
+                                                                      ifelse(mp1$no_of_wines_last30days_16yr == 6,6,
+                                                                             ifelse(mp1$no_of_wines_last30days_16yr == 7,7, NA)))))))
+
 mp1$no_of_wines_last30days_16yr <- factor(mp1$no_of_wines_last30days_16yr, 
-                                          levels = c(-10,-1,1,2,3,4,5,6,7), 
-                                          labels = c("Missing","No response","Zero","1-2","3-5","6-9","10-19","20-39","40 or more"))
+                                          levels = c(1,2,3,4,5,6,7), 
+                                          labels = c("Zero","1-2","3-5","6-9","10-19","20-39","40 or more"))
 table(mp1$no_of_wines_last30days_16yr)
 
 # Variable for number of spirits in the last 30 days, using D1422_CCS.pdf the labels are as shown below:
 table(mp1$no_of_spirits_last30days_16yr)
+mp1$no_of_spirits_last30days_16yr <- ifelse(mp1$no_of_spirits_last30days_16yr == 1,0, 
+                                          ifelse(mp1$no_of_spirits_last30days_16yr == 2,1, 
+                                                 ifelse(mp1$no_of_spirits_last30days_16yr == 3,2,
+                                                        ifelse(mp1$no_of_spirits_last30days_16yr == 4,3, 
+                                                               ifelse(mp1$no_of_spirits_last30days_16yr == 5,4,
+                                                                      ifelse(mp1$no_of_spirits_last30days_16yr == 6,5,
+                                                                             ifelse(mp1$no_of_spirits_last30days_16yr == 7,6, NA)))))))
+
 mp1$no_of_spirits_last30days_16yr <- factor(mp1$no_of_spirits_last30days_16yr, 
-                                            levels = c(-10,-1,1,2,3,4,5,6,7), 
-                                            labels = c("Missing","No response","Zero","1-2","3-5","6-9","10-19","20-39","40 or more"))
+                                            levels = c(0,1,2,3,4,5,6), 
+                                            labels = c("Zero","1-2","3-5","6-9","10-19","20-39","40 or more"))
 table(mp1$no_of_spirits_last30days_16yr)
 
 # Variable for whether the young woman is currently using the contraceptive pill (yes or no), using D1456_CCXF.pdf the labels are as shown below:
 table(mp1$contraceptive_pill_19yr)
+mp1$contraceptive_pill_19yr <- ifelse(mp1$contraceptive_pill_19yr ==1,1, 
+                                      ifelse(mp1$contraceptive_pill_19yr == 2,2, 
+                                             ifelse(mp1$contraceptive_pill_19yr == -3,0, NA)))
 mp1$contraceptive_pill_19yr <- factor(mp1$contraceptive_pill_19yr, 
-                                      levels = c(-10,-3,-1,1,2), 
-                                      labels = c("Not completed","Male","Not known","Yes","No"))
+                                      levels = c(0,1,2), 
+                                      labels = c("Male","Yes","No"))
 table(mp1$contraceptive_pill_19yr)
 
 # Variable for whether the young woman is currently using the contraceptive injection (yes or no), using D1456_CCXF.pdf the labels are as shown below:
 table(mp1$contraceptive_injection_19yr)
+mp1$contraceptive_injection_19yr <- ifelse(mp1$contraceptive_injection_19yr ==1,1, 
+                                           ifelse(mp1$contraceptive_injection_19yr == 2,2, 
+                                                  ifelse(mp1$contraceptive_injection_19yr == -3,0, NA)))
 mp1$contraceptive_injection_19yr <- factor(mp1$contraceptive_injection_19yr, 
-                                           levels = c(-10,-3,-1,1,2), 
-                                           labels = c("Not completed","Male","Not known","Yes","No"))
+                                           levels = c(0,1,2), 
+                                           labels = c("Male","Yes","No"))
 table(mp1$contraceptive_injection_19yr)
 
 # Variable for whether the young woman is currently using the contraceptive implant (yes or no), using D1456_CCXF.pdf the labels are as shown below:
 table(mp1$contraceptive_implant_19yr)
+mp1$contraceptive_implant_19yr <- ifelse(mp1$contraceptive_implant_19yr ==1,1, 
+                                      ifelse(mp1$contraceptive_implant_19yr == 2,2, 
+                                             ifelse(mp1$contraceptive_implant_19yr == -3,0, NA)))
 mp1$contraceptive_implant_19yr <- factor(mp1$contraceptive_implant_19yr, 
-                                         levels = c(-10,-3,-1,1,2), 
-                                         labels = c("Not completed","Male","Not known","Yes","No"))
+                                         levels = c(0,1,2), 
+                                         labels = c("Male","Yes","No"))
 table(mp1$contraceptive_implant_19yr)
 
 # Variable for whether the young woman is currently using the contraceptive coil (yes or no), using D1456_CCXF.pdf the labels are as shown below:
 table(mp1$contraceptive_hormonal_coil_19yr)
+mp1$contraceptive_hormonal_coil_19yr <- ifelse(mp1$contraceptive_hormonal_coil_19yr ==1,1, 
+                                               ifelse(mp1$contraceptive_hormonal_coil_19yr == 2,2, 
+                                                      ifelse(mp1$contraceptive_hormonal_coil_19yr == -3,0, NA)))
 mp1$contraceptive_hormonal_coil_19yr <- factor(mp1$contraceptive_hormonal_coil_19yr, 
-                                               levels = c(-10,-3,-1,1,2), 
-                                               labels = c("Not completed","Male","Not known","Yes","No"))
+                                               levels = c(0,1,2), 
+                                               labels = c("Male","Yes","No"))
 table(mp1$contraceptive_hormonal_coil_19yr)
 
 # Variable for whether the young woman is currently using the contraceptive patch (yes or no), using D1456_CCXF.pdf the labels are as shown below:
 table(mp1$contraceptive_patch_19yr)
+mp1$contraceptive_patch_19yr <- ifelse(mp1$contraceptive_patch_19yr ==1,1, 
+                                      ifelse(mp1$contraceptive_patch_19yr == 2,2, 
+                                             ifelse(mp1$contraceptive_patch_19yr == -3,0, NA)))
 mp1$contraceptive_patch_19yr <- factor(mp1$contraceptive_patch_19yr, 
-                                       levels = c(-10,-3,-1,1,2), 
-                                       labels = c("Not completed","Male","Not known","Yes","No"))
+                                       levels = c(0,1,2), 
+                                       labels = c("Male","Yes","No"))
 table(mp1$contraceptive_patch_19yr)
 
 # Variable for whether the young woman has been given the pill to regulate her period (no or yes), using D1456_CCXF.pdf the labels are as shown below:
 table(mp1$given_pill_for_periods_19yr)
+mp1$given_pill_for_periods_19yr <- ifelse(mp1$given_pill_for_periods_19yr ==1,2, 
+                                          ifelse(mp1$given_pill_for_periods_19yr == 2,1, 
+                                                 ifelse(mp1$given_pill_for_periods_19yr == -3,0, NA)))
 mp1$given_pill_for_periods_19yr <- factor(mp1$given_pill_for_periods_19yr, 
-                                          levels = c(-10,-3,-1,1,2), 
-                                          labels = c("Not completed","Male","Not known","No","Yes"))
+                                          levels = c(0,1,2), 
+                                          labels = c("Male","Yes","No"))
 table(mp1$given_pill_for_periods_19yr)
 
 # Variable for what age young woman were given the pill to regulate her period (age in years), using D1456_CCXF.pdf the labels are as shown below:
 table(mp1$age_given_pill_for_periods_19yr)
+mp1$age_given_pill_for_periods_19yr <- ifelse(mp1$age_given_pill_for_periods_19yr == 11,11, 
+                                              ifelse(mp1$age_given_pill_for_periods_19yr == 12,12,
+                                                     ifelse(mp1$age_given_pill_for_periods_19yr == 13,13,
+                                                            ifelse(mp1$age_given_pill_for_periods_19yr == 14,14,
+                                                                   ifelse(mp1$age_given_pill_for_periods_19yr == 15,15,
+                                                                          ifelse(mp1$age_given_pill_for_periods_19yr == 16,16,
+                                                                                 ifelse(mp1$age_given_pill_for_periods_19yr == 17,17,
+                                                                                        ifelse(mp1$age_given_pill_for_periods_19yr == 18,18,
+                                                                                               ifelse(mp1$age_given_pill_for_periods_19yr == 19,19,
+                                                                                                      ifelse(mp1$age_given_pill_for_periods_19yr == 20,20,
+                                                                                                             ifelse(mp1$age_given_pill_for_periods_19yr == -3,0, NA))))))))))) 
+                                                    
 mp1$age_given_pill_for_periods_19yr <- factor(mp1$age_given_pill_for_periods_19yr, 
-                                              levels = c(-10,-3,-1,11,12,13,14,15,16,17,18,19,20), 
-                                              labels = c("Not completed","Male","Not known",11,12,13,14,15,16,17,18,19,20))
+                                              levels = c(0,11,12,13,14,15,16,17,18,19,20), 
+                                              labels = c("Male",11,12,13,14,15,16,17,18,19,20))
 table(mp1$age_given_pill_for_periods_19yr)
 
 # Variable for participant sex, labels are as shown below:
 table(mp1$sex)
 table(mp1$sex,mp1$cramps_15yr)  # Used this table to deduce which number was male - no. 1 had no answers for this part of the questionnaire => 2 is female
+mp1$sex <- ifelse(mp1$sex == 1,1,
+                  ifelse(mp1$sex == 2,2, NA))
 mp1$sex <- factor(mp1$sex, 
-                  levels = c(-1,1,2), 
-                  labels =c("Missing","Male","Female"))
+                  levels = c(1,2), 
+                  labels =c("Male","Female"))
 table(mp1$sex)
 table(mp1$sex,mp1$cramps_15yr)  # Check the labels in the context of a period-related variable to make sure there aren't lots of answers for men which there are 
-                                #not!
+                                # not!
 
 # Variable for having ever tried cigarettes at 8 years old, using D2103_F08.pdf, labels are as shown below:
 table(mp1$ever_tried_cigs_8yr)
+mp1$ever_tried_cigs_8yr <- ifelse(mp1$ever_tried_cigs_8yr == 1,1,
+                                  ifelse(mp1$ever_tried_cigs_8yr == 2,2, NA))
 mp1$ever_tried_cigs_8yr <- factor(mp1$ever_tried_cigs_8yr, 
-                                  levels = c(-2,-1,1,2), 
-                                  labels = c("Not known","Missing","Yes","No"))
+                                  levels = c(1,2), 
+                                  labels = c("Yes","No"))
 table(mp1$ever_tried_cigs_8yr)
 
 # Variable for whether the child has smoked a cigarette at 10 years old, using D2105_F10.pdf, labels are as shown:
 table(mp1$child_tried_smoking_10yr)
+mp1$child_tried_smoking_10yr <- ifelse(mp1$child_tried_smoking_10yr == 1,1,
+                                       ifelse(mp1$child_tried_smoking_10yr == 2,2, NA))
 mp1$child_tried_smoking_10yr <- factor(mp1$child_tried_smoking_10yr, 
-                                       levels = c(-9,-4,-2,-1,1,2), 
-                                       labels = c("Did not do F&S","Child refused","Did not start task","Missing","Yes","No"))
+                                       levels = c(1,2), 
+                                       labels = c("Yes","No"))
 table(mp1$child_tried_smoking_10yr)
 
 # Variable for the frequency that the child has smoked cigarettes at 10 years old, using D2105_F10.pdf, labels are as shown:
 table(mp1$freq_child_smokes_10yr)
+mp1$freq_child_smokes_10yr <- ifelse(mp1$freq_child_smokes_10yr == 1,1,
+                                     ifelse(mp1$freq_child_smokes_10yr == 2,2,
+                                            ifelse(mp1$freq_child_smokes_10yr == 3,3, NA)))
 mp1$freq_child_smokes_10yr <- factor(mp1$freq_child_smokes_10yr, 
-                                     levels = c(-9,-3,-2,-1,1,2,3), 
-                                     labels = c("Did not do F&S","Child not done","Did not start task","Missing","Once a week in the last 6 months",
-                                                "More than 4 times in the last 6 months","Less than 3 times in the last 6 months"))
+                                     levels = c(1,2,3), 
+                                     labels = c("Once a week in the last 6 months","More than 4 times in the last 6 months",
+                                                "Less than 3 times in the last 6 months"))
 table(mp1$freq_child_smokes_10yr)
 
 # Variable for whether the child has drunk alcohol at 10 years old, using D2105_F10.pdf, labels are as shown:
 table(mp1$child_drunk_alcohol_10yr)
+mp1$child_drunk_alcohol_10yr <- ifelse(mp1$child_drunk_alcohol_10yr == 1,1,
+                                       ifelse(mp1$child_drunk_alcohol_10yr == 2,2, NA))
 mp1$child_drunk_alcohol_10yr <- factor(mp1$child_drunk_alcohol_10yr, 
-                                       levels = c(-9,-2,-1,1,2), 
-                                       labels = c("Did not do F&S","Did not start task","Missing","Yes","No"))
+                                       levels = c(1,2), 
+                                       labels = c("Yes","No"))
 table(mp1$child_drunk_alcohol_10yr)
 
 # Variable for the frequency that the child has drunk alcohol at 10 years old, using D2105_F10.pdf, labels are as shown:
 table(mp1$freq_child_drinks_alc_10yr)
+mp1$freq_child_drinks_alc_10yr <- ifelse(mp1$freq_child_drinks_alc_10yr == 1,1,
+                                         ifelse(mp1$freq_child_drinks_alc_10yr == 2,2,
+                                                ifelse(mp1$freq_child_drinks_alc_10yr == 3,3, NA)))
 mp1$freq_child_drinks_alc_10yr <- factor(mp1$freq_child_drinks_alc_10yr, 
-                                         levels = c(-9,-5,-3,-2,-1,1,2,3), 
-                                         labels = c("Did not do F&S","Child said don't know","Child not done","Did not start task","Missing",
-                                                    "1 time per week","More than 4 times","1-3 times"))
+                                         levels = c(1,2,3), 
+                                         labels = c("1 time per week","More than 4 times","1-3 times"))
 table(mp1$freq_child_drinks_alc_10yr)
 
 # Variable for whether a child has drunk alcohol at 9 years old from parents point of view, using D1318_KU.pdf, labels are as shown:
 table(mp1$child_drunk_alcohol_9yr)
+mp1$child_drunk_alcohol_9yr <- ifelse(mp1$child_drunk_alcohol_9yr == 1,1,
+                                      ifelse(mp1$child_drunk_alcohol_9yr == 2,2,
+                                             ifelse(mp1$child_drunk_alcohol_9yr == 3,3,
+                                                    ifelse(mp1$child_drunk_alcohol_9yr == 4,4, NA))))
 mp1$child_drunk_alcohol_9yr <- factor(mp1$child_drunk_alcohol_9yr, 
-                                      levels = c(-10,-1,1,2,3,4), 
-                                      labels = c("Not known","Missing","Yes parents know","Probably","Possibly","Don't know"))
+                                      levels = c(1,2,3,4), 
+                                      labels = c("Yes parents know","Probably","Possibly","Don't know"))
 table(mp1$child_drunk_alcohol_9yr)
 
 # Variable for maternal social class based on occupation (can't find the categories at the moment)
@@ -305,72 +383,106 @@ table(mp1$bmi_8yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_8yr)
+mp1$vigorous_exercise_8yr <- ifelse(mp1$vigorous_exercise_8yr == 1,1,
+                                    ifelse(mp1$vigorous_exercise_8yr == 2,2,
+                                           ifelse(mp1$vigorous_exercise_8yr == 3,3,
+                                                  ifelse(mp1$vigorous_exercise_8yr == 4,4,
+                                                         ifelse(mp1$vigorous_exercise_8yr == 5,5, NA)))))
 mp1$vigorous_exercise_8yr <- factor(mp1$vigorous_exercise_8yr, 
-                                    levels = c(-7,-1,1,2,3,4,5), 
-                                    labels = c(-7,"Missing","None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
+                                    levels = c(1,2,3,4,5), 
+                                    labels = c("None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_8yr)
 
 # Variable for whether child has started her period yet:
 table(mp1$started_period_8yr, mp1$sex)  # Used sex in here to see if -10 referred to males which it does
+mp1$started_period_8yr <- ifelse(mp1$started_period_8yr == 1,1,
+                                 ifelse(mp1$started_period_8yr == 2,2,
+                                        ifelse(mp1$started_period_8yr == -10,0, NA)))
 mp1$started_period_8yr <- factor(mp1$started_period_8yr, 
-                                 levels = c(-10,-1,1,2), 
-                                 labels = c("Male","Missing","Yes","No"))
+                                 levels = c(0,1,2), 
+                                 labels = c("Male","Yes","No"))
 table(mp1$started_period_8yr)
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_8yr)
+mp1$hmb_8yr <- ifelse(mp1$hmb_8yr == 2,2,
+                      ifelse(mp1$hmb_8yr == -2,3,
+                             ifelse(mp1$hmb_8yr == -10,0, NA)))
 mp1$hmb_8yr <- factor(mp1$hmb_8yr, 
-                      levels = c(-10,-2,-1,2), 
-                      labels = c("Male","Not started periods","Missing","No"))
+                      levels = c(0,2,3), 
+                      labels = c("Male","No","Not started periods"))
 table(mp1$hmb_8yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_8yr)
+mp1$dr_hmb_8yr <- ifelse(mp1$dr_hmb_8yr == -10,0,
+                         ifelse(mp1$dr_hmb_8yr == -2,3,
+                                ifelse(mp1$dr_hmb_8yr == -3,4, NA)))
 mp1$dr_hmb_8yr <- factor(mp1$dr_hmb_8yr, 
-                         levels = c(-10,-3,-2,-1), 
-                         labels = c("Male","No heavy bleeding","Not started period","Missing"))
+                         levels = c(0,3,4), 
+                         labels = c("Male","Not started period","No heavy bleeding"))
 table(mp1$dr_hmb_8yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
-table(mp1$cramps_8yr)
+table(mp1$cramps_8yr) 
+mp1$cramps_8yr <- ifelse(mp1$cramps_8yr == -10,0,
+                         ifelse(mp1$cramps_8yr == -2,3,
+                                ifelse(mp1$cramps_8yr == 2,2, NA)))
 mp1$cramps_8yr <- factor(mp1$cramps_8yr, 
-                         levels = c(-10,-2,-1,2), 
-                         labels = c("Male","Not started periods","Missing","No"))
+                         levels = c(0,2,3), 
+                         labels = c("Male","No","Not started period"))
 table(mp1$cramps_8yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_8yr)
+mp1$dr_cramps_8yr <- ifelse(mp1$dr_cramps_8yr == -10,0,
+                            ifelse(mp1$dr_cramps_8yr == -3,4,
+                                   ifelse(mp1$dr_cramps_8yr == -2,3, NA)))
 mp1$dr_cramps_8yr <- factor(mp1$dr_cramps_8yr, 
-                            levels = c(-10,-3,-2,-1), 
-                            labels = c("Male","No severe cramps","Not started period","Missing"))
+                            levels = c(0,3,4), 
+                            labels = c("Male","Not started period","No severe cramps"))
 table(mp1$dr_cramps_8yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_8yr)
+mp1$cramps_all_month_8yr <- ifelse(mp1$cramps_all_month_8yr == -10,0,
+                                   ifelse(mp1$cramps_all_month_8yr == -2,3,
+                                          ifelse(mp1$cramps_all_month_8yr == 1,1,
+                                                 ifelse(mp1$cramps_all_month_8yr == 2,2, NA))))
 mp1$cramps_all_month_8yr <- factor(mp1$cramps_all_month_8yr, 
-                                   levels = c(-10,-2,-1,1,2), 
-                                   labels = c("Male","Not started periods","Missing","Yes","No"))
+                                   levels = c(0,1,2,3), 
+                                   labels = c("Male","Yes","No","Not started periods"))
 table(mp1$cramps_all_month_8yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_8yr)
+mp1$dr_cramps_all_month_8yr <- ifelse(mp1$dr_cramps_all_month_8yr == -10,0,
+                                      ifelse(mp1$dr_cramps_all_month_8yr == -3,4,
+                                             ifelse(mp1$dr_cramps_all_month_8yr == -2,3,
+                                                    ifelse(mp1$dr_cramps_all_month_8yr == 1,1, NA))))
 mp1$dr_cramps_all_month_8yr <- factor(mp1$dr_cramps_all_month_8yr,
-                                      levels = c(-10,-3,-2,-1,1), 
-                                      labels = c("Male","No period type pains","Not started periods","Missing","Yes"))
+                                      levels = c(0,1,3,4), 
+                                      labels = c("Male","Yes","Not started periods","No period type pains"))
 table(mp1$dr_cramps_all_month_8yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_8yr)
+mp1$oral_contraceptives_pastyr_8yr <- ifelse(mp1$oral_contraceptives_pastyr_8yr == -10,0,
+                                             ifelse(mp1$oral_contraceptives_pastyr_8yr == -2,3,
+                                                    ifelse(mp1$oral_contraceptives_pastyr_8yr == 2,2, NA)))
 mp1$oral_contraceptives_pastyr_8yr <- factor(mp1$oral_contraceptives_pastyr_8yr, 
-                                             levels = c(-10,-2,-1,2), 
-                                             labels = c("Male","Not started periods","Missing","No"))
+                                             levels = c(0,2,3), 
+                                             labels = c("Male","No","Not started periods"))
 table(mp1$oral_contraceptives_pastyr_8yr)
 
 # Variable for whether child has a thyroid problem:
 table(mp1$thyroid_problem_8yr)
+mp1$thyroid_problem_8yr <- ifelse(mp1$thyroid_problem_8yr == -10,0,
+                                  ifelse(mp1$thyroid_problem_8yr == 1,1,
+                                         ifelse(mp1$thyroid_problem_8yr == 2,2, NA)))
 mp1$thyroid_problem_8yr <- factor(mp1$thyroid_problem_8yr, 
-                                  levels = c(-10,-1,1,2), 
-                                  labels = c("Male","Missing","Yes","No"))
+                                  levels = c(0,1,2), 
+                                  labels = c("Male","Yes","No"))
 table(mp1$thyroid_problem_8yr)
 
 # Using the D1501_PUB2.pdf (participant 9 years old):
@@ -380,73 +492,110 @@ table(mp1$bmi_9yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_9yr)
+mp1$vigorous_exercise_9yr <- ifelse(mp1$vigorous_exercise_9yr == 1,1,
+                                    ifelse(mp1$vigorous_exercise_9yr == 2,2,
+                                           ifelse(mp1$vigorous_exercise_9yr == 3,3,
+                                                  ifelse(mp1$vigorous_exercise_9yr == 4,4,
+                                                         ifelse(mp1$vigorous_exercise_9yr == 5,5, NA)))))
 mp1$vigorous_exercise_9yr <- factor(mp1$vigorous_exercise_9yr, 
-                                    levels = c(-1,1,2,3,4,5), 
-                                    labels = c("Missing","None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
+                                    levels = c(1,2,3,4,5), 
+                                    labels = c("None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_9yr)
 
 # Variable for whether child has started her period yet:
 table(mp1$started_period_9yr, mp1$sex)  # Used sex in here to see if -10 referred to males which it does
+mp1$started_period_9yr <- ifelse(mp1$started_period_9yr == 1,1,
+                                 ifelse(mp1$started_period_9yr == 2,2,
+                                        ifelse(mp1$started_period_9yr == -10,0, NA)))
 mp1$started_period_9yr <- factor(mp1$started_period_9yr, 
-                                 levels = c(-10,-6,1,2), 
-                                 labels = c("Male","Missing whole menstruation section","Yes","No"))
+                                 levels = c(0,1,2), 
+                                 labels = c("Male","Yes","No"))
 table(mp1$started_period_9yr)
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_9yr)
+mp1$hmb_9yr <- ifelse(mp1$hmb_9yr == 2,2,
+                      ifelse(mp1$hmb_9yr == -2,3,
+                             ifelse(mp1$hmb_9yr == -10,0, 
+                                    ifelse(mp1$hmb_9yr == 1,1, NA))))
 mp1$hmb_9yr <- factor(mp1$hmb_9yr, 
-                      levels = c(-10,-6,-2,-1,1,2), 
-                      labels = c("Male","Missing whole menstruation section","Not started periods","Missing","Yes","No"))
+                      levels = c(0,1,2,3), 
+                      labels = c("Male","Yes","No","Not started periods"))
 table(mp1$hmb_9yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_9yr)
+mp1$dr_hmb_9yr <- ifelse(mp1$dr_hmb_9yr == -2,3,
+                         ifelse(mp1$dr_hmb_9yr == -10,0,
+                                ifelse(mp1$dr_hmb_9yr == -3,4,
+                                       ifelse(mp1$dr_hmb_9yr == 2,2, NA))))
 mp1$dr_hmb_9yr <- factor(mp1$dr_hmb_9yr, 
-                         levels = c(-10,-6,-3,-2,-1,2), 
-                         labels = c("Male","Missing whole menstruation section","No heavy bleeding","Not started period","Missing","No"))
+                         levels = c(0,2,3,4), 
+                         labels = c("Male","No","Not started period","No heavy bleeding"))
 table(mp1$dr_hmb_9yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_9yr)
+mp1$cramps_9yr <- ifelse(mp1$cramps_9yr == -10,0,
+                         ifelse(mp1$cramps_9yr == -2,3,
+                                ifelse(mp1$cramps_9yr == 2,2, NA)))
 mp1$cramps_9yr <- factor(mp1$cramps_9yr, 
-                         levels = c(-10,-6,-2,-1,1,2), 
-                         labels = c("Male","Missing whole menstruation section","Not started periods","Missing","Yes","No"))
+                         levels = c(0,2,3), 
+                         labels = c("Male","No","Not started period"))
 table(mp1$cramps_9yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_9yr)
+mp1$dr_cramps_9yr <- ifelse(mp1$dr_cramps_9yr == -10,0,
+                            ifelse(mp1$dr_cramps_9yr == -3,4,
+                                   ifelse(mp1$dr_cramps_9yr == -2,3,
+                                          ifelse(mp1$dr_cramps_9yr == 1,1,
+                                                 ifelse(mp1$dr_cramps_9yr == 2,2, NA)))))
 mp1$dr_cramps_9yr <- factor(mp1$dr_cramps_9yr, 
-                            levels = c(-10,-6,-3,-2,-1,1,2), 
-                            labels = c("Male","Missing whole menstruation section","No severe cramps","Not started period","Missing","Yes","No"))
+                            levels = c(0,1,2,3,4), 
+                            labels = c("Male","Yes","No","Not started period","No severe cramps"))
 table(mp1$dr_cramps_9yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_9yr)
+mp1$cramps_all_month_9yr <- ifelse(mp1$cramps_all_month_9yr == -10,0,
+                                   ifelse(mp1$cramps_all_month_9yr == -2,3,
+                                          ifelse(mp1$cramps_all_month_9yr == 1,1,
+                                                 ifelse(mp1$cramps_all_month_9yr == 2,2, NA))))
 mp1$cramps_all_month_9yr <- factor(mp1$cramps_all_month_9yr, 
-                                   levels = c(-10,-6,-2,-1,1,2), 
-                                   labels = c("Male","Missing whole menstruation section","Not started periods","Missing","Yes","No"))
+                                   levels = c(0,1,2,3), 
+                                   labels = c("Male","Yes","No","Not started periods"))
 table(mp1$cramps_all_month_9yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_9yr)
+mp1$dr_cramps_all_month_9yr <- ifelse(mp1$dr_cramps_all_month_9yr == -10,0,
+                                      ifelse(mp1$dr_cramps_all_month_9yr == -3,4,
+                                             ifelse(mp1$dr_cramps_all_month_9yr == -2,3,
+                                                    ifelse(mp1$dr_cramps_all_month_9yr == 2,2, NA))))
 mp1$dr_cramps_all_month_9yr <- factor(mp1$dr_cramps_all_month_9yr, 
-                                      levels = c(-10,-6,-3,-2,-1,2), 
-                                      labels = c("Male","Missing whole menstruation section","No period type pains","Not started periods",
-                                                 "Missing","No"))
+                                      levels = c(0,2,3,4), 
+                                      labels = c("Male","No","Not started periods","No period type pains"))
 table(mp1$dr_cramps_all_month_9yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_9yr)
+mp1$oral_contraceptives_pastyr_9yr <- ifelse(mp1$oral_contraceptives_pastyr_9yr == -10,0,
+                                             ifelse(mp1$oral_contraceptives_pastyr_9yr == -2,3,
+                                                    ifelse(mp1$oral_contraceptives_pastyr_9yr == 2,2, NA)))
 mp1$oral_contraceptives_pastyr_9yr <- factor(mp1$oral_contraceptives_pastyr_9yr, 
-                                             levels = c(-10,-2,-1,2), 
-                                             labels = c("Male","Not started periods","Missing","No"))
+                                             levels = c(0,2,3), 
+                                             labels = c("Male","No","Not started periods"))
 table(mp1$oral_contraceptives_pastyr_9yr)
 
 # Variable for whether child has a thyroid problem:
 table(mp1$thyroid_problem_9yr)
+mp1$thyroid_problem_9yr <- ifelse(mp1$thyroid_problem_9yr == -10,0,
+                                  ifelse(mp1$thyroid_problem_9yr == 1,1,
+                                         ifelse(mp1$thyroid_problem_9yr == 2,2, NA)))
 mp1$thyroid_problem_9yr <- factor(mp1$thyroid_problem_9yr, 
-                                  levels = c(-10,-1,1,2), 
-                                  labels = c("Male","Missing","Yes","No"))
+                                  levels = c(0,1,2), 
+                                  labels = c("Male","Yes","No"))
 table(mp1$thyroid_problem_9yr)
 
 # Using the D1501_PUB3.pdf (participant 10 years old):
@@ -456,85 +605,122 @@ table(mp1$bmi_10yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_10yr)
+mp1$vigorous_exercise_10yr <- ifelse(mp1$vigorous_exercise_10yr == 1,1,
+                                    ifelse(mp1$vigorous_exercise_10yr == 2,2,
+                                           ifelse(mp1$vigorous_exercise_10yr == 3,3,
+                                                  ifelse(mp1$vigorous_exercise_10yr == 4,4,
+                                                         ifelse(mp1$vigorous_exercise_10yr == 5,5, NA)))))
 mp1$vigorous_exercise_10yr <- factor(mp1$vigorous_exercise_10yr, 
-                                     levels = c(-10,-1,1,2,3,4,5), 
-                                     labels = c(-10,"Missing","None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
+                                     levels = c(1,2,3,4,5), 
+                                     labels = c("None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_10yr)
 
 # Variable for whether child has started her period yet:
 table(mp1$started_period_10yr, mp1$sex)  # Used sex in here to see if -7 referred to males which it does
+mp1$started_period_10yr <- ifelse(mp1$started_period_10yr == 1,1,
+                                 ifelse(mp1$started_period_10yr == 2,2,
+                                        ifelse(mp1$started_period_10yr == -7,0, NA)))
 mp1$started_period_10yr <- factor(mp1$started_period_10yr, 
-                                  levels = c(-10,-7,-6,1,2), 
-                                  labels = c(-10,"Male","Missing whole menstruation section","Yes","No"))
+                                  levels = c(0,1,2), 
+                                  labels = c("Male","Yes","No"))
 table(mp1$started_period_10yr)
 
 # Variable for normal number of days bleeding:
 table(mp1$normal_no_days_bleeding_10yr)
 mp1$normal_no_days_bleeding_10yr <- factor(mp1$normal_no_days_bleeding_10yr, 
                                            levels = c(-10,-9,-7,-6,-2,-1,1,2,3,4,5,6,7,8,10), 
-                                           labels = c(-10,"Don't know","Male","Questions A4 to A9 omitted","Periods not started","Not stated",
+                                           labels = c(NA,NA,"Male",NA,"Periods not started",NA,
                                                       1,2,3,4,5,6,7,8,10))
 table(mp1$normal_no_days_bleeding_10yr)
 
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_10yr)
+mp1$hmb_10yr <- ifelse(mp1$hmb_10yr == -7,0,
+                      ifelse(mp1$hmb_10yr == -2,3,
+                             ifelse(mp1$hmb_10yr == 1,1, 
+                                    ifelse(mp1$hmb_10yr == 2,2, NA))))
 mp1$hmb_10yr <- factor(mp1$hmb_10yr, 
-                       levels = c(-10,-7,-6,-5,-2,1,2), 
-                       labels = c(-10,"Male","Missing whole menstruation section","Question A8a omitted","Not started periods","Yes","No"))
+                       levels = c(0,1,2,3), 
+                       labels = c("Male","Yes","No","Not started periods"))
 table(mp1$hmb_10yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_10yr)
+mp1$dr_hmb_10yr <- ifelse(mp1$dr_hmb_10yr == -2,3,
+                         ifelse(mp1$dr_hmb_10yr == -7,0,
+                                ifelse(mp1$dr_hmb_10yr == -3,4,
+                                       ifelse(mp1$dr_hmb_10yr == 2,2, 
+                                              ifelse(mp1$dr_hmb_10yr == 1,1, NA)))))
 mp1$dr_hmb_10yr <- factor(mp1$dr_hmb_10yr, 
-                          levels = c(-10,-7,-6,-5,-3,-2,1,2), 
-                          labels = c(-10,"Male","Missing whole menstruation section","Question A8a omitted","No heavy bleeding",
-                                     "Not started period","Yes","No"))
+                         levels = c(0,1,2,3,4), 
+                         labels = c("Male","Yes","No","Not started period","No heavy bleeding"))
 table(mp1$dr_hmb_10yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_10yr)
+mp1$cramps_10yr <- ifelse(mp1$cramps_10yr == -7,0,
+                         ifelse(mp1$cramps_10yr == -2,3,
+                                ifelse(mp1$cramps_10yr == 2,2, 
+                                       ifelse(mp1$cramps_10yr == 1,1, NA))))
 mp1$cramps_10yr <- factor(mp1$cramps_10yr, 
-                          levels = c(-10,-7,-6,-5,-2,1,2), 
-                          labels = c(-10,"Male","Missing whole menstruation section","Question A8b omitted","Not started periods","Yes","No"))
+                         levels = c(0,1,2,3), 
+                         labels = c("Male","Yes","No","Not started period"))
 table(mp1$cramps_10yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_10yr)
+mp1$dr_cramps_10yr <- ifelse(mp1$dr_cramps_10yr == -7,0,
+                            ifelse(mp1$dr_cramps_10yr == -3,4,
+                                   ifelse(mp1$dr_cramps_10yr == -2,3,
+                                          ifelse(mp1$dr_cramps_10yr == 1,1,
+                                                 ifelse(mp1$dr_cramps_10yr == 2,2, NA)))))
 mp1$dr_cramps_10yr <- factor(mp1$dr_cramps_10yr, 
-                             levels = c(-10,-7,-6,-5,-3,-2,1,2), 
-                             labels = c(-10,"Male","Missing whole menstruation section","Question A8b","No severe cramps",
-                                        "Not started period","Yes","No"))
+                            levels = c(0,1,2,3,4), 
+                            labels = c("Male","Yes","No","Not started period","No severe cramps"))
 table(mp1$dr_cramps_10yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_10yr)
-mp1$cramps_all_month_10yr <- factor(mp1$cramps_all_month_10yr,
-                                    levels = c(-10,-7,-6,-5,-2,1,2), 
-                                    labels = c(-10,"Male","Missing whole menstruation section","Question A8c omitted",
-                                               "Not started periods","Yes","No"))
+mp1$cramps_all_month_10yr <- ifelse(mp1$cramps_all_month_10yr == -7,0,
+                                   ifelse(mp1$cramps_all_month_10yr == -2,3,
+                                          ifelse(mp1$cramps_all_month_10yr == 1,1,
+                                                 ifelse(mp1$cramps_all_month_10yr == 2,2, NA))))
+mp1$cramps_all_month_10yr <- factor(mp1$cramps_all_month_10yr, 
+                                   levels = c(0,1,2,3), 
+                                   labels = c("Male","Yes","No","Not started periods"))
 table(mp1$cramps_all_month_10yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_10yr)
+mp1$dr_cramps_all_month_10yr <- ifelse(mp1$dr_cramps_all_month_10yr == -7,0,
+                                      ifelse(mp1$dr_cramps_all_month_10yr == -3,4,
+                                             ifelse(mp1$dr_cramps_all_month_10yr == -2,3,
+                                                    ifelse(mp1$dr_cramps_all_month_10yr == 2,2,
+                                                           ifelse(mp1$dr_cramps_all_month_10yr == 1,1, NA)))))
 mp1$dr_cramps_all_month_10yr <- factor(mp1$dr_cramps_all_month_10yr, 
-                                       levels = c(-10,-7,-6,-5,-3,-2,1,2), 
-                                       labels = c(-10,"Male","Missing whole menstruation section","Question A8c omitted","No period type pains",
-                                                  "Not started periods","Yes","No"))
+                                      levels = c(0,1,2,3,4), 
+                                      labels = c("Male","Yes","No","Not started periods","No period type pains"))
 table(mp1$dr_cramps_all_month_10yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_10yr)
+mp1$oral_contraceptives_pastyr_10yr <- ifelse(mp1$oral_contraceptives_pastyr_10yr == -7,0,
+                                             ifelse(mp1$oral_contraceptives_pastyr_10yr == -2,3,
+                                                    ifelse(mp1$oral_contraceptives_pastyr_10yr == 2,2, NA)))
 mp1$oral_contraceptives_pastyr_10yr <- factor(mp1$oral_contraceptives_pastyr_10yr, 
-                                              levels = c(-10,-7,-6,-2,-1,2), 
-                                              labels = c(-10,"Male","Missing whole menstruation section","Not started periods","Missing","No"))
+                                             levels = c(0,2,3), 
+                                             labels = c("Male","No","Not started periods"))
 table(mp1$oral_contraceptives_pastyr_10yr)
 
 # Variable for whether child has a thyroid problem:
 table(mp1$thyroid_problem_10yr)
+mp1$thyroid_problem_10yr <- ifelse(mp1$thyroid_problem_10yr == -7,0,
+                                  ifelse(mp1$thyroid_problem_10yr == 1,1,
+                                         ifelse(mp1$thyroid_problem_10yr == 2,2, NA)))
 mp1$thyroid_problem_10yr <- factor(mp1$thyroid_problem_10yr, 
-                                   levels = c(-10,-7,-1,1,2), 
-                                   labels = c(-10,"Male","Missing","Yes","No"))
+                                  levels = c(0,1,2), 
+                                  labels = c("Male","Yes","No"))
 table(mp1$thyroid_problem_10yr)
 
 # Using the D1501_PUB4.pdf (participant 11 years old):
@@ -544,85 +730,123 @@ table(mp1$bmi_11yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_11yr)
+mp1$vigorous_exercise_11yr <- ifelse(mp1$vigorous_exercise_11yr == 1,1,
+                                    ifelse(mp1$vigorous_exercise_11yr == 2,2,
+                                           ifelse(mp1$vigorous_exercise_11yr == 3,3,
+                                                  ifelse(mp1$vigorous_exercise_11yr == 4,4,
+                                                         ifelse(mp1$vigorous_exercise_11yr == 5,5, NA)))))
 mp1$vigorous_exercise_11yr <- factor(mp1$vigorous_exercise_11yr, 
-                                     levels = c(-10,-1,1,2,3,4,5), 
-                                     labels = c(-10,"Missing","None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
+                                     levels = c(1,2,3,4,5), 
+                                     labels = c("None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_11yr)
 
 # Variable for whether child has started her period yet:
 table(mp1$started_period_11yr, mp1$sex)  # Used sex in here to see if -7 referred to males which it does
+mp1$started_period_11yr <- ifelse(mp1$started_period_11yr == 1,1,
+                                 ifelse(mp1$started_period_11yr == 2,2,
+                                        ifelse(mp1$started_period_11yr == -7,0, NA)))
 mp1$started_period_11yr <- factor(mp1$started_period_11yr, 
-                                  levels = c(-10,-7,-6,1,2), 
-                                  labels = c(-10,"Male","Missing whole menstruation section","Yes","No"))
+                                  levels = c(0,1,2), 
+                                  labels = c("Male","Yes","No"))
 table(mp1$started_period_11yr)
 
 # Variable for normal number of days bleeding:
 table(mp1$normal_no_days_bleeding_11yr)
 mp1$normal_no_days_bleeding_11yr <- factor(mp1$normal_no_days_bleeding_11yr, 
                                            levels = c(-10,-9,-7,-6,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,14), 
-                                           labels = c(-10,"Don't know","Male","Questions A4 to A9 omitted","Periods not started","Not stated",
+                                           labels = c(NA,NA,"Male",NA,"Periods not started",NA,
                                                       0,1,2,3,4,5,6,7,8,9,10,11,12,14))
 table(mp1$normal_no_days_bleeding_11yr)
 
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_11yr)
+mp1$hmb_11yr <- ifelse(mp1$hmb_11yr == -7,0,
+                       ifelse(mp1$hmb_11yr == -2,3,
+                              ifelse(mp1$hmb_11yr == 1,1, 
+                                     ifelse(mp1$hmb_11yr == 2,2, NA))))
 mp1$hmb_11yr <- factor(mp1$hmb_11yr, 
-                       levels = c(-10,-7,-6,-5,-2,1,2), 
-                       labels = c(-10,"Male","Missing whole menstruation section","Question A8a omitted","Not started periods","Yes","No"))
+                       levels = c(0,1,2,3), 
+                       labels = c("Male","Yes","No","Not started periods"))
 table(mp1$hmb_11yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_11yr)
+mp1$dr_hmb_11yr <- ifelse(mp1$dr_hmb_11yr == -2,3,
+                          ifelse(mp1$dr_hmb_11yr == -7,0,
+                                 ifelse(mp1$dr_hmb_11yr == -3,4,
+                                        ifelse(mp1$dr_hmb_11yr == 2,2, 
+                                               ifelse(mp1$dr_hmb_11yr == 1,1, NA)))))
 mp1$dr_hmb_11yr <- factor(mp1$dr_hmb_11yr, 
-                          levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), 
-                          labels = c(-10,"Male","Missing whole menstruation section","Question A8a omitted","No heavy bleeding",
-                                     "Not started period","Not stated","Yes","No"))
+                          levels = c(0,1,2,3,4), 
+                          labels = c("Male","Yes","No","Not started period","No heavy bleeding"))
 table(mp1$dr_hmb_11yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_11yr)
+mp1$cramps_11yr <- ifelse(mp1$cramps_11yr == -7,0,
+                          ifelse(mp1$cramps_11yr == -2,3,
+                                 ifelse(mp1$cramps_11yr == 2,2, 
+                                        ifelse(mp1$cramps_11yr == 1,1, NA))))
 mp1$cramps_11yr <- factor(mp1$cramps_11yr, 
-                          levels = c(-10,-7,-6,-5,-2,1,2), 
-                          labels = c(-10,"Male","Missing whole menstruation section","Question A8b omitted","Not started periods","Yes","No"))
+                          levels = c(0,1,2,3), 
+                          labels = c("Male","Yes","No","Not started period"))
 table(mp1$cramps_11yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_11yr)
+mp1$dr_cramps_11yr <- ifelse(mp1$dr_cramps_11yr == -7,0,
+                          ifelse(mp1$dr_cramps_11yr == -2,3,
+                                 ifelse(mp1$dr_cramps_11yr == 2,2, 
+                                        ifelse(mp1$dr_cramps_11yr == 1,1,
+                                               ifelse(mp1$dr_cramps_11yr == -3,4, NA)))))
 mp1$dr_cramps_11yr <- factor(mp1$dr_cramps_11yr, 
-                             levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), 
-                             labels = c(-10,"Male","Missing whole menstruation section","Question A8b","No severe cramps","Not started period",
-                                        "Not stated","Yes","No"))
+                          levels = c(0,1,2,3,4), 
+                          labels = c("Male","Yes","No","Not started period","No severe cramps"))
 table(mp1$dr_cramps_11yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_11yr)
+mp1$cramps_all_month_11yr <- ifelse(mp1$cramps_all_month_11yr == -7,0,
+                                    ifelse(mp1$cramps_all_month_11yr == -2,3,
+                                           ifelse(mp1$cramps_all_month_11yr == 1,1,
+                                                  ifelse(mp1$cramps_all_month_11yr == 2,2, NA))))
 mp1$cramps_all_month_11yr <- factor(mp1$cramps_all_month_11yr, 
-                                    levels = c(-10,-7,-6,-5,-2,1,2), 
-                                    labels = c(-10,"Male","Missing whole menstruation section","Question A8c omitted","Not started periods",
-                                               "Yes","No"))
+                                    levels = c(0,1,2,3), 
+                                    labels = c("Male","Yes","No","Not started periods"))
 table(mp1$cramps_all_month_11yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_11yr)
+mp1$dr_cramps_all_month_11yr <- ifelse(mp1$dr_cramps_all_month_11yr == -7,0,
+                                       ifelse(mp1$dr_cramps_all_month_11yr == -3,4,
+                                              ifelse(mp1$dr_cramps_all_month_11yr == -2,3,
+                                                     ifelse(mp1$dr_cramps_all_month_11yr == 2,2,
+                                                            ifelse(mp1$dr_cramps_all_month_11yr == 1,1, NA)))))
 mp1$dr_cramps_all_month_11yr <- factor(mp1$dr_cramps_all_month_11yr, 
-                                       levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), 
-                                       labels = c(-10,"Male","Missing whole menstruation section","Question A8c omitted","No period type pains",
-                                                  "Not started periods","Not stated","Yes","No"))
+                                       levels = c(0,1,2,3,4), 
+                                       labels = c("Male","Yes","No","Not started periods","No period type pains"))
 table(mp1$dr_cramps_all_month_11yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_11yr)
+mp1$oral_contraceptives_pastyr_11yr <- ifelse(mp1$oral_contraceptives_pastyr_11yr == -7,0,
+                                              ifelse(mp1$oral_contraceptives_pastyr_11yr == -2,3,
+                                                     ifelse(mp1$oral_contraceptives_pastyr_11yr == 2,2,
+                                                            ifelse(mp1$oral_contraceptives_pastyr_11yr == 1,1, NA))))
 mp1$oral_contraceptives_pastyr_11yr <- factor(mp1$oral_contraceptives_pastyr_11yr, 
-                                              levels = c(-10,-7,-6,-2,-1,1,2), 
-                                              labels = c(-10,"Male","Missing whole menstruation section","Not started periods","Not stated","Yes","No"))
+                                              levels = c(0,1,2,3), 
+                                              labels = c("Male","Yes","No","Not started periods"))
 table(mp1$oral_contraceptives_pastyr_11yr)
 
 # Variable for whether child has a thyroid problem:
 table(mp1$thyroid_problem_11yr)
+mp1$thyroid_problem_11yr <- ifelse(mp1$thyroid_problem_11yr == -7,0,
+                                   ifelse(mp1$thyroid_problem_11yr == 1,1,
+                                          ifelse(mp1$thyroid_problem_11yr == 2,2, NA)))
 mp1$thyroid_problem_11yr <- factor(mp1$thyroid_problem_11yr, 
-                                   levels = c(-10,-7,-1,1,2), 
-                                   labels = c(-10,"Male","Not stated","Yes","No"))
+                                   levels = c(0,1,2), 
+                                   labels = c("Male","Yes","No"))
 table(mp1$thyroid_problem_11yr)
 
 # Using the D1501_PUB5.pdf (participant 13 years old):
@@ -632,80 +856,122 @@ table(mp1$bmi_13yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_13yr)
+mp1$vigorous_exercise_13yr <- ifelse(mp1$vigorous_exercise_13yr == 1,1,
+                                    ifelse(mp1$vigorous_exercise_13yr == 2,2,
+                                           ifelse(mp1$vigorous_exercise_13yr == 3,3,
+                                                  ifelse(mp1$vigorous_exercise_13yr == 4,4,
+                                                         ifelse(mp1$vigorous_exercise_13yr == 5,5, NA)))))
 mp1$vigorous_exercise_13yr <- factor(mp1$vigorous_exercise_13yr, 
-                                     levels = c(-10,-6,-1,1,2,3,4,5), 
-                                     labels = c(-10,"Section A omitted","Not stated","None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
+                                     levels = c(1,2,3,4,5), 
+                                     labels = c("None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_13yr)
 
 # Variable for whether child has started her period yet:
 table(mp1$started_period_13yr, mp1$sex)  # Used sex in here to see if -7 referred to males which it does
+mp1$started_period_13yr <- ifelse(mp1$started_period_13yr == 1,1,
+                                 ifelse(mp1$started_period_13yr == 2,2,
+                                        ifelse(mp1$started_period_13yr == -7,0, NA)))
 mp1$started_period_13yr <- factor(mp1$started_period_13yr, 
-                                  levels = c(-10,-7,-6,-1,1,2), 
-                                  labels = c(-10,"Male","Section A omitted","Not stated","Yes","No"))
+                                  levels = c(0,1,2), 
+                                  labels = c("Male","Yes","No"))
 table(mp1$started_period_13yr)
 
 # Variable for normal number of days bleeding:
 table(mp1$normal_no_days_bleeding_13yr)
 mp1$normal_no_days_bleeding_13yr <- factor(mp1$normal_no_days_bleeding_13yr, 
                                            levels = c(-10,-7,-6,-2,-1,1,2,3,4,5,6,7,8,9,10,11,12,15,22), 
-                                           labels = c(-10,"Male","Section A omitted","Periods not started","Not stated",1,2,3,4,5,6,7,8,9,10,11,12,15,22))
+                                           labels = c(-10,"Male","Section A omitted","Not started period","Not stated",1,2,3,4,5,6,7,8,9,10,11,12,15,22))
 table(mp1$normal_no_days_bleeding_13yr)
 
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_13yr)
+mp1$hmb_13yr <- ifelse(mp1$hmb_13yr == -7,0,
+                       ifelse(mp1$hmb_13yr == -2,3,
+                              ifelse(mp1$hmb_13yr == 1,1, 
+                                     ifelse(mp1$hmb_13yr == 2,2, NA))))
 mp1$hmb_13yr <- factor(mp1$hmb_13yr, 
-                       levels = c(-10,-7,-6,-2,-1,1,2), 
-                       labels = c(-10,"Male","Section A omitted","Not started periods","Not stated","Yes","No"))
+                       levels = c(0,1,2,3), 
+                       labels = c("Male","Yes","No","Not started period"))
 table(mp1$hmb_13yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_13yr)
+mp1$dr_hmb_13yr <- ifelse(mp1$dr_hmb_13yr == -2,3,
+                          ifelse(mp1$dr_hmb_13yr == -7,0,
+                                 ifelse(mp1$dr_hmb_13yr == -3,4,
+                                        ifelse(mp1$dr_hmb_13yr == 2,2, 
+                                               ifelse(mp1$dr_hmb_13yr == 1,1, NA)))))
 mp1$dr_hmb_13yr <- factor(mp1$dr_hmb_13yr, 
-                          levels = c(-10,-7,-6,-3,-2,-1,1,2), 
-                          labels = c(-10,"Male","Section A omitted","No heavy bleeding","Not started period","Not stated","Yes","No"))
+                          levels = c(0,1,2,3,4), 
+                          labels = c("Male","Yes","No","Not started period","No heavy bleeding"))
 table(mp1$dr_hmb_13yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_13yr)
+mp1$cramps_13yr <- ifelse(mp1$cramps_13yr == -7,0,
+                          ifelse(mp1$cramps_13yr == -2,3,
+                                 ifelse(mp1$cramps_13yr == 2,2, 
+                                        ifelse(mp1$cramps_13yr == 1,1, NA))))
 mp1$cramps_13yr <- factor(mp1$cramps_13yr, 
-                          levels = c(-10,-7,-6,-2,-1,1,2), 
-                          labels = c(-10,"Male","Section A omitted","Not started periods","Not stated","Yes","No"))
+                          levels = c(0,1,2,3), 
+                          labels = c("Male","Yes","No","Not started period"))
 table(mp1$cramps_13yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_13yr)
+mp1$dr_cramps_13yr <- ifelse(mp1$dr_cramps_13yr == -7,0,
+                             ifelse(mp1$dr_cramps_13yr == -3,4,
+                                    ifelse(mp1$dr_cramps_13yr == -2,3,
+                                           ifelse(mp1$dr_cramps_13yr == 1,1,
+                                                  ifelse(mp1$dr_cramps_13yr == 2,2, NA)))))
 mp1$dr_cramps_13yr <- factor(mp1$dr_cramps_13yr, 
-                             levels = c(-10,-7,-6,-3,-2,-1,1,2), 
-                             labels = c(-10,"Male","Section A omitted","No severe cramps","Not started period","Not stated","Yes","No"))
+                             levels = c(0,1,2,3,4), 
+                             labels = c("Male","Yes","No","Not started period","No severe cramps"))
 table(mp1$dr_cramps_13yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_13yr)
+mp1$cramps_all_month_13yr <- ifelse(mp1$cramps_all_month_13yr == -7,0,
+                                    ifelse(mp1$cramps_all_month_13yr == -2,3,
+                                           ifelse(mp1$cramps_all_month_13yr == 1,1,
+                                                  ifelse(mp1$cramps_all_month_13yr == 2,2, NA))))
 mp1$cramps_all_month_13yr <- factor(mp1$cramps_all_month_13yr, 
-                                    levels = c(-10,-7,-6,-2,-1,1,2), 
-                                    labels = c(-10,"Male","Section A omitted","Not started periods","Not stated","Yes","No"))
+                                    levels = c(0,1,2,3), 
+                                    labels = c("Male","Yes","No","Not started periods"))
 table(mp1$cramps_all_month_13yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_13yr)
+mp1$dr_cramps_all_month_13yr <- ifelse(mp1$dr_cramps_all_month_13yr == -7,0,
+                                       ifelse(mp1$dr_cramps_all_month_13yr == -3,4,
+                                              ifelse(mp1$dr_cramps_all_month_13yr == -2,3,
+                                                     ifelse(mp1$dr_cramps_all_month_13yr == 2,2,
+                                                            ifelse(mp1$dr_cramps_all_month_13yr == 1,1, NA)))))
 mp1$dr_cramps_all_month_13yr <- factor(mp1$dr_cramps_all_month_13yr, 
-                                       levels = c(-10,-7,-6,-3,-2,-1,1,2), 
-                                       labels = c(-10,"Male","Section A omitted","No period type pains","Not started periods","Not stated","Yes","No"))
+                                       levels = c(0,1,2,3,4), 
+                                       labels = c("Male","Yes","No","Not started periods","No period type pains"))
 table(mp1$dr_cramps_all_month_13yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_13yr)
+mp1$oral_contraceptives_pastyr_13yr <- ifelse(mp1$oral_contraceptives_pastyr_13yr == -7,0,
+                                              ifelse(mp1$oral_contraceptives_pastyr_13yr == -2,3,
+                                                     ifelse(mp1$oral_contraceptives_pastyr_13yr == 2,2,
+                                                            ifelse(mp1$oral_contraceptives_pastyr_13yr == 1,1, NA))))
 mp1$oral_contraceptives_pastyr_13yr <- factor(mp1$oral_contraceptives_pastyr_13yr, 
-                                              levels = c(-10,-7,-6,-2,-1,1,2), 
-                                              labels = c(-10,"Male","Section A omitted","Not started periods","Not stated","Yes","No"))
+                                              levels = c(0,1,2,3), 
+                                              labels = c("Male","Yes","No","Not started periods"))
 table(mp1$oral_contraceptives_pastyr_13yr)
 
 # Variable for whether child has a thyroid problem:
 table(mp1$thyroid_problem_13yr)
+mp1$thyroid_problem_13yr <- ifelse(mp1$thyroid_problem_13yr == -7,0,
+                                   ifelse(mp1$thyroid_problem_13yr == 1,1,
+                                          ifelse(mp1$thyroid_problem_13yr == 2,2, NA)))
 mp1$thyroid_problem_13yr <- factor(mp1$thyroid_problem_13yr, 
-                                   levels = c(-10,-7,-6,-1,1,2), 
-                                   labels = c(-10,"Male","Section A omitted","Not stated","Yes","No"))
+                                   levels = c(0,1,2), 
+                                   labels = c("Male","Yes","No"))
 table(mp1$thyroid_problem_13yr)
 
 # Using the D1501_PUB6.pdf (participant 14 years old):
@@ -715,16 +981,24 @@ table(mp1$bmi_14yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_14yr)
+mp1$vigorous_exercise_14yr <- ifelse(mp1$vigorous_exercise_14yr == 1,1,
+                                    ifelse(mp1$vigorous_exercise_14yr == 2,2,
+                                           ifelse(mp1$vigorous_exercise_14yr == 3,3,
+                                                  ifelse(mp1$vigorous_exercise_14yr == 4,4,
+                                                         ifelse(mp1$vigorous_exercise_14yr == 5,5, NA)))))
 mp1$vigorous_exercise_14yr <- factor(mp1$vigorous_exercise_14yr, 
-                                     levels = c(-10,-6,-1,1,2,3,4,5), 
-                                     labels = c(-10,"Section A omitted","Not stated","None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
+                                     levels = c(1,2,3,4,5), 
+                                     labels = c("None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_14yr)
 
 # Variable for whether child has started her period yet:
 table(mp1$started_period_14yr, mp1$sex)  # Used sex in here to see if -7 referred to males which it does
+mp1$started_period_14yr <- ifelse(mp1$started_period_14yr == 1,1,
+                                  ifelse(mp1$started_period_14yr == 2,2,
+                                         ifelse(mp1$started_period_14yr == -7,0, NA)))
 mp1$started_period_14yr <- factor(mp1$started_period_14yr, 
-                                  levels = c(-10,-7,-1,1,2), 
-                                  labels = c(-10,"Male","Not stated","Yes","No"))
+                                  levels = c(0,1,2), 
+                                  labels = c("Male","Yes","No"))
 table(mp1$started_period_14yr)
 
 # Variable for normal number of days bleeding:
@@ -736,74 +1010,117 @@ table(mp1$normal_no_days_bleeding_14yr)
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_14yr)
+mp1$hmb_14yr <- ifelse(mp1$hmb_14yr == -7,0,
+                       ifelse(mp1$hmb_14yr == -2,3,
+                              ifelse(mp1$hmb_14yr == 1,1, 
+                                     ifelse(mp1$hmb_14yr == 2,2, NA))))
 mp1$hmb_14yr <- factor(mp1$hmb_14yr, 
-                       levels = c(-10,-7,-2,-1,1,2), 
-                       labels = c(-10,"Male","Not started periods","Not stated","Yes","No"))
+                       levels = c(0,1,2,3), 
+                       labels = c("Male","Yes","No","Not started period"))
 table(mp1$hmb_14yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_14yr)
+mp1$dr_hmb_14yr <- ifelse(mp1$dr_hmb_14yr == -2,3,
+                          ifelse(mp1$dr_hmb_14yr == -7,0,
+                                 ifelse(mp1$dr_hmb_14yr == -3,4,
+                                        ifelse(mp1$dr_hmb_14yr == 2,2, 
+                                               ifelse(mp1$dr_hmb_14yr == 1,1, NA)))))
 mp1$dr_hmb_14yr <- factor(mp1$dr_hmb_14yr, 
-                          levels = c(-10,-7,-3,-2,-1,1,2), 
-                          labels = c(-10,"Male","No heavy bleeding","Not started period","Not stated","Yes","No"))
+                          levels = c(0,1,2,3,4), 
+                          labels = c("Male","Yes","No","Not started period","No heavy bleeding"))
 table(mp1$dr_hmb_14yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_14yr)
+mp1$cramps_14yr <- ifelse(mp1$cramps_14yr == -7,0,
+                          ifelse(mp1$cramps_14yr == -2,3,
+                                 ifelse(mp1$cramps_14yr == 2,2, 
+                                        ifelse(mp1$cramps_14yr == 1,1, NA))))
 mp1$cramps_14yr <- factor(mp1$cramps_14yr, 
-                          levels = c(-10,-7,-2,-1,1,2), 
-                          labels = c(-10,"Male","Not started periods","Not stated","Yes","No"))
+                          levels = c(0,1,2,3), 
+                          labels = c("Male","Yes","No","Not started period"))
 table(mp1$cramps_14yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_14yr)
+mp1$dr_cramps_14yr <- ifelse(mp1$dr_cramps_14yr == -7,0,
+                             ifelse(mp1$dr_cramps_14yr == -3,4,
+                                    ifelse(mp1$dr_cramps_14yr == -2,3,
+                                           ifelse(mp1$dr_cramps_14yr == 1,1,
+                                                  ifelse(mp1$dr_cramps_14yr == 2,2, NA)))))
 mp1$dr_cramps_14yr <- factor(mp1$dr_cramps_14yr, 
-                             levels = c(-10,-7,-3,-2,-1,1,2), 
-                             labels = c(-10,"Male","No severe cramps","Not started period","Not stated","Yes","No"))
+                             levels = c(0,1,2,3,4), 
+                             labels = c("Male","Yes","No","Not started period","No severe cramps"))
 table(mp1$dr_cramps_14yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_14yr)
+mp1$cramps_all_month_14yr <- ifelse(mp1$cramps_all_month_14yr == -7,0,
+                                    ifelse(mp1$cramps_all_month_14yr == -2,3,
+                                           ifelse(mp1$cramps_all_month_14yr == 1,1,
+                                                  ifelse(mp1$cramps_all_month_14yr == 2,2, NA))))
 mp1$cramps_all_month_14yr <- factor(mp1$cramps_all_month_14yr, 
-                                    levels = c(-10,-7,-2,-1,1,2), 
-                                    labels = c(-10,"Male","Not started periods","Not stated","Yes","No"))
+                                    levels = c(0,1,2,3), 
+                                    labels = c("Male","Yes","No","Not started periods"))
 table(mp1$cramps_all_month_14yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_14yr)
+mp1$dr_cramps_all_month_14yr <- ifelse(mp1$dr_cramps_all_month_14yr == -7,0,
+                                       ifelse(mp1$dr_cramps_all_month_14yr == -3,4,
+                                              ifelse(mp1$dr_cramps_all_month_14yr == -2,3,
+                                                     ifelse(mp1$dr_cramps_all_month_14yr == 2,2,
+                                                            ifelse(mp1$dr_cramps_all_month_14yr == 1,1, NA)))))
 mp1$dr_cramps_all_month_14yr <- factor(mp1$dr_cramps_all_month_14yr, 
-                                       levels = c(-10,-7,-3,-2,-1,1,2), 
-                                       labels = c(-10,"Male","No period type pains","Not started periods","Not stated","Yes","No"))
+                                       levels = c(0,1,2,3,4), 
+                                       labels = c("Male","Yes","No","Not started periods","No period type pains"))
 table(mp1$dr_cramps_all_month_14yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_14yr)
+mp1$oral_contraceptives_pastyr_14yr <- ifelse(mp1$oral_contraceptives_pastyr_14yr == -7,0,
+                                              ifelse(mp1$oral_contraceptives_pastyr_14yr == -2,3,
+                                                     ifelse(mp1$oral_contraceptives_pastyr_14yr == 2,2,
+                                                            ifelse(mp1$oral_contraceptives_pastyr_14yr == 1,1, NA))))
 mp1$oral_contraceptives_pastyr_14yr <- factor(mp1$oral_contraceptives_pastyr_14yr, 
-                                              levels = c(-10,-7,-2,-1,1,2,9), 
-                                              labels = c(-10,"Male","Not started periods","Not stated","Yes","No","Don't know"))
+                                              levels = c(0,1,2,3), 
+                                              labels = c("Male","Yes","No","Not started periods"))
 table(mp1$oral_contraceptives_pastyr_14yr)
 
 # Variable for whether child has a thyroid problem:
 table(mp1$thyroid_problem_14yr)
+mp1$thyroid_problem_14yr <- ifelse(mp1$thyroid_problem_14yr == -7,0,
+                                   ifelse(mp1$thyroid_problem_14yr == 1,1,
+                                          ifelse(mp1$thyroid_problem_14yr == 2,2,
+                                                 ifelse(mp1$thyroid_problem_14yr == 9,3, NA))))
 mp1$thyroid_problem_14yr <- factor(mp1$thyroid_problem_14yr, 
-                                   levels = c(-10,-7,-1,1,2,9), 
-                                   labels = c(-10,"Male","Not stated","Yes","No","Don't know"))
+                                   levels = c(0,1,2,3), 
+                                   labels = c("Male","Yes","No","Don't know"))
 table(mp1$thyroid_problem_14yr)
 
 # Using the D1501_PUB7.pdf (participant 15 years old):
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_15yr)
+mp1$vigorous_exercise_15yr <- ifelse(mp1$vigorous_exercise_15yr == 1,1,
+                                    ifelse(mp1$vigorous_exercise_15yr == 2,2,
+                                           ifelse(mp1$vigorous_exercise_15yr == 3,3,
+                                                  ifelse(mp1$vigorous_exercise_15yr == 4,4,
+                                                         ifelse(mp1$vigorous_exercise_15yr == 5,5, NA)))))
 mp1$vigorous_exercise_15yr <- factor(mp1$vigorous_exercise_15yr, 
-                                     levels = c(-10,-1,1,2,3,4,5), 
-                                     labels = c(-10,"Not stated","None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
+                                     levels = c(1,2,3,4,5), 
+                                     labels = c("None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_15yr)
 
 # Variable for whether child has started her period yet:
 table(mp1$started_period_15yr, mp1$sex)  # Used sex in here to see if -7 referred to males which it does
+mp1$started_period_15yr <- ifelse(mp1$started_period_15yr == 1,1,
+                                  ifelse(mp1$started_period_15yr == 2,2,
+                                         ifelse(mp1$started_period_15yr == -7,0, NA)))
 mp1$started_period_15yr <- factor(mp1$started_period_15yr, 
-                                  levels = c(-10,-7,-6,1,2), 
-                                  labels = c(-10,"Male","Questions A2 to A7 omitted","Yes","No"))
+                                  levels = c(0,1,2), 
+                                  labels = c("Male","Yes","No"))
 table(mp1$started_period_15yr)
 
 # Variable for normal number of days bleeding:
@@ -816,24 +1133,36 @@ table(mp1$normal_no_days_bleeding_15yr)
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_15yr)
+mp1$hmb_15yr <- ifelse(mp1$hmb_15yr == -7,0,
+                       ifelse(mp1$hmb_15yr == -2,3,
+                              ifelse(mp1$hmb_15yr == 1,1, 
+                                     ifelse(mp1$hmb_15yr == 2,2, NA))))
 mp1$hmb_15yr <- factor(mp1$hmb_15yr, 
-                       levels = c(-10,-7,-6,-5,-2,-1,1,2), 
-                       labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6a omitted","Not started periods","Not stated","Yes","No"))
+                       levels = c(0,1,2,3), 
+                       labels = c("Male","Yes","No","Not started period"))
 table(mp1$hmb_15yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_15yr)
+mp1$dr_hmb_15yr <- ifelse(mp1$dr_hmb_15yr == -2,3,
+                          ifelse(mp1$dr_hmb_15yr == -7,0,
+                                 ifelse(mp1$dr_hmb_15yr == -3,4,
+                                        ifelse(mp1$dr_hmb_15yr == 2,2, 
+                                               ifelse(mp1$dr_hmb_15yr == 1,1, NA)))))
 mp1$dr_hmb_15yr <- factor(mp1$dr_hmb_15yr, 
-                          levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), 
-                          labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6a omitted","No heavy bleeding","Not started period",
-                                     "Not stated","Yes","No"))
+                          levels = c(0,1,2,3,4), 
+                          labels = c("Male","Yes","No","Not started period","No heavy bleeding"))
 table(mp1$dr_hmb_15yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_15yr)
+mp1$cramps_15yr <- ifelse(mp1$cramps_15yr == -7,0,
+                          ifelse(mp1$cramps_15yr == -2,3,
+                                 ifelse(mp1$cramps_15yr == 2,2, 
+                                        ifelse(mp1$cramps_15yr == 1,1, NA))))
 mp1$cramps_15yr <- factor(mp1$cramps_15yr, 
-                          levels = c(-10,-7,-6,-2,-1,1,2), 
-                          labels = c(-10,"Male","Questions A2 to A7 omitted","Not started periods","Not stated","Yes","No"))
+                          levels = c(0,1,2,3), 
+                          labels = c("Male","Yes","No","Not started period"))
 table(mp1$cramps_15yr)
 
 # Variable for severity of cramps associated with period:
@@ -846,40 +1175,59 @@ table(mp1$severity_cramps_15yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_15yr)
+mp1$dr_cramps_15yr <- ifelse(mp1$dr_cramps_15yr == -7,0,
+                             ifelse(mp1$dr_cramps_15yr == -3,4,
+                                    ifelse(mp1$dr_cramps_15yr == -2,3,
+                                           ifelse(mp1$dr_cramps_15yr == 1,1,
+                                                  ifelse(mp1$dr_cramps_15yr == 2,2, NA)))))
 mp1$dr_cramps_15yr <- factor(mp1$dr_cramps_15yr, 
-                             levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), 
-                             labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6b omitted","No severe cramps","Not started period",
-                                        "Not stated","Yes","No"))
+                             levels = c(0,1,2,3,4), 
+                             labels = c("Male","Yes","No","Not started period","No severe cramps"))
 table(mp1$dr_cramps_15yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_15yr)
+mp1$cramps_all_month_15yr <- ifelse(mp1$cramps_all_month_15yr == -7,0,
+                                    ifelse(mp1$cramps_all_month_15yr == -2,3,
+                                           ifelse(mp1$cramps_all_month_15yr == 1,1,
+                                                  ifelse(mp1$cramps_all_month_15yr == 2,2, NA))))
 mp1$cramps_all_month_15yr <- factor(mp1$cramps_all_month_15yr, 
-                                    levels = c(-10,-7,-6,-5,-2,1,2), 
-                                    labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6c omitted","Not started periods","Yes","No"))
+                                    levels = c(0,1,2,3), 
+                                    labels = c("Male","Yes","No","Not started periods"))
 table(mp1$cramps_all_month_15yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_15yr)
+mp1$dr_cramps_all_month_15yr <- ifelse(mp1$dr_cramps_all_month_15yr == -7,0,
+                                       ifelse(mp1$dr_cramps_all_month_15yr == -3,4,
+                                              ifelse(mp1$dr_cramps_all_month_15yr == -2,3,
+                                                     ifelse(mp1$dr_cramps_all_month_15yr == 2,2,
+                                                            ifelse(mp1$dr_cramps_all_month_15yr == 1,1, NA)))))
 mp1$dr_cramps_all_month_15yr <- factor(mp1$dr_cramps_all_month_15yr, 
-                                       levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), 
-                                       labels = c(-10,"Male","Questions A2 to A7 omitted","Question A6c omitted","No period type pains",
-                                                  "Not started periods","Not stated","Yes","No"))
+                                       levels = c(0,1,2,3,4), 
+                                       labels = c("Male","Yes","No","Not started periods","No period type pains"))
 table(mp1$dr_cramps_all_month_15yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_15yr)
+mp1$oral_contraceptives_pastyr_15yr <- ifelse(mp1$oral_contraceptives_pastyr_15yr == -7,0,
+                                              ifelse(mp1$oral_contraceptives_pastyr_15yr == -2,3,
+                                                     ifelse(mp1$oral_contraceptives_pastyr_15yr == 2,2,
+                                                            ifelse(mp1$oral_contraceptives_pastyr_15yr == 1,1, NA))))
 mp1$oral_contraceptives_pastyr_15yr <- factor(mp1$oral_contraceptives_pastyr_15yr, 
-                                              levels = c(-10,-7,-6,-2,-1,1,2,9), 
-                                              labels = c(-10,"Male","Questions A2 to A7 omitted","Not started periods","Not stated","Yes","No",
-                                                         "Don't know"))
+                                              levels = c(0,1,2,3), 
+                                              labels = c("Male","Yes","No","Not started periods"))
 table(mp1$oral_contraceptives_pastyr_15yr)
 
 # Variable for whether child has a thyroid problem:
 table(mp1$thyroid_problem_15yr)
+mp1$thyroid_problem_15yr <- ifelse(mp1$thyroid_problem_15yr == -7,0,
+                                   ifelse(mp1$thyroid_problem_15yr == 1,1,
+                                          ifelse(mp1$thyroid_problem_15yr == 2,2,
+                                                 ifelse(mp1$thyroid_problem_15yr == 9,3, NA))))
 mp1$thyroid_problem_15yr <- factor(mp1$thyroid_problem_15yr, 
-                                   levels = c(-10,-7,-1,1,2,9), 
-                                   labels = c(-10,"Male","Not stated","Yes","No","Don't know"))
+                                   levels = c(0,1,2,3), 
+                                   labels = c("Male","Yes","No","Don't know"))
 table(mp1$thyroid_problem_15yr)
 
 # Using the D1501_PUB8.pdf (participant 16 years old):
@@ -889,16 +1237,24 @@ table(mp1$bmi_16yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_16yr)
+mp1$vigorous_exercise_16yr <- ifelse(mp1$vigorous_exercise_16yr == 1,1,
+                                    ifelse(mp1$vigorous_exercise_16yr == 2,2,
+                                           ifelse(mp1$vigorous_exercise_16yr == 3,3,
+                                                  ifelse(mp1$vigorous_exercise_16yr == 4,4,
+                                                         ifelse(mp1$vigorous_exercise_16yr == 5,5, NA)))))
 mp1$vigorous_exercise_16yr <- factor(mp1$vigorous_exercise_16yr, 
-                                     levels = c(-10,-1,1,2,3,4,5), 
-                                     labels = c(-10,"Not stated","None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
+                                     levels = c(1,2,3,4,5), 
+                                     labels = c("None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_16yr)
 
 # Variable for whether child has started her period yet:
 table(mp1$started_period_16yr, mp1$sex)  # Used sex in here to see if -7 referred to males which it does
+mp1$started_period_16yr <- ifelse(mp1$started_period_16yr == 1,1,
+                                  ifelse(mp1$started_period_16yr == 2,2,
+                                         ifelse(mp1$started_period_16yr == -7,0, NA)))
 mp1$started_period_16yr <- factor(mp1$started_period_16yr, 
-                                  levels = c(-10,-7,-6,1,2), 
-                                  labels = c(-10,"Male","Questions A4 to A9 omitted","Yes","No"))
+                                  levels = c(0,1,2), 
+                                  labels = c("Male","Yes","No"))
 table(mp1$started_period_16yr)
 
 # Variable for normal number of days bleeding:
@@ -911,62 +1267,93 @@ table(mp1$normal_no_days_bleeding_16yr)
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_16yr)
+mp1$hmb_16yr <- ifelse(mp1$hmb_16yr == -7,0,
+                       ifelse(mp1$hmb_16yr == -2,3,
+                              ifelse(mp1$hmb_16yr == 1,1, 
+                                     ifelse(mp1$hmb_16yr == 2,2, NA))))
 mp1$hmb_16yr <- factor(mp1$hmb_16yr, 
-                       levels = c(-10,-7,-6,-5,-2,1,2), 
-                       labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8a omitted","Not started periods","Yes","No"))
+                       levels = c(0,1,2,3), 
+                       labels = c("Male","Yes","No","Not started period"))
 table(mp1$hmb_16yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_16yr)
+mp1$dr_hmb_16yr <- ifelse(mp1$dr_hmb_16yr == -2,3,
+                          ifelse(mp1$dr_hmb_16yr == -7,0,
+                                 ifelse(mp1$dr_hmb_16yr == -3,4,
+                                        ifelse(mp1$dr_hmb_16yr == 2,2, 
+                                               ifelse(mp1$dr_hmb_16yr == 1,1, NA)))))
 mp1$dr_hmb_16yr <- factor(mp1$dr_hmb_16yr, 
-                          levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), 
-                          labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8a omitted","No heavy bleeding","Not started period",
-                                     "Not stated","Yes","No"))
+                          levels = c(0,1,2,3,4), 
+                          labels = c("Male","Yes","No","Not started period","No heavy bleeding"))
 table(mp1$dr_hmb_16yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_16yr)
+mp1$cramps_16yr <- ifelse(mp1$cramps_16yr == -7,0,
+                          ifelse(mp1$cramps_16yr == -2,3,
+                                 ifelse(mp1$cramps_16yr == 2,2, 
+                                        ifelse(mp1$cramps_16yr == 1,1, NA))))
 mp1$cramps_16yr <- factor(mp1$cramps_16yr, 
-                          levels = c(-10,-7,-6,-5,-2,1,2), 
-                          labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8b omitted","Not started periods","Yes","No"))
+                          levels = c(0,1,2,3), 
+                          labels = c("Male","Yes","No","Not started period"))
 table(mp1$cramps_16yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_16yr)
+mp1$dr_cramps_16yr <- ifelse(mp1$dr_cramps_16yr == -7,0,
+                             ifelse(mp1$dr_cramps_16yr == -3,4,
+                                    ifelse(mp1$dr_cramps_16yr == -2,3,
+                                           ifelse(mp1$dr_cramps_16yr == 1,1,
+                                                  ifelse(mp1$dr_cramps_16yr == 2,2, NA)))))
 mp1$dr_cramps_16yr <- factor(mp1$dr_cramps_16yr, 
-                             levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), 
-                             labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8b omitted","No severe cramps","Not started period",
-                                        "Not stated","Yes","No"))
+                             levels = c(0,1,2,3,4), 
+                             labels = c("Male","Yes","No","Not started period","No severe cramps"))
 table(mp1$dr_cramps_16yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_16yr)
+mp1$cramps_all_month_16yr <- ifelse(mp1$cramps_all_month_16yr == -7,0,
+                                    ifelse(mp1$cramps_all_month_16yr == -2,3,
+                                           ifelse(mp1$cramps_all_month_16yr == 1,1,
+                                                  ifelse(mp1$cramps_all_month_16yr == 2,2, NA))))
 mp1$cramps_all_month_16yr <- factor(mp1$cramps_all_month_16yr, 
-                                    levels = c(-10,-7,-6,-5,-2,1,2), 
-                                    labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8c omitted","Not started periods","Yes","No"))
+                                    levels = c(0,1,2,3), 
+                                    labels = c("Male","Yes","No","Not started periods"))
 table(mp1$cramps_all_month_16yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_16yr)
+mp1$dr_cramps_all_month_16yr <- ifelse(mp1$dr_cramps_all_month_16yr == -7,0,
+                                       ifelse(mp1$dr_cramps_all_month_16yr == -3,4,
+                                              ifelse(mp1$dr_cramps_all_month_16yr == -2,3,
+                                                     ifelse(mp1$dr_cramps_all_month_16yr == 2,2,
+                                                            ifelse(mp1$dr_cramps_all_month_16yr == 1,1, NA)))))
 mp1$dr_cramps_all_month_16yr <- factor(mp1$dr_cramps_all_month_16yr, 
-                                       levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), 
-                                       labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8c omitted","No period type pains",
-                                                  "Not started periods","Not stated","Yes","No"))
+                                       levels = c(0,1,2,3,4), 
+                                       labels = c("Male","Yes","No","Not started periods","No period type pains"))
 table(mp1$dr_cramps_all_month_16yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_16yr)
+mp1$oral_contraceptives_pastyr_16yr <- ifelse(mp1$oral_contraceptives_pastyr_16yr == -7,0,
+                                              ifelse(mp1$oral_contraceptives_pastyr_16yr == -2,3,
+                                                     ifelse(mp1$oral_contraceptives_pastyr_16yr == 2,2,
+                                                            ifelse(mp1$oral_contraceptives_pastyr_16yr == 1,1, NA))))
 mp1$oral_contraceptives_pastyr_16yr <- factor(mp1$oral_contraceptives_pastyr_16yr, 
-                                              levels = c(-10,-7,-6,-2,-1,1,2,9), 
-                                              labels = c(-10,"Male","Questions A4 to A9 omitted","Not started periods","Not stated","Yes","No",
-                                                         "Don't know"))
+                                              levels = c(0,1,2,3), 
+                                              labels = c("Male","Yes","No","Not started periods"))
 table(mp1$oral_contraceptives_pastyr_16yr)
 
 # Variable for whether child has a thyroid problem:
 table(mp1$thyroid_problem_16yr)
+mp1$thyroid_problem_16yr <- ifelse(mp1$thyroid_problem_16yr == -7,0,
+                                   ifelse(mp1$thyroid_problem_16yr == 1,1,
+                                          ifelse(mp1$thyroid_problem_16yr == 2,2,
+                                                 ifelse(mp1$thyroid_problem_16yr == 9,3, NA))))
 mp1$thyroid_problem_16yr <- factor(mp1$thyroid_problem_16yr, 
-                                   levels = c(-10,-7,-1,1,2,9), 
-                                   labels = c(-10,"Male","Not stated","Yes","No","Don't know"))
+                                   levels = c(0,1,2,3), 
+                                   labels = c("Male","Yes","No","Don't know"))
 table(mp1$thyroid_problem_16yr)
 
 # Using the D1501_PUB9.pdf (participant 17 years old):
@@ -976,16 +1363,24 @@ table(mp1$bmi_17yr)
 
 # Variable for frequency of participation in vigorous activity:
 table(mp1$vigorous_exercise_17yr)
+mp1$vigorous_exercise_17yr <- ifelse(mp1$vigorous_exercise_17yr == 1,1,
+                                    ifelse(mp1$vigorous_exercise_17yr == 2,2,
+                                           ifelse(mp1$vigorous_exercise_17yr == 3,3,
+                                                  ifelse(mp1$vigorous_exercise_17yr == 4,4,
+                                                         ifelse(mp1$vigorous_exercise_17yr == 5,5, NA)))))
 mp1$vigorous_exercise_17yr <- factor(mp1$vigorous_exercise_17yr, 
-                                     levels = c(-10,-1,1,2,3,4,5), 
-                                     labels = c(-10,"Not stated","None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
+                                     levels = c(1,2,3,4,5), 
+                                     labels = c("None","Less than once a week","1-3 times a week","4-6 times a week","Daily"))
 table(mp1$vigorous_exercise_17yr)
 
 # Variable for whether child has started her period yet:
 table(mp1$started_period_17yr, mp1$sex)  # Used sex in here to see if -7 referred to males which it does
+mp1$started_period_17yr <- ifelse(mp1$started_period_17yr == 1,1,
+                                  ifelse(mp1$started_period_17yr == 2,2,
+                                         ifelse(mp1$started_period_17yr == -7,0, NA)))
 mp1$started_period_17yr <- factor(mp1$started_period_17yr, 
-                                  levels = c(-10,-7,-6,1,2), 
-                                  labels = c(-10,"Male","Questions A4 to A9 omitted","Yes","No"))
+                                  levels = c(0,1,2), 
+                                  labels = c("Male","Yes","No"))
 table(mp1$started_period_17yr)
 
 # Variable for normal number of days bleeding:
@@ -999,119 +1394,170 @@ table(mp1$normal_no_days_bleeding_17yr)
 
 # Variable for whether child has ever had heavy or prolonged bleeding:
 table(mp1$hmb_17yr)
+mp1$hmb_17yr <- ifelse(mp1$hmb_17yr == -7,0,
+                       ifelse(mp1$hmb_17yr == -2,3,
+                              ifelse(mp1$hmb_17yr == 1,1, 
+                                     ifelse(mp1$hmb_17yr == 2,2, NA))))
 mp1$hmb_17yr <- factor(mp1$hmb_17yr, 
-                       levels = c(-10,-7,-6,-5,-2,1,2), 
-                       labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8a omitted","Not started periods","Yes","No"))
+                       levels = c(0,1,2,3), 
+                       labels = c("Male","Yes","No","Not started period"))
 table(mp1$hmb_17yr)
 
 # Variable for whether her doctor was contacted for heavy bleeding:
 table(mp1$dr_hmb_17yr)
+mp1$dr_hmb_17yr <- ifelse(mp1$dr_hmb_17yr == -2,3,
+                          ifelse(mp1$dr_hmb_17yr == -7,0,
+                                 ifelse(mp1$dr_hmb_17yr == -3,4,
+                                        ifelse(mp1$dr_hmb_17yr == 2,2, 
+                                               ifelse(mp1$dr_hmb_17yr == 1,1, NA)))))
 mp1$dr_hmb_17yr <- factor(mp1$dr_hmb_17yr, 
-                          levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), 
-                          labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8a omitted","No heavy bleeding",
-                                     "Not started period","Not stated","Yes","No"))
+                          levels = c(0,1,2,3,4), 
+                          labels = c("Male","Yes","No","Not started period","No heavy bleeding"))
 table(mp1$dr_hmb_17yr)
 
 # Variable for whether child has ever had severe cramps associated with period:
 table(mp1$cramps_17yr)
+mp1$cramps_17yr <- ifelse(mp1$cramps_17yr == -7,0,
+                          ifelse(mp1$cramps_17yr == -2,3,
+                                 ifelse(mp1$cramps_17yr == 2,2, 
+                                        ifelse(mp1$cramps_17yr == 1,1, NA))))
 mp1$cramps_17yr <- factor(mp1$cramps_17yr, 
-                          levels = c(-10,-7,-6,-5,-2,1,2), 
-                          labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8b omitted","Not started periods","Yes","No"))
+                          levels = c(0,1,2,3), 
+                          labels = c("Male","Yes","No","Not started period"))
 table(mp1$cramps_17yr)
 
 # Variable for whether her doctor was contacted for severe cramps:
 table(mp1$dr_cramps_17yr)
+mp1$dr_cramps_17yr <- ifelse(mp1$dr_cramps_17yr == -7,0,
+                             ifelse(mp1$dr_cramps_17yr == -3,4,
+                                    ifelse(mp1$dr_cramps_17yr == -2,3,
+                                           ifelse(mp1$dr_cramps_17yr == 1,1,
+                                                  ifelse(mp1$dr_cramps_17yr == 2,2, NA)))))
 mp1$dr_cramps_17yr <- factor(mp1$dr_cramps_17yr, 
-                             levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), 
-                             labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8b omitted","No severe cramps",
-                                        "Not started period","Not stated","Yes","No"))
+                             levels = c(0,1,2,3,4), 
+                             labels = c("Male","Yes","No","Not started period","No severe cramps"))
 table(mp1$dr_cramps_17yr)
 
 # Variable for whether child has period type pains for most of the month even when not bleeding:
 table(mp1$cramps_all_month_17yr)
+mp1$cramps_all_month_17yr <- ifelse(mp1$cramps_all_month_17yr == -7,0,
+                                    ifelse(mp1$cramps_all_month_17yr == -2,3,
+                                           ifelse(mp1$cramps_all_month_17yr == 1,1,
+                                                  ifelse(mp1$cramps_all_month_17yr == 2,2, NA))))
 mp1$cramps_all_month_17yr <- factor(mp1$cramps_all_month_17yr, 
-                                    levels = c(-10,-7,-6,-5,-2,1,2), 
-                                    labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8c omitted","Not started periods","Yes",
-                                               "No"))
+                                    levels = c(0,1,2,3), 
+                                    labels = c("Male","Yes","No","Not started periods"))
 table(mp1$cramps_all_month_17yr)
 
 # Variable for whether her doctor was contacted for period type pains:
 table(mp1$dr_cramps_all_month_17yr)
+mp1$dr_cramps_all_month_17yr <- ifelse(mp1$dr_cramps_all_month_17yr == -7,0,
+                                       ifelse(mp1$dr_cramps_all_month_17yr == -3,4,
+                                              ifelse(mp1$dr_cramps_all_month_17yr == -2,3,
+                                                     ifelse(mp1$dr_cramps_all_month_17yr == 2,2,
+                                                            ifelse(mp1$dr_cramps_all_month_17yr == 1,1, NA)))))
 mp1$dr_cramps_all_month_17yr <- factor(mp1$dr_cramps_all_month_17yr, 
-                                       levels = c(-10,-7,-6,-5,-3,-2,-1,1,2), 
-                                       labels = c(-10,"Male","Questions A4 to A9 omitted","Question A8c omitted","No period type pains",
-                                                  "Not started periods","Not stated","Yes","No"))
+                                       levels = c(0,1,2,3,4), 
+                                       labels = c("Male","Yes","No","Not started periods","No period type pains"))
 table(mp1$dr_cramps_all_month_17yr)
 
 # Variable for whether child has taken oral contraceptives for any reason in the last 12 months:
 table(mp1$oral_contraceptives_pastyr_17yr)
+mp1$oral_contraceptives_pastyr_17yr <- ifelse(mp1$oral_contraceptives_pastyr_17yr == -7,0,
+                                              ifelse(mp1$oral_contraceptives_pastyr_17yr == -2,3,
+                                                     ifelse(mp1$oral_contraceptives_pastyr_17yr == 2,2,
+                                                            ifelse(mp1$oral_contraceptives_pastyr_17yr == 1,1, NA))))
 mp1$oral_contraceptives_pastyr_17yr <- factor(mp1$oral_contraceptives_pastyr_17yr, 
-                                              levels = c(-10,-7,-6,-2,-1,1,2,9), 
-                                              labels = c(-10,"Male","Questions A4 to A9 omitted","Not started periods","Not stated","Yes","No",
-                                                         "Don't know"))
+                                              levels = c(0,1,2,3), 
+                                              labels = c("Male","Yes","No","Not started periods"))
 table(mp1$oral_contraceptives_pastyr_17yr)
 
 # Variable for whether child has a thyroid problem:
 table(mp1$thyroid_problem_17yr)
+mp1$thyroid_problem_17yr <- ifelse(mp1$thyroid_problem_17yr == -7,0,
+                                   ifelse(mp1$thyroid_problem_17yr == 1,1,
+                                          ifelse(mp1$thyroid_problem_17yr == 2,2,
+                                                 ifelse(mp1$thyroid_problem_17yr == 9,3, NA))))
 mp1$thyroid_problem_17yr <- factor(mp1$thyroid_problem_17yr, 
-                                   levels = c(-10,-7,-1,1,2,9), 
-                                   labels = c(-10,"Male","Not stated","Yes","No","Don't know"))
+                                   levels = c(0,1,2,3), 
+                                   labels = c("Male","Yes","No","Don't know"))
 table(mp1$thyroid_problem_17yr)
 
 # Using D1321_TA.pdf where participant is 13 years old
 # Variable for the frequency that the young person has drunk wine:
 
 table(mp1$freq_yp_drinks_wine)
+mp1$freq_yp_drinks_wine <- ifelse(mp1$freq_yp_drinks_wine == 1,1,
+                                  ifelse(mp1$freq_yp_drinks_wine == 2,2,
+                                         ifelse(mp1$freq_yp_drinks_wine == 3,3,
+                                                ifelse(mp1$freq_yp_drinks_wine == 4,4, NA))))
 mp1$freq_yp_drinks_wine <- factor(mp1$freq_yp_drinks_wine,
-                                  levels = c(-10,-1,1,2,3,4),
-                                  labels = c("Not completed", "No response","> Once a week","Once a week","< Once a week","Not at all"))
+                                  levels = c(1,2,3,4),
+                                  labels = c("> Once a week","Once a week","< Once a week","Not at all"))
 table(mp1$freq_yp_drinks_wine)
 
 # Variable for the frequency that the young person has drunk beer:
 
 table(mp1$freq_yp_drinks_beer)
+mp1$freq_yp_drinks_beer <- ifelse(mp1$freq_yp_drinks_beer == 1,1,
+                                  ifelse(mp1$freq_yp_drinks_beer == 2,2,
+                                         ifelse(mp1$freq_yp_drinks_beer == 3,3,
+                                                ifelse(mp1$freq_yp_drinks_beer == 4,4, NA))))
 mp1$freq_yp_drinks_beer <- factor(mp1$freq_yp_drinks_beer,
-                                  levels = c(-10,-1,1,2,3,4),
-                                  labels = c("Not completed", "No response","> Once a week","Once a week","< Once a week","Not at all"))
+                                  levels = c(1,2,3,4),
+                                  labels = c("> Once a week","Once a week","< Once a week","Not at all"))
 table(mp1$freq_yp_drinks_beer)
 
 # Variable for the frequency that the young person has drunk spirits:
 
 table(mp1$freq_yp_drinks_spirits)
+mp1$freq_yp_drinks_spirits <- ifelse(mp1$freq_yp_drinks_spirits == 1,1,
+                                  ifelse(mp1$freq_yp_drinks_spirits == 2,2,
+                                         ifelse(mp1$freq_yp_drinks_spirits == 3,3,
+                                                ifelse(mp1$freq_yp_drinks_spirits == 4,4, NA))))
 mp1$freq_yp_drinks_spirits <- factor(mp1$freq_yp_drinks_spirits,
-                                  levels = c(-10,-1,1,2,3,4),
-                                  labels = c("Not completed", "No response","> Once a week","Once a week","< Once a week","Not at all"))
+                                  levels = c(1,2,3,4),
+                                  labels = c("> Once a week","Once a week","< Once a week","Not at all"))
 table(mp1$freq_yp_drinks_spirits)
 
 # Variable for the frequency that the young person has drunk other alcohol:
 
 table(mp1$freq_yp_drinks_other)
+mp1$freq_yp_drinks_other <- ifelse(mp1$freq_yp_drinks_other == 1,1,
+                                  ifelse(mp1$freq_yp_drinks_other == 2,2,
+                                         ifelse(mp1$freq_yp_drinks_other == 3,3,
+                                                ifelse(mp1$freq_yp_drinks_other == 4,4, NA))))
 mp1$freq_yp_drinks_other <- factor(mp1$freq_yp_drinks_other,
-                                  levels = c(-10,-1,0,1,2,3,4),
-                                  labels = c("Not completed", "No response","Relevant text but no box ticked","> Once a week","Once a week",
-                                             "< Once a week","Not at all"))
+                                  levels = c(1,2,3,4),
+                                  labels = c("> Once a week","Once a week","< Once a week","Not at all"))
 table(mp1$freq_yp_drinks_other)
 
 # Variable for whether the teenager has smoked cigarettes, using D2107_TF1.pdf using the labels below:
 table(mp1$teen_has_smoked_12yr)
+mp1$teen_has_smoked_12yr <- ifelse(mp1$teen_has_smoked_12yr == 1,1,
+                                   ifelse(mp1$teen_has_smoked_12yr == 2,2, NA))
 mp1$teen_has_smoked_12yr <- factor(mp1$teen_has_smoked_12yr,
-                                   levels = c(-10,-6,-5,-1,1,2),
-                                   labels = c(-10,"Did not start the session","Did not start the task","Missing","Yes","No"))
+                                   levels = c(1,2),
+                                   labels = c("Yes","No"))
 table(mp1$teen_has_smoked_12yr)
 
 # Using D2108_TF2.pdf where participant is 13 years old
 # Variable for whether teenager has smoked cigarettes
 table(mp1$teen_has_smoked_13yr)
+mp1$teen_has_smoked_13yr <- ifelse(mp1$teen_has_smoked_13yr == 1,1,
+                                   ifelse(mp1$teen_has_smoked_13yr == 2,2, NA))
 mp1$teen_has_smoked_13yr <- factor(mp1$teen_has_smoked_13yr,
-                                   levels = c(-10,-6,-5,1,2),
-                                   labels = c(-10,"Did not start session","Did not start task","Yes","No"))
+                                   levels = c(1,2),
+                                   labels = c("Yes","No"))
 table(mp1$teen_has_smoked_13yr)
 
 # Variable for whether the teenager has had a whole drink of alcohol
 table(mp1$teen_has_drunk_13yr)
+mp1$teen_has_drunk_13yr <- ifelse(mp1$teen_has_drunk_13yr == 1,1,
+                                   ifelse(mp1$teen_has_drunk_13yr == 2,2, NA))
 mp1$teen_has_drunk_13yr <- factor(mp1$teen_has_drunk_13yr,
-                                  levels = c(-10,-9,-6,-5,1,2),
-                                  labels = c(-10,"Don't know","Did not start session","Did not start task","Yes","No"))
+                                   levels = c(1,2),
+                                   labels = c("Yes","No"))
 table(mp1$teen_has_drunk_13yr)
 
-save(mp1,file="mp1.Rda") # Saved the data set at this point at the end of the day (27/10/20) in MP1 file OneDrive
+save(mp1,file="mp1.Rda") # Saved the data set at this point at the end of the day (29/10/20) in MP1 file OneDrive
