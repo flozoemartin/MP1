@@ -47,7 +47,7 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
  - [ ] _**Clean & prepare ALSPAC variables for EWAS**_
     - [x] Rename each variable from ALSPAC identifier to easy to recognise name
     - [x] Assign labels to each category within the categorical variables for ease of use, using the built PDFs in the ALSPAC catalogue
-    - [ ] Replace any "Missing" or "Not stated" or -10 etc. categories with NA for compatability with R
+    - [x] Replace any "Missing" or "Not stated" or -10 etc. categories with NA for compatability with R
     - [ ] Derive separate clean variables of interest:
        - `menorr_drvisit_ever` for having ever visited the doctor for menorrhagia during puberty ≥1 time
        - `dysmen_drvisit_ever` for having ever visited the doctor for dysmenorrhea during puberty ≥1 time
