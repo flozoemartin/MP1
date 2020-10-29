@@ -4,7 +4,7 @@
 #                                                                                                                                                               #
 #   Author:       Flo Martin                                                                                                                                    #
 #   Start Date:   26/10/2020                                                                                                                                    #
-#   Description:  This script describes changing column labels from raw variable names to recognisable labels and changing category labels within variables     #
+#   Description:  This script describes data cleaning for flo_26oct for mini project 1                                                                          #
 #                                                                                                                                                               #
 ################################################################################################################################################################# 
 
