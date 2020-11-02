@@ -33,21 +33,22 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
     - `pub123-923` `pub724` for visiting a doctor for dysmenorrhea
   - [x] Extract covariate information: 
     - `men_age` `men_agey` for age at onset of menarche
-    - `pub527` `ccxf2000-2004` `ccxf3004-3005` for hormonal contraception use
+    - `pub127-927` `ccxf2000-2004` `ccxf3004-3005` for hormonal contraception use
     - `pub128-928` for presence of a thyroid problem
     - `YPB1217` for endometriosis
     - `YPB1216` for polycystic ovary syndrome (PCOS)
     - `YPA3310` for pregnancies
-    - `pub105-905` for body mass index (BMI)
+    - `pub105-905` & `fh3019` for body mass index (BMI)
     - `pub109-909` for participation in vigorous physical activity
-    - `c645a` `b_sc_m` for family socioeconomic position (maternal education & occupational class)
-    - `f8aa108` `fdaa482-483` `ff6610` `fg4822` `fh8440` `ccr735` for smoking
-    - `fdaa492-493` `fg4877` `ta8280-8283` `ccs8520-3522` `ku430` for alcohol
+    - `c645a` `c755` for family socioeconomic position (maternal education & occupational class)
+    - `fh8450` `fh8455` `fjsm350` fjsm450` for smoking
+    - `fh8511` `fjal1000` for alcohol
  
  - [ ] _**Clean & prepare ALSPAC variables for EWAS**_
     - [x] Rename each variable from ALSPAC identifier to easy to recognise name
     - [x] Assign labels to each category within the categorical variables for ease of use, using the built PDFs in the ALSPAC catalogue
     - [x] Replace any "Missing" or "Not stated" or -10 etc. categories with NA for compatability with R
+    - [x] Switch the order of yes and no 1 and 2 to yes and no 0 and 1
     - [ ] Derive separate clean variables of interest:
        - `menorr_drvisit_ever` for having ever visited the doctor for menorrhagia during puberty ≥1 time
        - `dysmen_drvisit_ever` for having ever visited the doctor for dysmenorrhea during puberty ≥1 time
