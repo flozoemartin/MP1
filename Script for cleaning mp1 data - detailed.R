@@ -4,7 +4,10 @@
 #                                                                                                                                                               #
 #   Author:       Flo Martin                                                                                                                                    #
 #   Start Date:   26/10/2020                                                                                                                                    #
-#   Description:  This script describes data cleaning for flo_26oct for mini project 1                                                                          #
+#   Finish Date:  30/10/2020                                                                                                                                    #
+#   Description:  This script describes data cleaning for flo_26oct for mini project 1 - the code maintains the labels for types of missing data and the        #
+#                 variables no longer in use. The subsequent building & cleaning scripts describe binarising the variables being used in the analysis and       #
+#                 deriving the variable for use in the analysis (the mp1.Rda in my OneDrive and being used in the EWAS)                                          #
 #                                                                                                                                                               #
 ################################################################################################################################################################# 
 
@@ -1114,4 +1117,4 @@ mp1$teen_has_drunk_13yr <- factor(mp1$teen_has_drunk_13yr,
                                   labels = c(-10,"Don't know","Did not start session","Did not start task","Yes","No"))
 table(mp1$teen_has_drunk_13yr)
 
-save(mp1,file="mp1.Rda") # Saved the data set at this point at the end of the day (27/10/20) in MP1 file OneDrive
+save(mp1,file="mp1.Rda") # Saved the data set at this point at the end of the day (30/10/20) in MP1 file OneDrive
