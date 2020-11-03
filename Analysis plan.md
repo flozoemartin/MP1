@@ -53,6 +53,8 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
        - `menorr_drvisit_ever` for having ever visited the doctor for menorrhagia during puberty ≥1 time
        - `dysmen_drvisit_ever` for having ever visited the doctor for dysmenorrhea during puberty ≥1 time
     - [x] Derive smoking and alcohol variables for regular vs not regular at each timepoint (15 and 17 years)
+       - `reg_smoker_15yr` `reg_smoker_17yr` for regular smoker
+       - `reg_drinker_15yr` `reg_drinker_17yr` for regular drinker
        
 - [ ] _**Merge ALSPAC data with methylation "samplesheet" on bluecrystal**_ available here:
 
