@@ -236,20 +236,8 @@ table(mp1$given_pill_for_periods_19yr)
 
 # Variable for what age young woman were given the pill to regulate her period (age in years), using D1456_CCXF.pdf the labels are as shown below:
 table(mp1$age_given_pill_for_periods_19yr)
-mp1$age_given_pill_for_periods_19yr <- ifelse(mp1$age_given_pill_for_periods_19yr == 11,11, 
-                                              ifelse(mp1$age_given_pill_for_periods_19yr == 12,12,
-                                                     ifelse(mp1$age_given_pill_for_periods_19yr == 13,13,
-                                                            ifelse(mp1$age_given_pill_for_periods_19yr == 14,14,
-                                                                   ifelse(mp1$age_given_pill_for_periods_19yr == 15,15,
-                                                                          ifelse(mp1$age_given_pill_for_periods_19yr == 16,16,
-                                                                                 ifelse(mp1$age_given_pill_for_periods_19yr == 17,17,
-                                                                                        ifelse(mp1$age_given_pill_for_periods_19yr == 18,18,
-                                                                                               ifelse(mp1$age_given_pill_for_periods_19yr == 19,19,
-                                                                                                      ifelse(mp1$age_given_pill_for_periods_19yr == 20,20, NA)))))))))) 
-
-mp1$age_given_pill_for_periods_19yr <- factor(mp1$age_given_pill_for_periods_19yr, 
-                                              levels = c(11,12,13,14,15,16,17,18,19,20), 
-                                              labels = c(11,12,13,14,15,16,17,18,19,20))
+mp1$age_given_pill_for_periods_19yr[mp1$age_given_pill_for_periods_19yr == -10 | mp1$age_given_pill_for_periods_19yr == -3 | 
+                                      mp1$age_given_pill_for_periods_19yr == -1] <- NA
 table(mp1$age_given_pill_for_periods_19yr)
 
 # Variable for participant sex, labels are as shown below:
@@ -1345,16 +1333,18 @@ table(mp1$reg_smoker_17yr)
 table(mp1$drinking_pattern_15yr)
 mp1$reg_drinker_15yr <- ifelse(mp1$drinking_pattern_15yr == "Only tried it once or twice" | mp1$drinking_pattern_15yr == "Used to sometimes, but not now" |
                                  mp1$drinking_pattern_15yr == "Sometimes, <once a week", 0,
-                               ifelse(mp1$drinking_pattern_15yr == "Usually drink on 1/2 days a week" | mp1$drinking_pattern_15yr == "Usually drink >2 days a week but not every day" |
-                                        mp1$drinking_pattern_15yr == "Usually drink every day", 1, NA))
+                                    ifelse(mp1$drinking_pattern_15yr == "Usually drink on 1/2 days a week" | 
+                                       mp1$drinking_pattern_15yr == "Usually drink >2 days a week but not every day" | 
+                                       mp1$drinking_pattern_15yr == "Usually drink every day", 1, NA))
 mp1$reg_drinker_15yr <- factor(mp1$reg_drinker_15yr,
                                levels = c(0,1),
                                labels = c("No", "Yes"))
 table(mp1$reg_drinker_15yr)
 
 table(mp1$freq_yp_drinks_17yr)
-mp1$reg_drinker_17yr <- ifelse(mp1$freq_yp_drinks_17yr == "Never" | mp1$freq_yp_drinks_17yr == "Monthly or less" | mp1$freq_yp_drinks_17yr == "2-4 times a month", 0,
-                               ifelse(mp1$freq_yp_drinks_17yr == "2-3 times a week" | mp1$freq_yp_drinks_17yr == "4 or more times a week", 1, NA))
+mp1$reg_drinker_17yr <- ifelse(mp1$freq_yp_drinks_17yr == "Never" | mp1$freq_yp_drinks_17yr == "Monthly or less" | 
+                                 mp1$freq_yp_drinks_17yr == "2-4 times a month", 0,
+                                    ifelse(mp1$freq_yp_drinks_17yr == "2-3 times a week" | mp1$freq_yp_drinks_17yr == "4 or more times a week", 1, NA))
 mp1$reg_drinker_17yr <- factor(mp1$reg_drinker_17yr,
                                levels = c(0,1),
                                labels = c("No", "Yes"))
