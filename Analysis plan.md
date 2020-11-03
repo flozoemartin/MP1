@@ -41,7 +41,7 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
     - `pub105-905` & `fh3019` for body mass index (BMI)
     - `pub109-909` for participation in vigorous physical activity
     - `c645a` `c755` for family socioeconomic position (maternal education & occupational class)
-    - `fh8450` `fh8455` `fjsm350` fjsm450` for smoking
+    - `fh8450` `fh8455` `fjsm350` `fjsm450` for smoking
     - `fh8511` `fjal1000` for alcohol
  
  - [x] _**Clean & prepare ALSPAC variables for EWAS**_
