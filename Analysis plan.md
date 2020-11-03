@@ -49,9 +49,10 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
     - [x] Assign labels to each category within the categorical variables for ease of use, using the built PDFs in the ALSPAC catalogue
     - [x] Replace any "Missing" or "Not stated" or -10 etc. categories with NA for compatability with R
     - [x] Switch the order of yes and no 1 and 2 to yes and no 0 and 1
-    - [ ] Derive separate clean variables of interest:
+    - [x] Derive separate clean variables of interest:
        - `menorr_drvisit_ever` for having ever visited the doctor for menorrhagia during puberty ≥1 time
        - `dysmen_drvisit_ever` for having ever visited the doctor for dysmenorrhea during puberty ≥1 time
+    - [ ] Derive smoking and alcohol variables for regular vs not regular at each timepoint (15 and 17 years)
        
 - [ ] _**Merge ALSPAC data with methylation "samplesheet" on bluecrystal**_ available here:
 
