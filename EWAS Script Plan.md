@@ -423,4 +423,7 @@ This block of code sorts by _p_-value (from the isva model) and save the EWAS re
 
 That's it!
 
+### References
 
+1. Naeem H, Wong NC, Chatterton Z, et al. Reducing the risk of false discovery enabling identification of biologically significant genome-wide methylation status using the HumanMethylation450 array. BMC Genomics. 2014;15(1):51.
+2. Houseman EA, Accomanda WP, Koestler DC, et al. DNA methylation arrays as surrogate measures of cell mixture distribution. BMC Bioinformatics. 2012;13(86)
