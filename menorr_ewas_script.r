@@ -1,9 +1,9 @@
-#################################################################################################################################################################
-#                                                                                                                                                               #
-#       Full code for any EWAS analysis                                                                                                                        #
-#       Compiled 12/06/2015 by Gemma Sharp - UPDATED FOR VERSION 3 20/05/2016 - Edited by Flo Martin 05/11/2020                                                #
-#                                                                                                                                                               #
-#################################################################################################################################################################
+##############################################################################################################################################################
+#                                                                                                                                                            #
+#       Full code for any EWAS analysis                                                                                                                      #
+#       Compiled 12/06/2015 by Gemma Sharp - UPDATED FOR VERSION 3 20/05/2016 - Edited by Flo Martin 05/11/2020                                              #
+#                                                                                                                                                            #
+##############################################################################################################################################################
 
 # pull in args
 args <- commandArgs(trailingOnly = TRUE)
@@ -148,7 +148,7 @@ ewas_res <- merge(ewas_res,outliers_n,by="probeID",all.x=TRUE)
 ewas_res$n_outliers <- ewas_res$n_outliers*-1
 ewas_res$final_n <- rowSums(ewas_res[,c("original_n","n_outliers")],na.rm=TRUE)
 
-#Create N_cases column if necessary
+# Create N_cases column if necessary
 if(class(obj$variable)=="factor"|any(as.numeric(Pheno[,2])!=0&as.numeric(Pheno[,2])!=1)==FALSE|class(Pheno[,2])=="character"){
 print("Phenotype of interest is binary")
 outliers_cases <- as.data.frame(rbind(obj$too.hi,obj$too.lo))
