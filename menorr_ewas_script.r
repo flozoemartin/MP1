@@ -36,8 +36,8 @@ library(meffil)
 load("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/samplesheet/data.Robj")
 samplesheet<-subset(samplesheet, time_point==TP)
 if(TP !="antenatal" & TP !="FOM"){
-qletB<-samplesheet$ALN[which(samplesheet$QLET=="B")] # Find alns for multiple pregnancies
-samplesheet<-samplesheet[-which(samplesheet$ALN %in% qletB),] # Remove multiple pregnancies
+qletB <- samplesheet$ALN[which(samplesheet$QLET=="B")] # Find alns for multiple pregnancies
+samplesheet <- samplesheet[-which(samplesheet$ALN %in% qletB),] # Remove multiple pregnancies
 }
 
 # Load the methylation data
@@ -72,17 +72,17 @@ Pheno <- read.dta(paste0(mp1,".dta"))
 
 # Load cell-counts
 if(TP=="15up"){
-cells<-read.table(paste0("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/derived/cellcounts/cord/",CellData,"/data.txt"),header=T)
+cells <- read.table(paste0("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/derived/cellcounts/cord/",CellData,"/data.txt"),header=T)
 }else{
 if(CellData=="houseman_eos"){
 load("/panfs/panasas01/sscm/ti19522/Common_files/aries-detailed-cell-counts-20150409.rda")
-cells<-detailed.cell.counts[[TP]]
+cells <- detailed.cell.counts[[TP]]
 }else{
-cells<-read.table("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/derived/cellcounts/houseman/data.txt", header=TRUE)
+cells <- read.table("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/derived/cellcounts/houseman/data.txt", header=TRUE)
 }}
 
 # Add Sample_Name to Pheno (assuming Pheno contains aln)
-Pheno < -merge(Pheno,samplesheet[,c("ALN","Sample_Name")],by.x="aln",by.y="ALN")
+Pheno <- merge(Pheno,samplesheet[,c("ALN","Sample_Name")],by.x="aln",by.y="ALN")
 
 # Prepare phenotype data
 Covs <- strsplit(Covariates,split=",")[[1]]
@@ -112,7 +112,7 @@ if(BorM=="M"){
 
 # Include cell counts in the EWAS model?
 if(CellAdj=="noCells"){
-Pheno<-Pheno[,-which(colnames(Pheno) %in% colnames(cells)[-1])]
+Pheno <- Pheno[,-which(colnames(Pheno) %in% colnames(cells)[-1])]
 }
 
 # Run EWAS using meffil
