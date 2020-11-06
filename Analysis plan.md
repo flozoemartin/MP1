@@ -65,9 +65,10 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
     - `bmi_meth` BMI at time of methylation measurement
     - `age_meth` age at time of methylation measurement
     - `contraception_meth` oral contraception at time of methylation measurement
-    - `c645a` mother's educational attainment at birth
-    - `b_sc_m` mother's occupation at birth
-    - `reg_smoker` smoking status (ever regular vs never regular) by the end of puberty
+    - `mat_edu` mother's educational attainment at birth
+    - `mat_occ_class` mother's occupation at birth
+    - `reg_smoker` smoking status (ever regular vs not regular) at time of methylation measurement    
+    - `reg_drinker` drinking (alcohol) status (ever regular vs not regular) at time of methylation measurement
     - `comorbidity` any diagnosed endocrinopathy (thyroid problem) or reproductive pathology (PCOS or endometriosis) by the end of puberty
   - [ ] Check over dataset for all variables & covariates needed for Step 2
   
