@@ -1350,4 +1350,15 @@ mp1$reg_drinker_17yr <- factor(mp1$reg_drinker_17yr,
                                labels = c("No", "Yes"))
 table(mp1$reg_drinker_17yr)
 
+# For comorbidities, thyroid problems, PCOS or endometriosis, I am making a binary variable for each time-point (15 and 17 years) covering whether a thyroid problem was present at
+# 15/17 years and whether PCOS or endometriosis had been diagnosed at 22 years (only info we have)
+
+mp1$comorbidity_15yr <- ifelse(mp1$thyroid_problem_15yr == "Yes" | mp1$pcos == "Yes" | mp1$endometriosis == "Yes",1,
+                               ifelse(mp1$thyroid_problem_15yr == "No" & mp1$pcos == "No" & mp1$endometriosis == "No",0,NA))
+table(mp1$comorbidity_15yr)
+
+mp1$comorbidity_17yr <- ifelse(mp1$thyroid_problem_17yr == "Yes" | mp1$pcos == "Yes" | mp1$endometriosis == "Yes",1,
+                               ifelse(mp1$thyroid_problem_17yr == "No" & mp1$pcos == "No" & mp1$endometriosis == "No",0,NA))
+table(mp1$comorbidity_17yr)
+
 save(mp1, file="mp1.Rda")
