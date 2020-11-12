@@ -47,7 +47,7 @@ rm(norm.beta.random)
 
 # Load detection p-values (used to filter all probes with a high detection p-value)
 load("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/detection_p_values/data.Robj")
-pvals <- detp[,samplesheet$Sample_Name] #keep the samples that correspond to the time point you're interested in
+pvals <- detp[,samplesheet$Sample_Name] # Keep the samples that correspond to the time point you're interested in
 rm(detp)
 
 # Load annotation data
