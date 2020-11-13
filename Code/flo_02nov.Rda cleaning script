@@ -1282,31 +1282,124 @@ mp1$endometriosis <- factor(mp1$endometriosis,
                             labels = c("No","Yes"))
 table(mp1$endometriosis)
 
-# Having prepared all the existing variable for analysis (remove negative numbers, switch yes and no numbers to 0 and 1 etc.) I now need
-# to derive the variables important for the analysis: has the young woman ever visited the dr for menorrhagia or dysmenorrhea during
-# puberty:
+# Here, I have gone through each timepoint and asked if the young woman answered yes to menorrhagia but no to visiting a doctor then code her as a 1
 
-mp1$menorr_drvisit_ever <- ifelse(mp1$dr_hmb_8yr == "Yes" | mp1$dr_hmb_9yr == "Yes" | mp1$dr_hmb_10yr == "Yes" | mp1$dr_hmb_11yr == "Yes" |
-                                        mp1$dr_hmb_13yr == "Yes" | mp1$dr_hmb_14yr == "Yes" | mp1$dr_hmb_15yr == "Yes" | mp1$dr_hmb_16yr == "Yes" |
-                                        mp1$dr_hmb_17yr == "Yes",1, 
-                                      ifelse(mp1$dr_hmb_8yr == "No" & mp1$dr_hmb_9yr == "No" & mp1$dr_hmb_10yr == "No" & mp1$dr_hmb_11yr == "No" &
-                                        mp1$dr_hmb_13yr == "No" & mp1$dr_hmb_14yr == "No" & mp1$dr_hmb_15yr == "No" & mp1$dr_hmb_16yr == "No" &
-                                        mp1$dr_hmb_17yr == "No",0, NA))
-mp1$menorr_drvisit_ever <- factor(mp1$menorr_drvisit_ever,
-                                  levels = c(1),
-                                  labels = c("Yes"))
+mp1$hmb_nodr_10yr <- ifelse(mp1$hmb_10yr == "Yes" & mp1$dr_hmb_10yr == "No",1,0)
+table(mp1$hmb_nodr_10yr)
+
+mp1$hmb_nodr_11yr <- ifelse(mp1$hmb_11yr == "Yes" & mp1$dr_hmb_11yr == "No",1,0)
+table(mp1$hmb_nodr_11yr)
+
+mp1$hmb_nodr_13yr <- ifelse(mp1$hmb_13yr == "Yes" & mp1$dr_hmb_13yr == "No",1,0)
+table(mp1$hmb_nodr_13yr)
+
+mp1$hmb_nodr_14yr <- ifelse(mp1$hmb_14yr == "Yes" & mp1$dr_hmb_14yr == "No",1,0)
+table(mp1$hmb_nodr_14yr)
+
+mp1$hmb_nodr_15yr <- ifelse(mp1$hmb_15yr == "Yes" & mp1$dr_hmb_15yr == "No",1,0)
+table(mp1$hmb_nodr_15yr)
+
+mp1$hmb_nodr_16yr <- ifelse(mp1$hmb_16yr == "Yes" & mp1$dr_hmb_16yr == "No",1,0)
+table(mp1$hmb_nodr_16yr)
+
+mp1$hmb_nodr_17yr <- ifelse(mp1$hmb_17yr == "Yes" & mp1$dr_hmb_17yr == "No",1,0)
+table(mp1$hmb_nodr_17yr)
+
+# Using these variables, I generated a variable hmb_controls which asking if a young women had reported menorrhagia at any timpoint but not visted the dr
+
+mp1$hmb_controls <- ifelse(mp1$hmb_nodr_10yr == 1 | mp1$hmb_nodr_11yr == 1 | mp1$hmb_nodr_13yr == 1 | mp1$hmb_nodr_14yr == 1 | mp1$hmb_nodr_15yr == 1 |
+                             mp1$hmb_nodr_16yr == 1 | mp1$hmb_nodr_17yr == 1,1,0)
+table(mp1$hmb_controls)
+
+# However, this variable captured 1873 women, including 289 young women who had reported no at ≥1 timepoint and yes at ≥1 timepoint - these women needed to be 
+# moved from controls to cases. So I generated a variable for ever having visited the doctor for menorrhagia
+
+mp1$menorr_drvisit_ever <- ifelse(mp1$dr_hmb_10yr == "Yes" | mp1$dr_hmb_11yr == "Yes" | mp1$dr_hmb_13yr == "Yes" | mp1$dr_hmb_14yr == "Yes" | 
+                                    mp1$dr_hmb_15yr == "Yes" | mp1$dr_hmb_16yr == "Yes" | mp1$dr_hmb_17yr == "Yes",1,0)
 table(mp1$menorr_drvisit_ever)
 
-mp1$dysmen_drvisit_ever <- ifelse(mp1$dr_cramps_8yr == "Yes" | mp1$dr_cramps_9yr == "Yes" | mp1$dr_cramps_10yr == "Yes" | mp1$dr_cramps_11yr == "Yes" |
-                                    mp1$dr_cramps_13yr == "Yes" | mp1$dr_cramps_14yr == "Yes" | mp1$dr_cramps_15yr == "Yes" | mp1$dr_cramps_16yr == "Yes" |
-                                    mp1$dr_cramps_17yr == "Yes", 1,
-                                  ifelse(mp1$dr_cramps_8yr == "No" & mp1$dr_cramps_9yr == "No" & mp1$dr_cramps_10yr == "No" & mp1$dr_cramps_11yr == "No" &
-                                    mp1$dr_cramps_13yr == "No" & mp1$dr_cramps_14yr == "No" & mp1$dr_cramps_15yr == "No" & mp1$dr_cramps_16yr == "No" &
-                                    mp1$dr_cramps_17yr == "No", 0, NA))
-mp1$dysmen_drvisit_ever <- factor(mp1$dysmen_drvisit_ever,
-                                  levels = c(1),
-                                  labels = c("Yes"))
+# This variable captured 527 women who had been to the dr ≥1 time during puberty. Now I just needed to remove the 289 from controls and split split cases 
+# (coded as 1) and controls (coded as 0) in one variable
+
+mp1$menorr_ewas <- NA
+mp1$menorr_ewas[mp1$hmb_controls ==1] <- 0
+mp1$menorr_ewas[mp1$menorr_drvisit_ever ==1] <- 1
+table(mp1$menorr_ewas)
+
+# Now, the variable menorr_ewas incorporates cases (women who have visited the doctor ≥1 time during puberty n=527) and controls (women who have reported HMB ≥1 
+# time during puberty but have never visited the doctor n=1584)
+
+# Check all the timpoints to make sure no controls have visited the doctor 
+
+table(mp1$menorr_ewas, mp1$dr_hmb_10yr)
+table(mp1$menorr_ewas, mp1$dr_hmb_11yr)
+table(mp1$menorr_ewas, mp1$dr_hmb_13yr)
+table(mp1$menorr_ewas, mp1$dr_hmb_14yr)
+table(mp1$menorr_ewas, mp1$dr_hmb_15yr)
+table(mp1$menorr_ewas, mp1$dr_hmb_16yr)
+table(mp1$menorr_ewas, mp1$dr_hmb_17yr)
+
+# Similarly for dysmenorrhea:
+
+# Here, I have gone through each timepoint and asked if the young woman answered yes to dysmenorrhea but no to visiting a doctor then code her as a 1
+
+mp1$cramps_nodr_9yr <- ifelse(mp1$cramps_9yr == "Yes" & mp1$dr_cramps_9yr == "No",1,0)
+table(mp1$cramps_nodr_9yr)
+
+mp1$cramps_nodr_10yr <- ifelse(mp1$cramps_10yr == "Yes" & mp1$dr_cramps_10yr == "No",1,0)
+table(mp1$cramps_nodr_10yr)
+
+mp1$cramps_nodr_11yr <- ifelse(mp1$cramps_11yr == "Yes" & mp1$dr_cramps_11yr == "No",1,0)
+table(mp1$cramps_nodr_11yr)
+
+mp1$cramps_nodr_13yr <- ifelse(mp1$cramps_13yr == "Yes" & mp1$dr_cramps_13yr == "No",1,0)
+table(mp1$cramps_nodr_13yr)
+
+mp1$cramps_nodr_14yr <- ifelse(mp1$cramps_14yr == "Yes" & mp1$dr_cramps_14yr == "No",1,0)
+table(mp1$cramps_nodr_14yr)
+
+mp1$cramps_nodr_15yr <- ifelse(mp1$cramps_15yr == "Yes" & mp1$dr_cramps_15yr == "No",1,0)
+table(mp1$cramps_nodr_15yr)
+
+mp1$cramps_nodr_16yr <- ifelse(mp1$cramps_16yr == "Yes" & mp1$dr_cramps_16yr == "No",1,0)
+table(mp1$cramps_nodr_16yr)
+
+mp1$cramps_nodr_17yr <- ifelse(mp1$cramps_17yr == "Yes" & mp1$dr_cramps_17yr == "No",1,0)
+table(mp1$cramps_nodr_17yr)
+
+# Using these variables, I generated a variable cramps_controls which asking if a young women had reported dysmenorrhea at any timpoint but not visted the dr
+
+mp1$cramps_controls <- ifelse(mp1$cramps_nodr_9yr == 1 |mp1$cramps_nodr_10yr == 1 | mp1$cramps_nodr_11yr == 1 | mp1$cramps_nodr_13yr == 1 
+                            | mp1$cramps_nodr_14yr == 1 | mp1$cramps_nodr_15yr == 1 | mp1$cramps_nodr_16yr == 1 | mp1$cramps_nodr_17yr == 1,1,0)
+table(mp1$cramps_controls)
+
+# However, this variable captured 2993 women, including 419 young women who had reported no at ≥1 timepoint and yes at ≥1 timepoint - these women needed to be 
+# moved from controls to cases. So I generated a variable for ever having visited the doctor for dysmenorrhea
+
+mp1$dysmen_drvisit_ever <- ifelse(mp1$dr_cramps_9yr == "Yes" |mp1$dr_cramps_10yr == "Yes" | mp1$dr_cramps_11yr == "Yes" | mp1$dr_cramps_13yr == "Yes" 
+                              | mp1$dr_cramps_14yr == "Yes" | mp1$dr_cramps_15yr == "Yes" | mp1$dr_cramps_16yr == "Yes" | mp1$dr_cramps_17yr == "Yes",1,0)
 table(mp1$dysmen_drvisit_ever)
+
+# This variable captured 641 women who had been to the dr ≥1 time during puberty. Now I just needed to remove the 419 from controls and split cases (coded as 1) 
+# and controls (coded as 0) in one variable
+
+mp1$dysmen_ewas <- NA
+mp1$dysmen_ewas[mp1$cramps_controls ==1] <- 0
+mp1$dysmen_ewas[mp1$dysmen_drvisit_ever ==1] <- 1
+table(mp1$dysmen_ewas)
+
+# Now the variable dysmen_ewas incorporates cases (women who have visited the doctor ≥1 time during puberty for dysmenorrhea n=641) and controls (women who have 
+# reported dysmenorrhea but never visited the doctor)
+
+# Check all the timpoints to make sure no controls have visited the doctor 
+
+table(mp1$dysmen_ewas, mp1$dr_cramps_10yr)
+table(mp1$dysmen_ewas, mp1$dr_cramps_11yr)
+table(mp1$dysmen_ewas, mp1$dr_cramps_13yr)
+table(mp1$dysmen_ewas, mp1$dr_cramps_14yr)
+table(mp1$dysmen_ewas, mp1$dr_cramps_15yr)
+table(mp1$dysmen_ewas, mp1$dr_cramps_16yr)
+table(mp1$dysmen_ewas, mp1$dr_cramps_17yr)
 
 # Similarly for smoking and alcohol use, I need to derive a binary variable for each showing whether the young person is regularly smoking
 # or drinking at the time of their methylation measurement (15 or 17 years), so generating a variable from the information I have for each of
@@ -1350,8 +1443,8 @@ mp1$reg_drinker_17yr <- factor(mp1$reg_drinker_17yr,
                                labels = c("No", "Yes"))
 table(mp1$reg_drinker_17yr)
 
-# For comorbidities, thyroid problems, PCOS or endometriosis, I am making a binary variable for each time-point (15 and 17 years) covering whether a thyroid problem was present at
-# 15/17 years and whether PCOS or endometriosis had been diagnosed at 22 years (only info we have)
+# For comorbidities, thyroid problems, PCOS or endometriosis, I am making a binary variable for each time-point (15 and 17 years) covering whether a thyroid 
+# problem was present at 15/17 years and whether PCOS or endometriosis had been diagnosed at 22 years (only info we have)
 
 mp1$comorbidity_15yr <- ifelse(mp1$thyroid_problem_15yr == "Yes" | mp1$pcos == "Yes" | mp1$endometriosis == "Yes",1,
                                ifelse(mp1$thyroid_problem_15yr == "No" & mp1$pcos == "No" & mp1$endometriosis == "No",0,NA))
