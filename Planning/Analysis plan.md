@@ -50,8 +50,8 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
     - [x] Replace any "Missing" or "Not stated" or -10 etc. categories with NA for compatability with R
     - [x] Switch the order of yes and no 1 and 2 to yes and no 0 and 1
     - [x] Derive separate clean variables of interest:
-       - `menorr_drvisit_ever` for having ever visited the doctor for menorrhagia during puberty ≥1 time
-       - `dysmen_drvisit_ever` for having ever visited the doctor for dysmenorrhea during puberty ≥1 time
+       - `menorr_ewas` for having ever visited the doctor for menorrhagia during puberty ≥1 time (1) or experienced menorrhagia but not visited the doctor (0)
+       - `dysmen_ewas` for having ever visited the doctor for dysmenorrhea during puberty ≥1 time (1) or experienced dysmenorrheaa but not visited the doctor (0)
     - [x] Derive smoking and alcohol variables for regular vs not regular at each timepoint (15 and 17 years)
        - `reg_smoker_15yr` `reg_smoker_17yr` for regular smoker
        - `reg_drinker_15yr` `reg_drinker_17yr` for regular drinker
@@ -64,6 +64,7 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
   - [ ] Derive covariates at the time methylation measurements were taken at a clinic held when the young woman was either 15 or 17 years old:
     - `bmi_meth` BMI at time of methylation measurement
     - `age_meth` age at time of methylation measurement
+    - `age_at_menarche` for age at onset of menarche
     - `contraception_meth` oral contraception at time of methylation measurement
     - `mat_edu` mother's educational attainment at birth
     - `mat_occ_class` mother's occupation at birth
