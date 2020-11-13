@@ -71,7 +71,7 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
     - `reg_smoker` smoking status (ever regular vs not regular) at time of methylation measurement    
     - `reg_drinker` drinking (alcohol) status (ever regular vs not regular) at time of methylation measurement
     - `comorbidity` any diagnosed endocrinopathy (thyroid problem) or reproductive pathology (PCOS or endometriosis) by the end of puberty
-  - [x] Check over dataset for all variables & covariates needed for Step 2
+  - [ ] Check over dataset for all variables & covariates needed for Step 2
   
 - [ ] _**Save file on RDSF for access via bluecrystal**_
 
