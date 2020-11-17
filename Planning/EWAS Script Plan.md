@@ -144,7 +144,7 @@ Where:
 The last bits of the line are the file path to the R script and the file path to an `.out` file (called mp1_menorr.out for HMB for example), which will show the output from R to see how the EWAS is doing. Call the `.out` file the same name as the `.sh` file then save them in the `ewas_results` folder within the project subfolder.
 
 ```
-R CMD BATCH --no-save --no-restore '--args menorr_drvisit_ever houseman Cells mp1 B 15up age_meth,bmi_meth,contraception_meth,mat_edu,mat_occ,reg_smoker,reg_drinker,comorbidity /panfs/panasas01/sscm/ti19522/EWAS//panfs/panasas01/sscm/ti19522/EWAS/' /panfs/panasas01/sscm/ti19522/common_files/meffil_EWAS_script.r/panfs/panasas01/sscm/ti19522/EWAS/mp1/mp1_menorr.out
+R CMD BATCH --no-save --no-restore '--args menorr_ewas houseman Cells mp1 B 15up age_meth,men_age_m,bmi_meth,contraception_meth,mat_edu,mat_occ,reg_smoker,reg_drinker,comorbidity /panfs/panasas01/sscm/ti19522/EWAS//panfs/panasas01/sscm/ti19522/EWAS/' /panfs/panasas01/sscm/ti19522/common_files/meffil_EWAS_script.r/panfs/panasas01/sscm/ti19522/EWAS/mp1/menorr_ewas.out
 ```
 
 This should then be saved in the `submission_script` folder then submit it to BlueCrystal:
