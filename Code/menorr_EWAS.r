@@ -14,7 +14,7 @@ Phenofile <- toString(args[4])  # Path to file containing all phenotype informat
 BorM <- toString(args[5])       # Betas or M-values (B or M)
 TP <- toString(args[6])         # Time point (cord or F7 or 15up or antenatal or FOM)
 Covariates <- toString(args[7]) # List of covariates (eg: m_age,mum_uni,matsm,parity i.e. commas but no spaces or quotation marks)
-WD <- toString(args[8])         # Working directory (eg /panfs/panasas01/sscm/ti19522/EWAS/mp1)
+WD <- toString(args[8])         # Working directory (/newhome/ti19522/EWAS)
 
 print(Trait)
 print(CellData)
