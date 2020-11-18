@@ -24,11 +24,11 @@ gantt
     
     section Nov '20
     Data cleaning                             :done, 2020-11-02, 2020-11-06
-    Merge ALSPAC data with ARIES              :active, 2020-11-06, 9d
+    Merge ALSPAC data with ARIES              :active, 2020-11-06, 14d
     Adapt EWAS scripts                        :active, 2020-11-06, 9d
     Meeting 3                                 :crit, 2020-11-12, 1h
-    Run EWAS on BlueCrystal                   :des5, 2020-11-16, 2020-11-19
-    Summarise EWAS results                    :des6, after des5, 3d
+    Run EWAS on BlueCrystal                   :des5, 2020-11-16, 2020-11-20
+    Summarise EWAS results                    :des6, after des5, 5d
     Check enrichment                          :des7, after des6, 5d
     Meeting 4                                 :crit, 2020-11-26, 1h
     Back to ALSPAC                            :des8, after des7, 2d
