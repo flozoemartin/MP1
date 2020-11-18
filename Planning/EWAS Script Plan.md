@@ -92,10 +92,9 @@ I need to set up folders on my home directory. I need a file called `common_file
 - `naeem_list.csv` which is a list of probes (in Gemma's repository) that have been identified as potentially problematic (on a SNP, cross-hybridising etc.). A list of probes on the array 
 tat have the potential to provide a noisy methylation signal, therefore reducing false discovery rate that is the result of these noisy signals (1).
 - `aries-detailed-cell-counts-20150409.Rda` which is a list of dataframes (one for each ARIES timepoint) with cells counts estimated using the Houseman methods but 
-where granulocytes are split into eosinophils and neutophils. The Houseman method is similar to regression calibration (technique that corrects biases in regression 
-results in situations where exposue variables are measured with error) which infers changes in the distribution of white blood cells between different 
+where granulocytes are split into eosinophils and neutophils. The Houseman method is similar to regression calibration (technique that corrects biases in regression results in situations where exposue variables are measured with error) which infers changes in the distribution of white blood cells between different 
 subpopulations using DNA methylation signatures, in combination with a previously obtained external validation set consisting of signatures from purified leukocyte 
-samples (2).  
+samples (2). I won't need this for my menorrhagia/dysmenorrhea EWAS.
 - `meffil_EWAS_script.r` which is Gemma's EWAS R script (also in the repository). It should stay generic so you can use the same script to run any ARIES EWAS.
 
 I need another file called `EWAS` with subfolders for different projects, at the moment I would only need one for mini project one `mp1` with subfolders:
@@ -119,7 +118,7 @@ Then set the working directory:
 
 Next tell it to install R:
 
-`module add languages/R-3.4.1-ATLAS`
+`module add languages/R-3.6.3`
 
 Then change the working directory as in R:
 
@@ -128,7 +127,7 @@ Then change the working directory as in R:
 The next line is specific to each individual EWAS:
 
 ```
-R CMD BATCH --no-save --no-restore '--args Trait CellData CellAdj Phenofile BorM TP Covariates WD' /panfs/panasas01/sscm/ti19522/common_files/meffil_EWAS_script.r/panfs/panasas01/sscm/ti19522/EWAS/mp1/mp1_menorr.out
+R CMD BATCH --no-save --no-restore '--args Trait CellData CellAdj Phenofile BorM TP Covariates WD' /newhome/ti19522/common_files/meffil_EWAS_script.r /newhome/ti19522/EWAS/alspac_menstruation_project/menorr_ewas.out
 ```
       
 Where:
@@ -144,13 +143,13 @@ Where:
 The last bits of the line are the file path to the R script and the file path to an `.out` file (called mp1_menorr.out for HMB for example), which will show the output from R to see how the EWAS is doing. Call the `.out` file the same name as the `.sh` file then save them in the `ewas_results` folder within the project subfolder.
 
 ```
-R CMD BATCH --no-save --no-restore '--args menorr_ewas houseman Cells mp1 B 15up age_meth,men_age_m,bmi_meth,contraception_meth,mat_edu,mat_occ,reg_smoker,reg_drinker,comorbidity /panfs/panasas01/sscm/ti19522/EWAS//panfs/panasas01/sscm/ti19522/EWAS/' /panfs/panasas01/sscm/ti19522/common_files/meffil_EWAS_script.r/panfs/panasas01/sscm/ti19522/EWAS/mp1/menorr_ewas.out
+R CMD BATCH --no-save --no-restore '--args menorr_ewas houseman Cells mp1 B 15up age_meth,men_age_m,bmi_meth,contraception_meth,mat_edu,mat_occ_class,reg_smoker,reg_drinker,comorbidity /newhome/ti19522/EWAS/' /newhome/ti19522/common_files/meffil_EWAS_script.r /newhome/ti19522/EWAS/alspac_menstruation_project/menorr_ewas.out
 ```
 
-This should then be saved in the `submission_script` folder then submit it to BlueCrystal:
+This should then be saved in the `submission_scripts` folder then submit it to BlueCrystal:
 
 ```
-qsub EWAS/mp1/submission_scripts/mp1_menorr.sh
+qsub EWAS/alspac_menstruation_project/submission_scripts/menorr_ewas.sh
 ```
 
 ## The EWAS R Script
@@ -165,7 +164,7 @@ Phenofile <- toString(args[4])              # Path to file containing all phenot
 BorM <- toString(args[5])                   # Beta values or M-values (B or M)
 TP <- toString(args[6])                     # Time point (cord or F7 or 15up or antenatal or FOM)
 Covariates <- toString(args[7])             # List of covariates (eg: m_age,mum_uni,matsm,parity i.e. commas but no spaces or quotation marks)
-WD <- toString(args[8])                     # Working directory (eg /panfs/panasas01/sscm/ti19522/EWAS/mp1)
+WD <- toString(args[8])                     # Working directory (eg /newhome/ti19522/EWAS/alspac_menstruation_project)
 ```
 This part of the script pulls in the arguments that were set in the `.sh` file.
 
@@ -182,7 +181,7 @@ print(WD)
 This part checks they've been set properly.
 
 ```
-setwd(/panfs/panasas01/sscm/ti19522/EWAS/mp1)
+setwd(/newhome/ti19522/EWAS/alspac_menstruation_project)
 ```
 This part sets the working directory to the specific EWAS project folder.
 
@@ -367,7 +366,7 @@ ewas_res<-merge(ewas_res,outliers_cases,by="probeID",all=TRUE)
 This block of code is for if trait of interest is binary; we will want to know how many cases were included in the EWAS for each probe. Firstly identifies if the trait of interest is binary and then if it is, it will add more columns to the EWAS results dataframe to describe the number of outliers removed within the cases and the final number of cases and controls.
 
 ```
-Naeem<-read.csv("/panfs/panasas01/sscm/gs8094/Common_files/naeem_list.csv")
+Naeem<-read.csv("/newhome/ti19522/common_files/naeem_list.csv")
 ewas_res$OnNaeem <- ifelse(ewas_res$probeID %in% Naeem$EXCLUDE_PROBES,"yes","no")
 ```
 These lines of code indicate whether probes are on the Naeem list of possible problematic probes or not.
@@ -387,7 +386,7 @@ This block of code corrects for multiple testing using FDR and Bonferroni approa
 ```
 ewas_res$Trait <- Trait
 ewas_res$Covariates <- paste0(ls(obj$covariates),collapse=", ")
-ewas_res$nSVs <- ncol(obj$analyses$sva$design) #Number 
+ewas_res$nSVs <- ncol(obj$analyses$sva$design) # Number 
 ewas_res$nISVs <- ncol(obj$analyses$isva$design)
 ewas_res$TP <- TP
 ewas_res$BorM <- BorM
