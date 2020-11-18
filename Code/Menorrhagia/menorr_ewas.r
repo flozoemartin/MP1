@@ -34,7 +34,7 @@ library(meffil)
 
 # Load description of samples
 load("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/samplesheet/data.Robj")
-samplesheet<-subset(samplesheet, time_point==TP)
+samplesheet <- subset(samplesheet, time_point==TP)
 if(TP !="antenatal" & TP !="FOM"){
 qletB <- samplesheet$ALN[which(samplesheet$QLET=="B")] # Find alns for multiple pregnancies
 samplesheet <- samplesheet[-which(samplesheet$ALN %in% qletB),] # Remove multiple pregnancies
@@ -68,14 +68,14 @@ paste(length(Probes_to_exclude_Pvalue),"were removed because they had a high det
 rm(XY, SNPs.and.controls, pvals, count_over_0.05, pvalue_over_0.05, Probes_to_exclude_Pvalue)
 
 # Load phenotype data (this should be stored in your working directory)
-Pheno <- read.dta(paste0(mp1,".dta"))
+Pheno <- read.csv(paste0(mp1,".csv"))
 
 # Load cell-counts
 if(TP=="15up"){
 cells <- read.table(paste0("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/derived/cellcounts/cord/",CellData,"/data.txt"),header=T)
 }else{
 if(CellData=="houseman_eos"){
-load("/panfs/panasas01/sscm/ti19522/Common_files/aries-detailed-cell-counts-20150409.rda")
+load("/newhome/ti19522/common_files/aries-detailed-cell-counts-20150409.rda")
 cells <- detailed.cell.counts[[TP]]
 }else{
 cells <- read.table("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/derived/cellcounts/houseman/data.txt", header=TRUE)
