@@ -4,7 +4,7 @@
 #                                                                                                                                                                 #
 ###################################################################################################################################################################
 
-setwd("~/EWAS/periodpain") # Set your working directory where your results will be saved
+setwd("/newhome/ti19522/EWAS/alspac_menstruation_project/ewas_results") # Set your working directory where your results will be saved
 
 # Install the following packages if you don't already have them:
 library(stringr)
@@ -38,7 +38,7 @@ data(Other)
 annotation <- cbind(as.data.frame(Locations), as.data.frame(Other))
 
 # Load the phenotype data (please replace the file name and directory - this file should be saved in your user area (not the RDSF))
-pheno <- readRDS("PainforEWAS.rds")
+pheno <- read.csv("mp1.csv")
 
 # Load samplesheet (describes methylation data)
 load("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/samplesheet/data.Robj")
@@ -83,14 +83,14 @@ meth <- ewaff.handle.outliers(meth, method="iqr")[[1]]
 # of interest)
 
 res <- ewaff.sites(methylation ~ pain,
-                         variable.of.interest="pain",
+                         variable.of.interest="dysmen_ewas",
                          methylation=meth,
                          data=pheno,
                          generate.confounders="sva",
                          method="limma",
                          n.confounders=10)
 res <- merge(res$table,annotation,by="row.names",all=F)
-save(res,file="Pain_Daughters_EWASres.Rdata") # Change filename as needed
+save(res,file="dysmen_ewas.Rdata") # Change filename as needed
 
 # Run DMR analysis
 
@@ -102,7 +102,7 @@ dmrs <- dmrff(estimate=res$estimate,
               pos=res$pos,
               maxgap=500,
               verbose=T)
-save(dmrs,file="Pain_Daughters_DMRres.Rdata") # Change filename as needed
+save(dmrs,file="dysmen_DMRres.Rdata") # Change filename as needed
 
 # Check enrichment in EWAS catalog
 
@@ -145,7 +145,7 @@ enrichment_res$fdr <- p.adjust(enrichment_res$p,method="fdr")
 enrichment_res$percentage <- 100*(enrichment_res$ITIH/(enrichment_res$ITNH+enrichment_res$ITIH))
 enrichment_res <- enrichment_res[order(enrichment_res$percentage,decreasing=T),]
 enrichment_res[enrichment_res$fdr<0.05,]
-save(enrichment_res,file="Pain_Daughters_EWAScatEnrichmentres.Rdata")
+save(enrichment_res,file="dysmen_EWAScatEnrichmentres.Rdata")
 
 # Enrichment of KEGG and GO terms
 
@@ -161,4 +161,4 @@ go.res <- go.res[order(go.res$P.DE),]
 kegg.res <- gometh(sig.cpg=cpgs, all.cpg=res$Row.names, collection="KEGG")
 
 kegg.res <- kegg.res[order(kegg.res$P.DE),]
-save(list=c("go.res","kegg.res"),file="Pain_Daughters_GO_KEGG_res.Rdata")
+save(list=c("go.res","kegg.res"),file="dysmen_GO_KEGG_res.Rdata")
