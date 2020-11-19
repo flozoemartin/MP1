@@ -64,7 +64,7 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
   - [ ] Derive covariates at the time methylation measurements were taken at a clinic held when the young woman was either 15 or 17 years old:
     - `bmi_meth` BMI at time of methylation measurement
     - `age_meth` age at time of methylation measurement
-    - `age_at_menarche` for age at onset of menarche
+    - `men_age_m` for age at onset of menarche
     - `contraception_meth` oral contraception at time of methylation measurement
     - `mat_edu` mother's educational attainment at birth
     - `mat_occ_class` mother's occupation at birth
