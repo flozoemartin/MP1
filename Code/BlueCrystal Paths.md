@@ -91,8 +91,18 @@ style K fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
 style L fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
     
 ```
+</div>
 
 
-Shown in green are the folders situated in the remote working directory and in blue, files used for analysis. My folder "alspac_menstruation_project" is specific to my mini project 1; within this folder I keep specific submission scripts and EWAS results for this project. In the future I may add other folders with EWAS that will refer to different projects.
+<div align="right"> Shown in green are the folders situated in the remote working directory and in blue, files used for analysis. My folder "alspac_menstruation_project" is specific to my mini project 1; within this folder I keep specific submission scripts and EWAS results for this project. In the future I may add other folders with EWAS that will refer to different projects.
+  
+## Moving files between your local directory & remote directory
+### Local &rarr; Remote
 
+If working in `ssh` session, log out using <kbd>Ctrl</kbd> + <kbd>d</kbd> then relogin using:
 
+```
+sftp username@bluecrystalp3.bris.ac.uk
+```
+
+Then enter your password when prompted :key:
