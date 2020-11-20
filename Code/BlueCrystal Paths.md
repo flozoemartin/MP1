@@ -66,16 +66,33 @@ Always use `ls` and `pwd` along the way to double check the files we have access
 
 ```mermaid
   graph TD;
-    common_files --> meffil_EWAS_script.r
-    common_files --> naeem_list.csv
-    EWAS --> alspac_menstruation_project
-    alspac_menstruation_project --> Pheno.Rda
-    alspac_menstruation_project --> submission_scripts
-    alspac_menstruation_project --> ewas_results
-    submission_scripts --> menorr_ewas_crude.sh
-    submission_scripts --> menorr_ewas_adj.sh
-    submission_scripts --> dysmen_ewas_crude.sh
-    submission_scripts --> dysmen_ewas_adj.sh
+    A[common_files] --> B(meffil_EWAS_script.r);
+    A[common_files] --> C(naeem_list.csv);
+    D[EWAS] --> E[alspac_menstruation_project];
+    E[alspac_menstruation_project] --> F(Pheno.Rda);
+    E[alspac_menstruation_project] --> G[submission_scripts];
+    E[alspac_menstruation_project] --> H[ewas_results];
+    G[submission_scripts] --> I(menorr_ewas_crude.sh);
+    G[submission_scripts] --> J(menorr_ewas_adj.sh);
+    G[submission_scripts] --> K(dysmen_ewas_crude.sh);
+    G[submission_scripts] --> L(dysmen_ewas_adj.sh)
+style A fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
+style B fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
+style C fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
+style D fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
+style E fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
+style F fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
+style G fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
+style H fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
+style G fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
+style I fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
+style J fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
+style K fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
+style L fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
     
 ```
-</div>
+
+
+Shown in green are the folders situated in the remote working directory and in blue, files used for analysis. My folder "alspac_menstruation_project" is specific to my mini project 1; within this folder I keep specific submission scripts and EWAS results for this project. In the future I may add other folders with EWAS that will refer to different projects.
+
+
