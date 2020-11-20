@@ -129,4 +129,13 @@ And this file will move to your remote working directory. From there you can man
 
 ### Remote &rarr; Local
 
+Still within the `sftp` session, you can move files from your remote working directory to your local working directory. Similarly to the last step the working directories can be checked and changed using the commands `lls` & `lcd` (local) and `ls` & `cd` (remote). Once your directories are correctly set, use:
+
+```
+get filename.csv
+```
+
+To move a file from the remote working directory to the local working directory.
+
+
 
