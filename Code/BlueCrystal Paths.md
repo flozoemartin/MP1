@@ -137,5 +137,91 @@ get filename.csv
 
 To move a file from the remote working directory to the local working directory.
 
+## Merging the `samplesheet` (ARIES) with an ALSPAC dataset
+In the event that you have an ALSPAC dataset that you want to merge with the ARIES dataset for epigenetic analysis, `samplesheet` must be merged with the dataset in order to link ALN identification numbers with Sentrix numbers from the lab. To move forward with this step, you will need:
+  - [x] An ALSPAC dataset (in `.dta`, `.csv` or `.Rda` format)
+  - [x] A BlueCrystal account
+  - [x] Access to ARIES (contact ieu-datamanagement@bristol.ac.uk)
+  
+Once these steps have been completed then the dataset can be merged with the ARIES `samplesheet`. Open Terminal and log in. If R isn't installed, type:
 
+```
+vim .bash_profile
+```
 
+To open a text editor, then alter the text to mirror:
+
+```
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+module add languages/R-3.6.3-gcc9.1.0
+PATH=$PATH:$HOME/bin
+
+export PATH
+```
+
+To implement, press <kbd>Esc</kbd>, then type `:x` and press <kbd>Enter</kbd>. You will need to logout and log back in to an `ssh -X` session (described in the last section).
+
+Now that R is installed in your BlueCrystal environment you can open it by typing:
+
+```
+R
+```
+
+To load `samplesheet` into the R environment, type:
+
+```
+load ("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/20-05-03/data/samplesheet/data.Robj")
+```
+
+And check this has worked by typing `ls()`. It should show `[1] samplesheet` if it has successfully loaded in. If you haven't 'called' the arguments for the EWAS using the submission script, then you need to assign a value to `TP` (timepoint) for whichever timepoint you will be using in your EWAS. In this example, I am using the adolescent timepoint, where methylation was measured at either 15 or 17 years of age:
+
+```
+TP <- "15up"
+```
+
+Once TP has been assigned the specific timepoint being used in the EWAS, type:
+
+```
+if(TP !="antenatal" & TP !="FOM"){
+   qletB <- samplesheet$ALN[which(samplesheet$QLET=="B")]                # Find alns for multiple pregnancies
+   samplesheet <- samplesheet[-which(samplesheet$ALN %in% qletB),]       # Remove multiple pregnancies
+ }
+```
+
+This bit of code removes multiple pregnancies to either prevent mother's being counted twice (if using mum's in the EWAS) or removing twins to limit bias introduced by population stratification when including siblings into EWAS analyses. Using `dim(samplesheet)` to check the number of rows and columns following this step (at time of writing this generated 977 rows). Using `names(samplesheet)` allows oyu to interrogate the column names in `samplesheet` and `table(samplesheet$time_code)` allows us to confirm that the methylation measures were only taken in the specified period of time assigned by `TP`. Another quality control step is removing duplicates, flagged by the column `duplicates.rm`. To do this, type:
+
+```
+table(samplesheet$duplicate.rm)                                          # This allows you to check the number of duplicates present in samplesheet
+samplesheet <- samplesheet[-which(samplesheet$duplicate.rm=="Remove"),]  # This removes the duplicates from the samplesheet
+```
+
+Using `dim(samplesheet)` again we can double check that the right number of duplicates have been removed. Now we can merge the resultant `samplesheet` with the local ALSPAC dataset. Make sure the dataset you want to merge is loaded into the remote environment and you working directory is set to the file location within R:
+
+```
+getwd()
+setwd("/remote/location/of/ALSPAC/file")
+load("alspac_data.Rda")
+```
+
+Now that the ALSPAC dataset file has been loaded into the remote R environment, we can merge it with `samplesheet`, using:
+
+```
+Pheno <- merge(alspac_data, samplesheet, by.x="aln", by.y="ALN")         # This last part makes sure that the ALNs in each dataset are matched irrespective of case
+```
+
+If we then use `dim(Pheno)` we can check that the number of rows matches that of `samplesheet` and the number of columns matches that of `alspac_data` + `samplesheet`. If all looks groovy, we can save `Pheno` as a dataset for manipulation in local R before use in an EWAS analysis!
+
+```
+save(Pheno, file="Pheno.Rda")
+```
+
+This will save to the remote working directory that was set in R. Move the file from the remote to lcoal directory using the section above.
+
+Now that the dataset has been successfully merged and moved from the remote directory to the local directory, it can be manipulated as needed ready for the EWAS analysis. Any covariates required that relied on having the methylation measurement timing can be derived and `Pheno.Rda` can be moved back to the remote directory ready for use in EWAS.
