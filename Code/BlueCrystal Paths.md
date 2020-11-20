@@ -62,6 +62,7 @@ mv new_folder_name subfolder_location
 
 Always use `ls` and `pwd` along the way to double check the files we have access to from which area of your home directory. Similarly to Gemma, I have my home directory organised into:
 
+
 <div align="center">
 
 ```mermaid
@@ -91,7 +92,6 @@ style K fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
 style L fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
     
 ```
-</div>
 
 
 <div align="left"> Shown in green are the folders situated in the remote working directory and in blue, files used for analysis. My folder "alspac_menstruation_project" is specific to my mini project 1; within this folder I keep specific submission scripts and EWAS results for this project. In the future I may add other folders with EWAS that will refer to different projects.
@@ -106,3 +106,27 @@ sftp username@bluecrystalp3.bris.ac.uk
 ```
 
 Then enter your password when prompted :key:
+
+During this session, it is possible to interact with both your local and remote working directories. To view the files listed within your local directory, type:
+
+```
+lls
+```
+
+And to change the local directory to where the file you want to move is located, use:
+
+```
+lcd /pathname/from/computer
+```
+
+To move a file from your local working directory to your remote working directory, type:
+
+```
+put filename.csv
+```
+
+And this file will move to your remote working directory. From there you can manipulate it's location as described in the previous seciton.
+
+### Remote &rarr; Local
+
+
