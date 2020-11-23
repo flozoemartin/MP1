@@ -66,30 +66,39 @@ Always use `ls` and `pwd` along the way to double check the files we have access
 <div align="center">
 
 ```mermaid
-  graph TD;
+  graph LR;
     A[common_files] --> B(meffil_EWAS_script.r);
     A[common_files] --> C(naeem_list.csv);
     D[EWAS] --> E[alspac_menstruation_project];
-    E[alspac_menstruation_project] --> F(Pheno.Rda);
-    E[alspac_menstruation_project] --> G[submission_scripts];
-    E[alspac_menstruation_project] --> H[ewas_results];
-    G[submission_scripts] --> I(menorr_ewas_crude.sh);
-    G[submission_scripts] --> J(menorr_ewas_adj.sh);
-    G[submission_scripts] --> K(dysmen_ewas_crude.sh);
-    G[submission_scripts] --> L(dysmen_ewas_adj.sh)
+    E[alspac_menstruation_project] --> F(Pheno.csv);
+    E[alspac_menstruation_project] --> G(Pheno_comorbidrm.csv);
+    E[alspac_menstruation_project] --> H[submission_scripts];
+    E[alspac_menstruation_project] --> I[ewas_results];
+    H[submission_scripts] --> J(menorr_ewas.sh);
+    H[submission_scripts] --> K(menorr_ewas_comorbidrm.sh);
+    H[submission_scripts] --> L(menorr_ewas_adj.sh);
+    H[submission_scripts] --> M(menorr_ewas_adj_comorbidrm.sh);
+    H[submission_scripts] --> N(dysmen_ewas.sh);
+    H[submission_scripts] --> O(dysmen_ewas_comorbidrm.sh);
+    H[submission_scripts] --> P(dysmen_ewas_adj.sh)
+    H[submission_scripts] --> Q(dysmen_ewas_adj_comorbidrm.sh);
 style A fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
 style B fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
 style C fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
 style D fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
 style E fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
 style F fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
-style G fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
+style G fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
 style H fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
-style G fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
-style I fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
+style I fill:#3cb371, stroke:#000000,stroke-width:2px,color:#000000
 style J fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
 style K fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
 style L fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
+style M fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
+style N fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
+style O fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
+style P fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
+style Q fill:#afeeee, stroke:#000000,stroke-width:2px,color:#000000
     
 ```
       
@@ -225,3 +234,55 @@ save(Pheno, file="Pheno.Rda")
 This will save to the remote working directory that was set in R. Move the file from the remote to lcoal directory using the section above.
 
 Now that the dataset has been successfully merged and moved from the remote directory to the local directory, it can be manipulated as needed ready for the EWAS analysis. Any covariates required that relied on having the methylation measurement timing can be derived and `Pheno.Rda` can be moved back to the remote directory ready for use in EWAS.
+
+## Running the EWAS analysis in BlueCrystal
+Now that we have the merged dataset, we can gathering together the necessary submission scripts and files needed to run the EWAS using `meffil`. First thing I need to do is write the submission script for the EWAS I want to run. I am going to use the unadjusted menorrhagia EWAS as an example here. The submission script for this EWAS is created in a Terminal session, using the `nano` command with the working directory set as `submission_scripts`:
+
+```
+nano menorr_ewas.sh
+```
+
+This will open a text editor which the following text can be added:
+
+```
+#!/bin/bash
+#
+#
+#PBS -l nodes=1:ppn=1,walltime=12:00:00
+
+WORK_DIR="/newhome/ti19522/EWAS/alspac_menstruation_project"
+module add languages/R-3.6.3
+
+R CMD BATCH --no-save --no-restore '--args menorr_ewas houseman Cells Pheno B 15up age_meth /newhome/ti19522/EWAS/alspac_menstruation_project' /newhome/ti19522/common_files/meffil_EWAS_script.r /newhome/ti19522/EWAS/alspac_menstruation_project/ewas_results/menorr_ewas.out
+```
+
+This shell file is the 'job' that is submitted to BlueCrystal and draws on the `meffil_EWAS_script.r` to complete the analysis. _More info on what each of the elements within the shell file in the EWAS Anaysis Plan._ 
+
+The job is then submitted to BlueCrystal using the command:
+
+```
+qsub EWAS/alspac_menstruation_project/submission_scripts/menorr_ewas.sh
+```
+
+The progress of the job can be checked using:
+
+```
+qstat -U username
+```
+
+To ensure that the job runs smoothly, double check that `meffil` is in your remote R environment library. Open R in Terminal by typing `R` and check what version R is installed. If the newest version is installed (time of writing version 3.6.3) this is too new to follow Matt Suderman's instructions but too old for the newest version of Bioconductor. To get around this, install an older version of R into your BlueCrystal environment to be able to follow Matt's instructions. Quit R (`q()`) and type:
+
+```
+module add languages/R-3.4.1-ATLAS
+```
+
+Then reopen R & check which version is now running. If version 3.4.1 is running, then Matt's instructions for installing `meffil` can be used:
+
+```
+source("http://bioconductor.org/biocLite.R")
+install.packages("devtools")
+library(devtools)
+install_github("perishky/meffil")
+```
+
+These steps take quite a long time so bear with it!
