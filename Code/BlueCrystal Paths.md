@@ -286,3 +286,5 @@ install_github("perishky/meffil")
 ```
 
 These steps take quite a long time so bear with it!
+
+I have adjusted the `meffil_EWAS_script.r` to not include the merge with `samplesheet` part because I did that in the previous step, pulled the dataset back out into my local environment, added covariates __based on__ methylation measurement time then used the merged dataset in the EWAS analysis. It is basically just a jumbled version of Gemma's pipeline (found on @ammegandchips).   
