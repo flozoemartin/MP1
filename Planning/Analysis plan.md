@@ -56,12 +56,12 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
        - `reg_smoker_15yr` `reg_smoker_17yr` for regular smoker
        - `reg_drinker_15yr` `reg_drinker_17yr` for regular drinker
        
-- [ ] _**Merge ALSPAC data with methylation "samplesheet" on bluecrystal**_ available here:
+- [x] _**Merge ALSPAC data with methylation "samplesheet" on bluecrystal**_ available here:
 
     /panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/samplesheet/data.Robj    
 
-- [ ] _**Derive & clean covariates**_ 
-  - [ ] Derive covariates at the time methylation measurements were taken at a clinic held when the young woman was either 15 or 17 years old:
+- [x] _**Derive & clean covariates**_ 
+  - [x] Derive covariates at the time methylation measurements were taken at a clinic held when the young woman was either 15 or 17 years old:
     - `bmi_meth` BMI at time of methylation measurement
     - `age_meth` age at time of methylation measurement
     - `men_age_m` for age at onset of menarche
@@ -71,7 +71,7 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
     - `reg_smoker` smoking status (ever regular vs not regular) at time of methylation measurement    
     - `reg_drinker` drinking (alcohol) status (ever regular vs not regular) at time of methylation measurement
     - `comorbidity` any diagnosed endocrinopathy (thyroid problem) or reproductive pathology (PCOS or endometriosis) by the end of puberty
-  - [ ] Check over dataset for all variables & covariates needed for Step 2
+  - [x] Check over dataset for all variables & covariates needed for Step 2
   
 - [ ] _**Save file on RDSF for access via bluecrystal**_
 
