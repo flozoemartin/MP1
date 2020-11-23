@@ -68,7 +68,7 @@ paste(length(Probes_to_exclude_Pvalue),"were removed because they had a high det
 rm(XY, SNPs.and.controls, pvals, count_over_0.05, pvalue_over_0.05, Probes_to_exclude_Pvalue)
 
 # Load phenotype data (this should be stored in your working directory)
-Pheno <- read.csv(paste0(mp1,".csv"))
+Pheno <- read.csv(paste0(Phenofile,".csv"),stringsAsFactors=FALSE)
 
 # Load cell-counts
 if(TP=="15up"){
