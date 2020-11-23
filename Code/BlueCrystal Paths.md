@@ -256,7 +256,7 @@ module add languages/R-3.6.3
 R CMD BATCH --no-save --no-restore '--args menorr_ewas houseman Cells Pheno B 15up age_meth /newhome/ti19522/EWAS/alspac_menstruation_project' /newhome/ti19522/common_files/meffil_EWAS_script.r /newhome/ti19522/EWAS/alspac_menstruation_project/ewas_results/menorr_ewas.out
 ```
 
-This shell file is the 'job' that is submitted to BlueCrystal and draws on the `meffil_EWAS_script.r` to complete the analysis. _More info on what each of the elements within the shell file in the EWAS Anaysis Plan._ 
+This shell file is the 'job' that is submitted to BlueCrystal and draws on the `meffil_EWAS_script.r` to complete the analysis. _More info on what each of the elements within the shell file in the EWAS Analysis Plan._ 
 
 The job is then submitted to BlueCrystal using the command:
 
@@ -287,4 +287,12 @@ install_github("perishky/meffil")
 
 These steps take quite a long time so bear with it!
 
-I have adjusted the `meffil_EWAS_script.r` to not include the merge with `samplesheet` part because I did that in the previous step, pulled the dataset back out into my local environment, added covariates __based on__ methylation measurement time then used the merged dataset in the EWAS analysis. It is basically just a jumbled version of Gemma's pipeline (found on @ammegandchips).   
+I have adjusted the `meffil_EWAS_script.r` to not include the merge with `samplesheet` part because I did that in the previous step, pulled the dataset back out into my local environment, added covariates __based on__ methylation measurement time then used the merged dataset in the EWAS analysis. It is basically just a jumbled version of Gemma's pipeline (found on @ammegandchips). 
+
+Every time a job completes, it will provide the `.out` file in the `ewas_results` folder. Use this to interrogate where the script has got to if it doesn't finish to troubleshoot the problems. To open the `.out` file type:
+
+```
+cat menorr_ewas.out
+```
+
+When in the `ewas_results` working directory. This will give an onscreen print out of the script & where R was stopped by an error.
