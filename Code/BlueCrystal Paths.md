@@ -261,7 +261,7 @@ This shell file is the 'job' that is submitted to BlueCrystal and draws on the `
 The job is then submitted to BlueCrystal using the command:
 
 ```
-qsub EWAS/alspac_menstruation_project/submission_scripts/menorr_ewas.sh
+qsub ~/EWAS/alspac_menstruation_project/submission_scripts/menorr_ewas.sh
 ```
 
 The progress of the job can be checked using:
@@ -270,7 +270,7 @@ The progress of the job can be checked using:
 qstat -U username
 ```
 
-To ensure that the job runs smoothly, double check that `meffil` is in your remote R environment library. Open R in Terminal by typing `R` and check what version R is installed. If the newest version is installed (time of writing version 3.6.3) this is too new to follow Matt Suderman's instructions but too old for the newest version of Bioconductor. To get around this, install an older version of R into your BlueCrystal environment to be able to follow Matt's instructions. Quit R (`q()`) and type:
+To ensure that the job runs smoothly, double check that `meffil` is in your remote R environment library. Open R in Terminal by typing `R` and check what version R is installed. If the newest version is installed (time of writing version 3.6.3) this is too new to follow Matt Suderman's instructions but too old for the newest version of Bioconductor. To get around this, install an older version of R into your BlueCrystal environment to be able to follow Matt's instructions. Quit R `q()` and type:
 
 ```
 module add languages/R-3.4.1-ATLAS
