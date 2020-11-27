@@ -186,13 +186,14 @@ R
 To load `samplesheet` into the R environment, type:
 
 ```
-load("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/20-05-03/data/samplesheet/data.Robj")
+load("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/samplesheet/data.Robj")
 ```
 
 And check this has worked by typing `ls()`. It should show `[1] samplesheet` if it has successfully loaded in. If you haven't 'called' the arguments for the EWAS using the submission script, then you need to assign a value to `TP` (timepoint) for whichever timepoint you will be using in your EWAS. In this example, I am using the adolescent timepoint, where methylation was measured at either 15 or 17 years of age:
 
 ```
 TP <- "15up"
+samplesheet<-subset(samplesheet, time_point==TP)
 ```
 
 Once TP has been assigned the specific timepoint being used in the EWAS, type:
