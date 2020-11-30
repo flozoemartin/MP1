@@ -38,7 +38,7 @@ data(Other)
 annotation <- cbind(as.data.frame(Locations), as.data.frame(Other))
 
 # Load the phenotype data (please replace the file name and directory - this file should be saved in your user area (not the RDSF))
-pheno <- read.csv("mp1.csv")
+pheno <- read.csv("Pheno.csv")
 
 # Load samplesheet (describes methylation data)
 load("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/samplesheet/data.Robj")
@@ -62,9 +62,6 @@ probes.to.exclude.p <- rownames(detp)[which(count.over.0.05 > ncol(detp)*0.05)]
 XY <- as.character(row.names(annotation)[which(annotation$chr %in% c("chrX", "chrY"))])
 SNPs.and.controls <- as.character(row.names(norm.beta.random))[grep("rs|ch", as.character(row.names(norm.beta.random)))]
 
-# Merge phenotype data with samplesheet data 
-pheno <- merge(pheno,samplesheet[,c("ALN","Sample_Name")],by.x="aln",by.y="ALN")
-
 # Load and add the cell counts
 houseman.cell.counts <- read.table("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/derived/cellcounts/houseman/data.txt",header=T)
 pheno <- merge(pheno,houseman.cell.counts,by="Sample_Name",all=F)
@@ -82,7 +79,7 @@ meth <- ewaff.handle.outliers(meth, method="iqr")[[1]]
 # Run the EWASs (including generation of surrogate variables to control for technical batch) and save the results (replace painD with the name of your trait 
 # of interest)
 
-res <- ewaff.sites(methylation ~ pain,
+res <- ewaff.sites(methylation ~ menorr_ewas,
                    variable.of.interest="menorr_ewas",
                    methylation=meth,
                    data=pheno,
@@ -119,7 +116,7 @@ cpgs <- apply(dmr_hits[,c("chr","start","end")],1,lookup_cpgs) # List the CpGs i
 cpgs <- unlist(cpgs)
 
 require(data.table)
-ewascat <- fread("~/newhome/ti19522/EWAS/alspac_menstruation_project/EWAS_Catalog_03-07-2019.txt.gz")
+ewascat <- fread("/newhome/ti19522/common_files/ewascatalog-results.txt")
 
 terms <- unique(ewascat$Trait[ewascat$CpG %in% cpgs])
 
