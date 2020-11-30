@@ -68,21 +68,10 @@ paste(length(Probes_to_exclude_Pvalue),"were removed because they had a high det
 rm(XY, SNPs.and.controls, pvals, count_over_0.05, pvalue_over_0.05, Probes_to_exclude_Pvalue)
 
 # Load phenotype data (this should be stored in your working directory)
-Pheno <- read.csv(paste0(Phenofile,".csv"),stringsAsFactors=FALSE)
+Pheno <- read.csv(file.path("/newhome/ti19522/EWAS/alspac_menstruation_project", "Pheno.csv"),stringsAsFactors=FALSE)
 
 # Load cell-counts
-if(TP=="15up"){
-  cells <- read.table(paste0("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/derived/cellcounts/cord/",CellData,"/data.txt"),header=T)
-}else{
-  if(CellData=="houseman_eos"){
-    load("/newhome/ti19522/common_files/aries-detailed-cell-counts-20150409.rda")
-    cells <- detailed.cell.counts[[TP]]
-  }else{
-    cells <- read.table("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/derived/cellcounts/houseman/data.txt", header=TRUE)
-  }}
-
-# Add Sample_Name to Pheno (assuming Pheno contains aln)
-Pheno <- merge(Pheno,samplesheet[,c("ALN","Sample_Name")],by.x="aln",by.y="ALN")
+cells <- read.table(paste0("/panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/derived/cellcounts/cord/",CellData,"/data.txt"),header=T)
 
 # Prepare phenotype data
 Covs <- strsplit(Covariates,split=",")[[1]]
@@ -158,3 +147,47 @@ if(class(obj$variable)=="factor"|any(as.numeric(Pheno[,2])!=0&as.numeric(Pheno[,
                                n_outliers_controls=rowSums(outliers_cases[,as.factor(obj$variable)==levels(obj$variable)[1]]))
   ewas_res <- merge(ewas_res,outliers_cases,by="probeID",all=TRUE)
 }
+
+# Load the Naeem list of problematic probes
+Naeem<-read.csv("/newhome/ti19522/common_files/naeem_list.csv")
+ewas_res$OnNaeem<-ifelse(ewas_res$probeID %in% Naeem$EXCLUDE_PROBES,"yes","no")
+
+# Adjustment for multiple testing
+ewas_res$fdr.none <- p.adjust(ewas_res$p.none, method="fdr") 
+ewas_res$bonferroni.none <- p.adjust(ewas_res$p.none, method="bonferroni")
+ewas_res$fdr.all <- p.adjust(ewas_res$p.all, method="fdr") 
+ewas_res$bonferroni.all <- p.adjust(ewas_res$p.all, method="bonferroni")
+ewas_res$fdr.sva <- p.adjust(ewas_res$p.sva, method="fdr") 
+ewas_res$bonferroni.sva <- p.adjust(ewas_res$p.sva, method="bonferroni")
+ewas_res$fdr.isva <- p.adjust(ewas_res$p.isva, method="fdr") 
+ewas_res$bonferroni.isva <- p.adjust(ewas_res$p.isva, method="bonferroni")
+
+# Annotate and sort
+# Add information about EWAS
+ewas_res$Trait <- Trait
+ewas_res$Covariates <- paste0(ls(obj$covariates),collapse=", ")
+ewas_res$nSVs <- ncol(obj$analyses$sva$design) #Number 
+ewas_res$nISVs <- ncol(obj$analyses$isva$design)
+ewas_res$TP <- TP
+ewas_res$BorM <- BorM
+ewas_res$CellData <- CellData
+ewas_res$CellAdj <- CellAdj
+
+# Add Lambda (a measure of test statistic inflation)
+Lambda <- function(P){
+  chisq <- qchisq(1-P,1)
+  median(chisq,na.rm=T)/qchisq(0.5,1)
+}
+
+ewas_res$lambda.none <- Lambda(ewas_res$p.none)
+ewas_res$lambda.all <- Lambda(ewas_res$p.all)
+ewas_res$lambda.sva <- Lambda(ewas_res$p.sva)
+ewas_res$lambda.isva <- Lambda(ewas_res$p.isva)
+
+# Add annotation information about probes
+ewas_res <- merge(ewas_res,annotation,by.x="probeID", by.y="name",all.x=TRUE)
+ewas_res <- ewas_res[order(ewas_res$p.isva),]
+
+# Save as an Rdata file
+savefile <- paste("ewas_results/",Trait,TP,Covariates,CellAdj,Sys.Date(),".Rdata", sep = "_")
+save(ewas_res,file=savefile)
