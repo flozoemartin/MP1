@@ -80,8 +80,8 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
 - [ ] _**Adapt the EWAS script for the following models**_
   - [x] (i)   Methylation at adolescence ~ ever having visited the doctor for menorrhagia + surrogate variables for batch + age at time of methylation measurement
   - [x] (ii)  Methylation at adolescence ~ ever having visited the doctor for dysmenorrhea + surrogate variables for batch + age at time of methylation measurement
-  - [ ] (iii) Methylation at adolescence ~ ever having visited the doctor for menorrhagia + surrogate variables for batch + age at time of methylation measurement               without adjusting for estimated cells
-  - [ ] (iv)  Methylation at adolescence ~ ever having visited the doctor for dysmenorrhea + surrogate variables for batch + age at time of methylation measurement               without adjusting for estimated cells
+  - [x] (iii) Methylation at adolescence ~ ever having visited the doctor for menorrhagia + surrogate variables for batch + age at time of methylation measurement               without adjusting for estimated cells
+  - [x] (iv)  Methylation at adolescence ~ ever having visited the doctor for dysmenorrhea + surrogate variables for batch + age at time of methylation measurement               without adjusting for estimated cells
   - [ ] (v)   Model (i) with all cases of endometriosis, PCOS and thyroid problems removed
   - [ ] (vi)  Model (ii) with all cases of endometriosis, PCOS and thyroid problems removed
   
