@@ -49,14 +49,14 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
     - [x] Assign labels to each category within the categorical variables for ease of use, using the built PDFs in the ALSPAC catalogue
     - [x] Replace any "Missing" or "Not stated" or -10 etc. categories with NA for compatability with R
     - [x] Switch the order of yes and no 1 and 2 to yes and no 0 and 1
-    - [ ] Derive separate clean variables of interest:
+    - [x] Derive separate clean variables of interest:
        - `menorr_ewas` for having ever visited the doctor for menorrhagia during puberty ≥1 time (1) or not (experienced outcome & not visited the doctor and not           experienced the outcome) (0)
        - `dysmen_ewas` for having ever visited the doctor for dysmenorrhea during puberty ≥1 time (1) or not (experienced outcome & not visited the doctor and not           experienced the outcome) (0)
     - [x] Derive smoking and alcohol variables for regular vs not regular at each timepoint (15 and 17 years)
        - `reg_smoker_15yr` `reg_smoker_17yr` for regular smoker
        - `reg_drinker_15yr` `reg_drinker_17yr` for regular drinker
        
-- [ ] _**Merge ALSPAC data with methylation "samplesheet" on bluecrystal**_ available here:
+- [x] _**Merge ALSPAC data with methylation "samplesheet" on bluecrystal**_ available here:
 
     /panfs/panasas01/dedicated-mrcieu/studies/latest/alspac/epigenetic/methylation/450k/aries/released/2016-05-03/data/samplesheet/data.Robj    
 
@@ -73,15 +73,17 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
     - `comorbidity` any diagnosed endocrinopathy (thyroid problem) or reproductive pathology (PCOS or endometriosis) by the end of puberty
   - [x] Check over dataset for all variables & covariates needed for Step 2
   
-- [ ] _**Save file on RDSF for access via bluecrystal**_
+- [x] _**Save file on RDSF for access via bluecrystal**_ folder 104
 
 ### Section 2 - Hypothesis-free epigenome-wide association studies (EWAS)
 
 - [ ] _**Adapt the EWAS script for the following models**_
-  - [ ] (i)   Methylation at adolescence ~ ever having visited the doctor for menorrhagia + surrogate variables for batch + age at time of methylation measurement
-  - [ ] (ii)  Methylation at adolescence ~ ever having visited the doctor for dysmenorrhea + surrogate variables for batch + age at time of methylation measurement
-  - [ ] (iii) Model (i) with all cases of endometriosis, PCOS and thyroid problems removed
-  - [ ] (iv)  Model (ii) with all cases of endometriosis, PCOS and thyroid problems removed
+  - [x] (i)   Methylation at adolescence ~ ever having visited the doctor for menorrhagia + surrogate variables for batch + age at time of methylation measurement
+  - [x] (ii)  Methylation at adolescence ~ ever having visited the doctor for dysmenorrhea + surrogate variables for batch + age at time of methylation measurement
+  - [ ] (iii) Methylation at adolescence ~ ever having visited the doctor for menorrhagia + surrogate variables for batch + age at time of methylation measurement               without adjusting for estimated cells
+  - [ ] (iv)  Methylation at adolescence ~ ever having visited the doctor for dysmenorrhea + surrogate variables for batch + age at time of methylation measurement               without adjusting for estimated cells
+  - [ ] (v)   Model (i) with all cases of endometriosis, PCOS and thyroid problems removed
+  - [ ] (vi)  Model (ii) with all cases of endometriosis, PCOS and thyroid problems removed
   
 - [ ] _**Summarise EWAS results**_
   - [ ] Create a table summarising the number of CpGs with FDR-adjusted *p* <0.05 or unadjusted *p* <1x10<sup>-5</sup> for each model and number of DMRs according to `dmrff`. 
