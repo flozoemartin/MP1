@@ -7,7 +7,9 @@
 #   Finish Date:  13/11/2020                                                                                                                                    #
 #   Description:  This script describes data cleaning for flo_02nov for mini project 1 where minus numbers are replaced with NA, coding for yes and no is       #
 #                 switched from 1 & 2 to 0 & 1, and variables are generated for ever having visited the doctor, smoked regularly or drank regulaly. This data   #
-#                 is ready to merge with the epigenetic data when I get access to ARIES                                                                         #
+#                 is ready to merge with the epigenetic data when I get access to ARIES. This script describes controls generated before MP1 meeting 4, which   #
+#                 were defined as reported outcome but never visited the dr; this was altered to include women who had never reported the outcome as well       #
+#                 described in a separate script (cleaning_script.r)                                                                                            #
 #                                                                                                                                                               #
 ################################################################################################################################################################# 
 
