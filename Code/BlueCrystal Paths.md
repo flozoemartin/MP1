@@ -296,4 +296,4 @@ Every time a job completes, it will provide the `.out` file in the `ewas_results
 cat menorr_ewas.out
 ```
 
-When in the `ewas_results` working directory. This will give an onscreen print out of the script & where R was stopped by an error.
+When in the `ewas_results` working directory. This will give an onscreen print out of the script & where R was stopped by an error. If there are no problems with the script and it runs fully, go to where you sent the `.out` file and the outputs of the script will be there! You can export these files to your local directory using the steps outlined above and interrogated on your local system.
