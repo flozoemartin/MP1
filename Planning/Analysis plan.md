@@ -77,13 +77,13 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
 
 ### Section 2 - Hypothesis-free epigenome-wide association studies (EWAS)
 
-- [ ] _**Adapt the EWAS script for the following models**_
+- [x] _**Adapt the EWAS script for the following models**_
   - [x] (i)   Methylation at adolescence ~ ever having visited the doctor for menorrhagia + surrogate variables for batch + age at time of methylation measurement
   - [x] (ii)  Methylation at adolescence ~ ever having visited the doctor for dysmenorrhea + surrogate variables for batch + age at time of methylation measurement
   - [x] (iii) Methylation at adolescence ~ ever having visited the doctor for menorrhagia + surrogate variables for batch + age at time of methylation measurement               without adjusting for estimated cells
   - [x] (iv)  Methylation at adolescence ~ ever having visited the doctor for dysmenorrhea + surrogate variables for batch + age at time of methylation measurement               without adjusting for estimated cells
-  - [ ] (v)   Model (i) with all cases of endometriosis, PCOS and thyroid problems removed
-  - [ ] (vi)  Model (ii) with all cases of endometriosis, PCOS and thyroid problems removed
+  - [x] (v)   Model (i) with all cases of endometriosis, PCOS and thyroid problems removed
+  - [x] (vi)  Model (ii) with all cases of endometriosis, PCOS and thyroid problems removed
   
 - [ ] _**Summarise EWAS results**_
   - [ ] Create a table summarising the number of CpGs with FDR-adjusted *p* <0.05 or unadjusted *p* <1x10<sup>-5</sup> for each model and number of DMRs according to `dmrff`. 
