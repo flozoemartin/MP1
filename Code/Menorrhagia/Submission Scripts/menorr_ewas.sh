@@ -3,8 +3,7 @@
 #!/bin/bash
 
 #PBS -N menorr_ewas
-#PBS -o menorr_ewas_out
-#PBS -l select=1:ncpus=1:mem=100M
+#PBS -l select=1:ncpus=1:mem=900M
 #PBS -l walltime=12:00:00
 
 WORK_DIR="/home/ti19522/EWAS/alspac_menstruation_project"
