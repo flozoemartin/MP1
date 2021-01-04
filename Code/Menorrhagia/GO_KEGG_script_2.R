@@ -6,9 +6,9 @@
 ###################################################################################################################################################################
 
 # This forms the second part of the scripts required to perform an EWAS analysis using the ewaff package with DMR analysis using dmrff. As discussed at the start 
-# of the last script, the parts of the analysis that require packages from Bioconductor cannot be performed on BlueCrystal3, as it is now outdated for these packages.
-# To get around this issue, we generate the data we need using the large data held on BC3 using script #1 in this series, then utilise the datasets generated to 
-# perform the additional analyses using Bioconductor packages.
+# of the last script, the parts of the analysis that require packages from Bioconductor cannot be performed on BlueCrystal3, as it is now outdated for these 
+# packages. To get around this issue, we generate the data we need using the large data held on BC3 using script #1 in this series, then utilise the datasets 
+# generated to perform the additional analyses using Bioconductor packages.
 
 setwd("/Users/ti19522/Downloads/bluecrystal_files/results/Menorrhagia/ewaff") # Set working directory to the file where the ewaff data is pulled from BC
 
