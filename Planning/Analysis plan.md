@@ -92,12 +92,12 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
   - [ ] Look at the overlap in top hits from both menorrhagia and dysmenorrhea models
   
 - [ ] _**Enrichment analysis**_
-  - [ ] EWAS catalog:
+  - [x] EWAS catalog:
     - Download latest version of the EWAS catalog from the website
     - Write R function to check enrichment
     - Run enrichment for top CpGs with *p* < 1x10<sup>-5</sup>
     - Run enrichment for any CpGs with significant DMRs
-  - [ ] Bioloigical functions (KEGG and GO terms):
+  - [x] Bioloigical functions (KEGG and GO terms):
     - Install R package `missMethyl`
     - Run enrichment for top CpGs with *p* < 1x10<sup>-5</sup>
     - Run enrichment for any CpGs with significant DMRs
@@ -108,9 +108,9 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
 ### Section 3 - Adjusted EWAS   
 Useful for identifying methylated sits/regions that might be causally associated with menorrhagia/dysmenorrhea
 
-- [ ] _**Adapt the EWAS script for each of the following models**_
-  - [ ] (i) Methylation at adolescence ~ ever visited the doctor for menorrhagia + surrogate variables for batch + age at time of methylation measurement + smoking status + mother's education + mother's occupation + houseman estimated cell counts
-  - [ ] (ii) Methylation at adolescence ~ ever visited the doctor for dysmenorrhea + surrogate variables for batch + age at time of methylation measurement + smoking status + mother's education + mother's occupation + houseman estimated cell counts
+- [x] _**Adapt the EWAS script for each of the following models**_
+  - [x] (i) Methylation at adolescence ~ ever visited the doctor for menorrhagia + surrogate variables for batch + age at time of methylation measurement + smoking status + mother's education + mother's occupation + houseman estimated cell counts
+  - [x] (ii) Methylation at adolescence ~ ever visited the doctor for dysmenorrhea + surrogate variables for batch + age at time of methylation measurement + smoking status + mother's education + mother's occupation + houseman estimated cell counts
 
 - [ ] _**Summarise adjusted EWAS results**_
   - [ ] Create a table summarising the dataset including all the covariates
