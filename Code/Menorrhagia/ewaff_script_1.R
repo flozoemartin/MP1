@@ -8,9 +8,9 @@
 # This forms the first part of the scripts required to perform an EWAS analysis using the ewaff package with DMR analysis using dmrff. Only some of the analysis 
 # does not require packages from Bioconductor and requires the large data stored on BlueCrystal3 (the ewaff part of the analysis). So, we generate the data we need 
 # using the large data held on BC3 using this script, then utilise the datasets generated to perform the additional analyses using Bioconductor packages using script
-# number 2 (GO/KEGG Script).
+# number 2 (GO/KEGG Script). Be sure to use an older version of R (3.6.3 or older) where you have devtools already installed.
 
-setwd("/newhome/ti19522/EWAS/alspac_menstruation_project") # Set your working directory where your results will be saved
+setwd("/newhome/ti19522/EWAS/alspac_menstruation_project/menorr_ewaff") # Set your working directory where your results will be saved
 chooseCRANmirror(ind = 68)
 
 # Install the following packages if you don't already have them:
@@ -22,12 +22,9 @@ install.packages("tableone",repos = "http://cran.us.r-project.org")
 library(tableone)
 
 # In addition, please install the ewaff and dmrff packages, which are still in development and not yet available on CRAN:
-install.packages("devtools",repos = "http://cran.us.r-project.org")
-library(devtools)
-
-install_github("perishky/ewaff")
+# install_github("perishky/ewaff")
 library(ewaff)
-install_github("perishky/dmrff")
+# install_github("perishky/dmrff")
 library(dmrff)
 
 # Finally, install the correct package to provide annotation for your methylation data. If you have 450k:
