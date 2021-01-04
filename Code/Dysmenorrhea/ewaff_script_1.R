@@ -1,6 +1,6 @@
 ###################################################################################################################################################################
 #                                                                                                                                                                 #
-#     R script from Gemma for menorrhagia EWAS (using ewaff)                                                                                                      #
+#     R script from Gemma for dysmenorrhea EWAS (using ewaff)                                                                                                      #
 #     Edited by Flo on 04/10/2021 for EWAS analysis remotely                                                                                                      #
 #                                                                                                                                                                 #
 ###################################################################################################################################################################
@@ -8,9 +8,9 @@
 # This forms the first part of the scripts required to perform an EWAS analysis using the ewaff package with DMR analysis using dmrff. Only some of the analysis 
 # does not require packages from Bioconductor and requires the large data stored on BlueCrystal3 (the ewaff part of the analysis). So, we generate the data we need 
 # using the large data held on BC3 using this script, then utilise the datasets generated to perform the additional analyses using Bioconductor packages using script
-# number 2 (GO/KEGG Script).
+# number 2 (GO/KEGG Script). Be sure to use a version of R where devtools or ewaff/dmrff are already installed (BC3 too old for devtools updated for 4.0.3).
 
-setwd("/newhome/ti19522/EWAS/alspac_menstruation_project") # Set your working directory where your results will be saved
+setwd("/newhome/ti19522/EWAS/alspac_menstruation_project/dysmen_ewaff") # Set your working directory where your results will be saved
 chooseCRANmirror(ind = 68)
 
 # Install the following packages if you don't already have them:
@@ -76,15 +76,15 @@ meth <- ewaff.handle.outliers(meth, method="iqr")[[1]]
 # Run the EWASs (including generation of surrogate variables to control for technical batch) and save the results (replace painD with the name of your trait 
 # of interest)
 
-res <- ewaff.sites(methylation ~ menorr_ewas,
-                   variable.of.interest="menorr_ewas",
+res <- ewaff.sites(methylation ~ dysmen_ewas,
+                   variable.of.interest="dysmen_ewas",
                    methylation=meth,
                    data=pheno,
                    generate.confounders="sva",
                    method="limma",
                    n.confounders=10)
 res <- merge(res$table,annotation,by="row.names",all=F)
-save(res,file="menorr_ewas.Rdata") # Change filename as needed
+save(res,file="dysmen_ewas.Rdata") # Change filename as needed
 
 # Run DMR analysis
 
@@ -96,7 +96,7 @@ dmrs <- dmrff(estimate=res$estimate,
               pos=res$pos,
               maxgap=500,
               verbose=T)
-save(dmrs,file="menorr_DMRres.Rdata") # Change filename as needed
+save(dmrs,file="dysmen_DMRres.Rdata") # Change filename as needed
 
 # Check enrichment in EWAS catalog
 
@@ -139,4 +139,4 @@ enrichment_res$fdr <- p.adjust(enrichment_res$p,method="fdr")
 enrichment_res$percentage <- 100*(enrichment_res$ITIH/(enrichment_res$ITNH+enrichment_res$ITIH))
 enrichment_res <- enrichment_res[order(enrichment_res$percentage,decreasing=T),]
 enrichment_res[enrichment_res$fdr<0.05,]
-save(enrichment_res,file="menorr_EWAScatEnrichmentres.Rdata")
+save(enrichment_res,file="dysmen_EWAScatEnrichmentres.Rdata")
