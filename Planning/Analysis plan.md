@@ -117,8 +117,8 @@ Useful for identifying methylated sits/regions that might be causally associated
   - [ ] Look at the associations between cell counts and menstrual disorders: cell counts can tell us about systemic inflammation as a risk factor for menorrhagia and dysmenorrhea:
     - Cell proportion ~ menorrhagia
     - Cell proportion ~ dysmenorrhea
-    - Cell proportion ~ menorrhagia + age + BMI + contraception + smoking + mother's education + mother's occupation
-    - Cell proportion ~ dysmenorrhea + age + BMI + contraception + smoking + mother's education + mother's occupation
+    - Cell proportion ~ menorrhagia + age + age at onset of menarche + BMI + contraception + smoking + drinking + mother's education 
+    - Cell proportion ~ dysmenorrhea + age + age at onset of menarche + BMI + contraception + smoking + drinking + mother's education
     
 :tada: Finished Mini Project One! :tada:
   
