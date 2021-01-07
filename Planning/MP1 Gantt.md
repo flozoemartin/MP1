@@ -28,10 +28,10 @@ gantt
     Adapt EWAS scripts                        :done, 2020-11-06, 9d
     Meeting 3                                 :crit, 2020-11-12, 1h
     Run EWAS on BlueCrystal                   :done, des5, 2020-11-16, 2020-11-20
-    Summarise EWAS results                    :des6, after des5, 5d
-    Check enrichment                          :des7, after des6, 5d
+    Summarise EWAS results                    :done, des6, after des5, 5d
+    Check enrichment                          :done, des7, after des6, 5d
     Meeting 4                                 :crit, 2020-11-26, 1h
-    Back to ALSPAC                            :des8, after des7, 2d
+    Back to ALSPAC                            :done, des8, after des7, 2d
 ```
 
 ```mermaid
@@ -40,11 +40,11 @@ gantt
     title       Adjusted EWAS
     
     section Dec '20
-    Adapt EWAS scripts                        :des9, 2020-11-30, 2020-12-02
-    Run EWAS on BlueCrystal                   :des10, after des9, 5d
+    Adapt EWAS scripts                        :done, des9, 2020-11-30, 2020-12-02
+    Run EWAS on BlueCrystal                   :done, des10, after des9, 5d
     Jury duty                                 :crit, 2020-12-07, 14d
     Meeting 5                                 :crit, 2020-12-10, 1h
-    Summarise EWAS results                    :des11, 2020-12-21, 3d
+    Summarise EWAS results                    :done, des11, 2020-12-21, 3d
 ```
 
 ```mermaid
@@ -53,7 +53,7 @@ gantt
     title       Finishing up
     
     section Jan '21
-    Tidy up scripts                           :active, des12, 2021-01-05, 2021-01-08
+    Summarise final EWAS results              :active, des12, 2021-01-05, 2021-01-08
     Meeting 6                                 :crit, 2021-01-07, 1h
     Finish manuscript & send to Gemma         :des13, after des12, 9d
     Meeting 7                                 :crit, 2021-01-21, 1h
