@@ -418,7 +418,7 @@ ewas_res <- ewas_res[order(ewas_res$p.isva),]
 savefile <- paste("ewas_results/",Trait,TP,Covariates,CellAdj,Sys.Date(),".Rdata", sep = "_") # Save as an Rdata file
 save(ewas_res,file=savefile)
 ```
-This block of code sorts by _p_-value (from the isva model) and save the EWAS results as an `.Rda` file in the `ewas_res` folder.
+This block of code sorts by _p_-value (from the isva model) and save the EWAS results as an `.Rda` file in the `ewas_results` folder.
 
 That's it!
 
