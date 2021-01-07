@@ -48,7 +48,7 @@ graph LR
 
 A[Methylation]
 
-A <-->|Age| B(Menorrhagia)
+A *-->|Age| B(Menorrhagia)
 A -->|BMI| B(Menorrhagia)
 A -->|Contraception| B(Menorrhagia)
 A -->|Maternal education| B(Menorrhagia)
