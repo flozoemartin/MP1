@@ -1,5 +1,5 @@
-# Gantt chart for mini project 1
-## 01/10/2020 - 31/10/2021
+# Gantt Chart for Mini Project 1
+## 01/10/2020 - 31/01/2021
 ### Flo Martin
 
 ```mermaid
