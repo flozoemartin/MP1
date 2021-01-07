@@ -113,7 +113,7 @@ Useful for identifying methylated sits/regions that might be causally associated
   - [x] (ii) Methylation at adolescence ~ ever visited the doctor for dysmenorrhea + surrogate variables for batch + age at time of methylation measurement + smoking status + mother's education + mother's occupation + houseman estimated cell counts
 
 - [ ] _**Summarise adjusted EWAS results**_
-  - [ ] Create a table summarising the dataset including all the covariates
+  - [x] Create a table summarising the dataset including all the covariates
   - [ ] Look at the associations between cell counts and menstrual disorders: cell counts can tell us about systemic inflammation as a risk factor for menorrhagia and dysmenorrhea:
     - Cell proportion ~ menorrhagia
     - Cell proportion ~ dysmenorrhea
