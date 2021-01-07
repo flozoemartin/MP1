@@ -87,8 +87,8 @@ enrichment analyses. Finally, I will run **adjusted EWAS** to identify methylate
   
 - [ ] _**Summarise EWAS results**_
   - [ ] Create a table summarising the number of CpGs with FDR-adjusted *p* <0.05 or unadjusted *p* <1x10<sup>-5</sup> for each model and number of DMRs according to `dmrff`. 
-  - [ ] Look at correlation in effect estimates between models (i) and (ii) and between models (iii) and (iv): do menorrhagia and dysmenorrhea have similar associations with DNA methylation?
-  - [ ] Look at the percentage difference in effect estimates between models (i) and (iii) and between models (ii) and (iv): does removing cases of endocrine and reproductive disorders change the results?
+  - [ ] Look at correlation in effect estimates between models (i) and (ii) and between models (v) and (vi): do menorrhagia and dysmenorrhea have similar associations with DNA methylation?
+  - [ ] Look at the percentage difference in effect estimates between models (i) and (v) and between models (ii) and (vi): does removing cases of endocrine and reproductive disorders change the results?
   - [ ] Look at the overlap in top hits from both menorrhagia and dysmenorrhea models
   
 - [ ] _**Enrichment analysis**_
