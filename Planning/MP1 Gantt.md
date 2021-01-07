@@ -24,10 +24,10 @@ gantt
     
     section Nov '20
     Data cleaning                             :done, 2020-11-02, 2020-11-06
-    Merge ALSPAC data with ARIES              :active, 2020-11-06, 14d
+    Merge ALSPAC data with ARIES              :done, 2020-11-06, 14d
     Adapt EWAS scripts                        :done, 2020-11-06, 9d
     Meeting 3                                 :crit, 2020-11-12, 1h
-    Run EWAS on BlueCrystal                   :active, des5, 2020-11-16, 2020-11-20
+    Run EWAS on BlueCrystal                   :done, des5, 2020-11-16, 2020-11-20
     Summarise EWAS results                    :des6, after des5, 5d
     Check enrichment                          :des7, after des6, 5d
     Meeting 4                                 :crit, 2020-11-26, 1h
@@ -53,7 +53,7 @@ gantt
     title       Finishing up
     
     section Jan '21
-    Tidy up scripts                           :des12, 2021-01-05, 2021-01-08
+    Tidy up scripts                           :active, des12, 2021-01-05, 2021-01-08
     Meeting 6                                 :crit, 2021-01-07, 1h
     Finish manuscript & send to Gemma         :des13, after des12, 9d
     Meeting 7                                 :crit, 2021-01-21, 1h
