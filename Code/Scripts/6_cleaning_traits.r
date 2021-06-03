@@ -39,7 +39,7 @@ colnames(traits) [71] <- "ss_22yr"
 colnames(traits) [72] <- "skin_cancer_25yr"
 
 # Maternal education - binary: degree or A-levels and lower
-traits$mat_edu_bin <- mp1$mat_edu_bin
+traits$mat_degree <- mp1$mat_degree
 
 # Alcohol in trimester 1 
 table(traits$alcohol_t1)
