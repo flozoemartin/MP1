@@ -141,3 +141,62 @@ ggplot() +
   theme(legend.text = element_text(size=16, lineheight = 3)) 
 
 # Table 1 - characteristic comparison table between eligible cases and controls for EWAS
+
+# Maternal educational attainment
+table(mp1$mat_degree, mp1$cramps, useNA = "always")
+table(mp1$mat_degree, mp1$hmb, useNA = "always")
+
+# Age at onset of menarche in months
+group_by(mp1, cramps) %>%
+  summarise(
+    count = n(),
+    mean = mean(men_age_m, na.rm = TRUE),
+    sd = sd(men_age_m, na.rm = TRUE),
+    median = median(men_age_m, na.rm = TRUE)
+  )
+
+aggregate(x = mp1$men_age_m,
+          by = list(mp1$cramps),
+          FUN = mean,
+          na.rm = TRUE) 
+
+group_by(mp1, hmb) %>%
+  summarise(
+    count = n(),
+    mean = mean(men_age_m, na.rm = TRUE),
+    sd = sd(men_age_m, na.rm = TRUE),
+    median = median(men_age_m, na.rm = TRUE)
+  )
+
+aggregate(x = mp1$men_age_m,
+          by = list(mp1$hmb),
+          FUN = mean,
+          na.rm = TRUE) 
+
+# BMI at 17 years (TF4/self-report where clinic unavailable)
+group_by(mp1, cramps) %>%
+  summarise(
+    count = n(),
+    mean = mean(bmi, na.rm = TRUE),
+    sd = sd(bmi, na.rm = TRUE),
+    median = median(bmi, na.rm = TRUE)
+  )
+
+group_by(mp1, hmb) %>%
+  summarise(
+    count = n(),
+    mean = mean(bmi, na.rm = TRUE),
+    sd = sd(bmi, na.rm = TRUE),
+    median = median(bmi, na.rm = TRUE)
+  )
+
+# Smoking at 17 years (derived from cotinine measured at TF4)
+table(mp1$reg_smoker, mp1$cramps, useNA = "always")
+table(mp1$reg_smoker, mp1$hmb, useNA = "always")
+
+# Contraception any time during puberty 
+table(mp1$contraception_ewas, mp1$cramps, useNA = "always")
+table(mp1$contraception_ewas, mp1$hmb, useNA = "always")
+
+
+
