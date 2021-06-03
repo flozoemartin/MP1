@@ -173,43 +173,6 @@ traits$contraception <- mp1$contraception_ewas
 # Comorbidity reported by the age of 22 years
 traits$comorbidity <- mp1$comorbidity
 
-# Continous traits
-
-# Maternal pre_pregnancy BMI (asked at 12 weeks gest)
-table(traits$mat_bmi)
-traits$mat_bmi[traits$mat_bmi == -3] <- NA
-
-# Gestational age
-table(traits$bestgest)
-traits$preterm[traits$bestgest <38] <- 1
-traits$preterm[traits$bestgest >37] <- 0
-table(traits$preterm)
-
-# Cognitive score aged 6 years (81 months)
-table(traits$cognitive_score_6yr)
-traits$cognitive_score_6yr[traits$cognitive_score_6yr == -1] <- NA
-
-# Age at onset of menarche 
-traits$men_age_m <- mp1$men_age_m
-
-# ACE score from useful traitsa for the trait "child abuse"
-table(traits$ace_score)
-
-# BMI at 17 years
-traits$bmi <- mp1$bmi
-
-# Cotinine at 17 years old
-table(traits$cotinine_tf4)
-traits$cotinine_tf4[traits$cotinine_tf4 == -2 | traits$cotinine_tf4 == -1] <- NA
-
-# C-reactive protein at TF4 to proxy for inflammation
-table(traits$crp_tf4)
-traits$crp_tf4[traits$crp_tf4 == -1] <- NA
-
-# Total serum cholesterol at TF4
-table(traits$serum_chol_tf4)
-traits$serum_chol_tf4[traits$serum_chol_tf4 == -1] <- NA
-
 # Crohn's diagnosis at 22 years
 table(traits$crohns_22yr)
 traits$crohns_22yr <- ifelse(traits$crohns_22yr == 1 | traits$crohns_22yr == 2,1,
@@ -244,6 +207,49 @@ traits$kidney_disease <- ifelse(traits$kidney_disease ==2,0,
                                 ifelse(traits$kidney_disease ==1,1,NA))
 table(traits$kidney_disease)
 # Not enough participants to include in the analysis
+
+# Continous traits
+
+# Maternal pre_pregnancy BMI (asked at 12 weeks gest)
+table(traits$mat_bmi)
+traits$mat_bmi[traits$mat_bmi == -3] <- NA
+traits$mat_bmi_z <- scale(traits$mat_bmi)
+
+# Gestational age
+table(traits$bestgest)
+traits$gest_z <- scale(traits$bestgest)
+
+# Cognitive score aged 6 years (81 months)
+table(traits$cognitive_score_6yr)
+traits$cognitive_score_6yr[traits$cognitive_score_6yr == -1] <- NA
+traits$cog_score_z <- scale(traits$cognitive_score_6yr)
+
+# Age at onset of menarche 
+traits$men_age_m <- mp1$men_age_m
+traits$men_age_z <- scale(traits$men_age_m)
+
+# ACE score from useful traitsa for the trait "child abuse"
+table(traits$ace_score)
+traits$ace_z <- scale(traits$ace_score)
+
+# BMI at 17 years
+traits$bmi <- mp1$bmi
+traits$bmi_17_z <- scale(traits$bmi)
+
+# Cotinine at 17 years old
+table(traits$cotinine_tf4)
+traits$cotinine_tf4[traits$cotinine_tf4 == -2 | traits$cotinine_tf4 == -1] <- NA
+traits$cotinine_z <- scale(traits$cotinine_tf4)
+
+# C-reactive protein at TF4 to proxy for inflammation
+table(traits$crp_tf4)
+traits$crp_tf4[traits$crp_tf4 == -1] <- NA
+traits$crp_z <- scale(traits$crp_tf4)
+
+# Total serum cholesterol at TF4
+table(traits$serum_chol_tf4)
+traits$serum_chol_tf4[traits$serum_chol_tf4 == -1] <- NA
+traits$chol_z <- scale(traits$serum_chol_tf4)
 
 # Pull the variables for case controls definition from mp1
 traits$hmb <- mp1$hmb
