@@ -662,6 +662,9 @@ table(mp1$bmi)
 mp1$bmi_17yr[mp1$bmi_17yr ==0] <- NA
 mp1$bmi_tf4[mp1$bmi_tf4 ==0] <- NA
 
+mp1$bmi_cc <- ifelse(is.na(mp1$bmi),0,1)
+table(mp1$bmi_cc)
+
 # Variable for whether child has started her period yet:
 table(mp1$started_period_17yr, mp1$sex)  # Used sex in here to see if -7 referred to males which it does
 mp1$started_period_17yr <- ifelse(mp1$started_period_17yr == 1,1,
@@ -729,11 +732,6 @@ table(mp1$thyroid_problem_17yr)
 # Variable for BMI at 15 years (taken at TF3)
 table(mp1$bmi_15yr)
 mp1$bmi_15yr[mp1$bmi_15yr == -10 | mp1$bmi_15yr == -6 | mp1$bmi_15yr == -1] <- NA
-
-# D2111_TF4.pdf
-# BMI taken at the teen focus 4 clinic
-table(mp1$bmi_17yr_tf4)
-mp1$bmi_17yr_tf4[mp1$bmi_17yr_tf4 == -1 | mp1$bmi_17yr_tf4 == -4 | mp1$bmi_17yr_tf4 == -10] <- NA
 
 # Using D1426_YPB.pdf
 # Variable for ever been diagnosed with PCOS
