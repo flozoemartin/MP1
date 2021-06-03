@@ -1029,12 +1029,12 @@ table(mp1$contraception_ewas)
 
 # Binary maternal education variable
 
-mp1$mat_edu_bin <- ifelse(mp1$mat_edu == "Degree" | mp1$mat_edu == "A level",1,
-                          ifelse(mp1$mat_edu == "O level" | mp1$mat_edu == "Vocational" | mp1$mat_edu == "CSE/none",0,NA))
-mp1$mat_edu_bin <- factor(mp1$mat_edu_bin,
+mp1$mat_degree <- ifelse(mp1$mat_edu == "Degree",1,
+                          ifelse(mp1$mat_edu == "A level" | mp1$mat_edu == "O level" | mp1$mat_edu == "Vocational" | mp1$mat_edu == "CSE/none",0,NA))
+mp1$mat_degree <- factor(mp1$mat_degree,
                           levels = c(0,1),
-                          labels = c("O levels or lower","A levels or Degree"))
-table(mp1$mat_edu_bin, mp1$cramps)
+                          labels = c("A levels or lower","Degree"))
+table(mp1$mat_degree, mp1$cramps)
 
 # Save cleaned dataset for the generation of the Pheno file for the EWAS
 save(mp1, file="mp1.Rda")
