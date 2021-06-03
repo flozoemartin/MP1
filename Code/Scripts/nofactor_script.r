@@ -5,7 +5,7 @@
 #   Author:       Flo Martin                                                                                                                                    #
 #   Start Date:   23/11/2020                                                                                                                                    #
 #   Finish Date:  24/11/2020                                                                                                                                    #
-#   Description:  This script describes generating a cleaned dataset with no factor variable for generating plots of MP1 data                                    #                                                                                                                       
+#   Description:  This script describes generating a cleaned dataset with no factor variable for generating plots of MP1 data                                   #                                                                                                                       
 #                                                                                                                                                               #
 ################################################################################################################################################################# 
 
