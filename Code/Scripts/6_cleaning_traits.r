@@ -257,3 +257,7 @@ traits$cramps <- mp1$cramps
 
 # Save the dataset cleaned ready for the analysis
 save(traits, file = "traits.Rda")
+
+# And save the dataset with comorbidities removed for the supplementary material
+comorbidrm <- traits[!(traits$comorbidity == 1),]
+save(comorbidrm, file = "traits_comorbidrm.Rda")
