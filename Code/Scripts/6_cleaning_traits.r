@@ -158,8 +158,22 @@ table(traits$hdp)
 # Preeclampsia specifically
 table(traits$preeclampsia)
 
-# Participant alcohol use at 17 years 
-traits
+# Adolescent alcohol use at 17 years
+table(traits$alcohol_tf4)
+traits$alcohol_tf4[traits$alcohol_tf4 == -10 | traits$alcohol_tf4 == -4 | traits$alcohol_tf4 == -2 | traits$alcohol_tf4 == -1] <- NA
+# Regular drinker those who drink more than once a week
+traits$reg_drinker <- NA
+traits$reg_drinker[traits$alcohol_tf4 == 4 | traits$alcohol_tf4 == 5] <- 1
+traits$reg_drinker[traits$alcohol_tf4 == 1 | traits$alcohol_tf4 == 2 | traits$alcohol_tf4 == 3] <- 0
+table(traits$reg_drinker)
+
+# Adolescent contraception use any time during adolescence
+traits$contraception <- mp1$contraception_ewas
+
+# Comorbidity reported by the age of 22 years
+traits$comorbidity <- mp1$comorbidity
+
+# Continous traits
 
 # Maternal pre_pregnancy BMI (asked at 12 weeks gest)
 table(traits$mat_bmi)
@@ -177,15 +191,6 @@ traits$cognitive_score_6yr[traits$cognitive_score_6yr == -1] <- NA
 
 # ACE score from useful traitsa for the trait "child abuse"
 table(traits$ace_score)
-
-# Alcohol use at 17 years
-table(traits$alcohol_tf4)
-traits$alcohol_tf4[traits$alcohol_tf4 == -10 | traits$alcohol_tf4 == -4 | traits$alcohol_tf4 == -2 | traits$alcohol_tf4 == -1] <- NA
-# Regular drinker those who drink more than once a week
-traits$reg_drinker <- NA
-traits$reg_drinker[traits$alcohol_tf4 == 4 | traits$alcohol_tf4 == 5] <- 1
-traits$reg_drinker[traits$alcohol_tf4 == 1 | traits$alcohol_tf4 == 2 | traits$alcohol_tf4 == 3] <- 0
-table(traits$reg_drinker)
 
 # BMI at 17 years
 traits$bmi_17yr[traits$bmi_17yr == -1 | traits$bmi_17yr == -10] <- NA
