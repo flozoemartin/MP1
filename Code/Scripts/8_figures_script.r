@@ -198,5 +198,9 @@ table(mp1$reg_smoker, mp1$hmb, useNA = "always")
 table(mp1$contraception_ewas, mp1$cramps, useNA = "always")
 table(mp1$contraception_ewas, mp1$hmb, useNA = "always")
 
+# Comorbidity by the age of 22 years
+table(mp1$comorbidity_cc, mp1$cramps, useNA = "always")
+table(mp1$comorbidity_cc, mp1$hmb, useNA = "always")
+
 
 
