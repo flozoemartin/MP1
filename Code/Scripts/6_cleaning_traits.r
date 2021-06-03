@@ -189,6 +189,9 @@ table(traits$preterm)
 table(traits$cognitive_score_6yr)
 traits$cognitive_score_6yr[traits$cognitive_score_6yr == -1] <- NA
 
+# Age at onset of menarche 
+traits$men_age_m <- mp1$men_age_m
+
 # ACE score from useful traitsa for the trait "child abuse"
 table(traits$ace_score)
 
