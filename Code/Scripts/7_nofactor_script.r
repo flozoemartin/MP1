@@ -202,18 +202,6 @@ mp1_nofactor$dr_cramps_13yr <- ifelse(mp1_nofactor$dr_cramps_13yr == 1,1,
 
 # Using the D1501_PUB6.pdf (participant 14 years old):
 
-# Variable for BMI (will categorise the missings later)
-table(mp1_nofactor$bmi_14yr)
-mp1_nofactor$bmi_14yr[mp1_nofactor$bmi_14yr == -10 | mp1_nofactor$bmi_14yr == -6 | mp1_nofactor$bmi_14yr == -1] <- NA
-
-# Variable for frequency of participation in vigorous activity:
-table(mp1_nofactor$vigorous_exercise_14yr)
-mp1_nofactor$vigorous_exercise_14yr <- ifelse(mp1_nofactor$vigorous_exercise_14yr == 1,1,
-                                            ifelse(mp1_nofactor$vigorous_exercise_14yr == 2,2,
-                                                   ifelse(mp1_nofactor$vigorous_exercise_14yr == 3,3,
-                                                          ifelse(mp1_nofactor$vigorous_exercise_14yr == 4,4,
-                                                                ifelse(mp1_nofactor$vigorous_exercise_14yr == 5,5, NA)))))
-
 # Variable for whether child has started her period yet:
 table(mp1_nofactor$started_period_14yr, mp1_nofactor$sex)  # Used sex in here to see if -7 referred to males which it does
 mp1_nofactor$started_period_14yr <- ifelse(mp1_nofactor$started_period_14yr == 1,1,
@@ -325,6 +313,31 @@ mp1_nofactor$cramps_17yr <- ifelse(mp1_nofactor$cramps_17yr == 2,0,
 table(mp1_nofactor$dr_cramps_17yr)
 mp1_nofactor$dr_cramps_17yr <- ifelse(mp1_nofactor$dr_cramps_17yr == 1,1,
                                       ifelse(mp1_nofactor$dr_cramps_17yr == 2,0, NA))
+
+# These variables give me the right numbers to be able to generate proportions of girls who reported each level of severity
+table(mp1_nofactor$severity_cramps_15yr)
+mp1_nofactor$sev_cramps_15yr <- ifelse(mp1_nofactor$severity_cramps_15yr == 3,1,0)
+table(mp1_nofactor$sev_cramps_15yr)
+
+mp1_nofactor$mod_plus_sev_dys <- ifelse(mp1_nofactor$severity_cramps_15yr == 3 | mp1_nofactor$severity_cramps_15yr == 2,1,0)
+table(mp1_nofactor$mod_plus_sev_dys)
+
+mp1_nofactor$mild_plus_mod_sev_cramps_15yr <- ifelse(mp1_nofactor$severity_cramps_15yr == 3 | mp1_nofactor$severity_cramps_15yr == 2 | 
+                                                       mp1_nofactor$severity_cramps_15yr == 1,1,0)
+table(mp1_nofactor$mild_plus_mod_sev_cramps_15yr)
+
+# These variables give me the right numbers to be able to generate proportions of girls who reported going to the doctor
+mp1_nofactor$dr_sev <- ifelse(mp1_nofactor$severity_cramps_15yr == 3 & mp1_nofactor$dr_cramps_15yr == 1,1,0)
+table(mp1_nofactor$dr_sev)
+
+mp1_nofactor$mod_sev <- ifelse(mp1_nofactor$severity_cramps_15yr == 2 | mp1_nofactor$severity_cramps_15yr == 3,1,0)
+table(mp1_nofactor$mod_sev)
+
+mp1_nofactor$dr_mod_sev <- ifelse(mp1_nofactor$mod_sev == 1 & mp1_nofactor$dr_cramps_15yr == 1,1,0)
+table(mp1_nofactor$dr_mod_sev)
+
+mp1_nofactor$dr_mild_mod_sev <- ifelse(mp1_nofactor$cramps_15yr == 1 & mp1_nofactor$dr_cramps_15yr == 1,1,0)
+table(mp1_nofactor$dr_mild_mod_sev)
 
 # Save the dataset for use making figures 3 & 4
 save(mp1_nofactor, file="mp1_nofactor.Rda")
