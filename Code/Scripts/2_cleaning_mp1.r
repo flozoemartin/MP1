@@ -652,6 +652,16 @@ table(mp1$thyroid_problem_16yr)
 table(mp1$bmi_17yr)
 mp1$bmi_17yr[mp1$bmi_17yr == -10  | mp1$bmi_17yr == -1] <- NA
 
+mp1$bmi_tf4[mp1$bmi_tf4 == -1 | mp1$bmi_tf4 == -4 | mp1$bmi_tf4 == -10] <- NA
+
+mp1$bmi_17yr[is.na(mp1$bmi_17yr)] <- 0
+mp1$bmi_tf4[is.na(mp1$bmi_tf4)] <- 0
+mp1$bmi <- ifelse(mp1$bmi_tf4 >0,mp1$bmi_tf4,
+                  ifelse(mp1$bmi_tf4 ==0 & mp1$bmi_17yr >0, mp1$bmi_17yr,NA))
+table(mp1$bmi)
+mp1$bmi_17yr[mp1$bmi_17yr ==0] <- NA
+mp1$bmi_tf4[mp1$bmi_tf4 ==0] <- NA
+
 # Variable for whether child has started her period yet:
 table(mp1$started_period_17yr, mp1$sex)  # Used sex in here to see if -7 referred to males which it does
 mp1$started_period_17yr <- ifelse(mp1$started_period_17yr == 1,1,
