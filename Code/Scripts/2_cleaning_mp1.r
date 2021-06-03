@@ -735,19 +735,6 @@ mp1$bmi_15yr[mp1$bmi_15yr == -10 | mp1$bmi_15yr == -6 | mp1$bmi_15yr == -1] <- N
 table(mp1$bmi_17yr_tf4)
 mp1$bmi_17yr_tf4[mp1$bmi_17yr_tf4 == -1 | mp1$bmi_17yr_tf4 == -4 | mp1$bmi_17yr_tf4 == -10] <- NA
 
-# Variable for frequency that young person has a drink of alcohol
-table(mp1$freq_yp_drinks_17yr)
-mp1$freq_yp_drinks_17yr <- ifelse(mp1$freq_yp_drinks_17yr == 1,1,
-                                  ifelse(mp1$freq_yp_drinks_17yr == 2,2,
-                                         ifelse(mp1$freq_yp_drinks_17yr == 3,3,
-                                                ifelse(mp1$freq_yp_drinks_17yr == 4,4,
-                                                       ifelse(mp1$freq_yp_drinks_17yr == 5,5, NA)))))
-mp1$freq_yp_drinks_17yr <- factor(mp1$freq_yp_drinks_17yr,
-                                  levels = c(1,2,3,4,5),
-                                  labels = c("Never","Monthly or less","2-4 times a month","2-3 times a week",
-                                             "4 or more times a week"))
-table(mp1$freq_yp_drinks_17yr)
-
 # Using D1426_YPB.pdf
 # Variable for ever been diagnosed with PCOS
 table(mp1$pcos)
@@ -999,6 +986,11 @@ table(mp1$cramps_sens)
 
 mp1$comorbidity <- ifelse(mp1$thyroid_problem_17yr == "Yes" | mp1$pcos == "Yes" | mp1$endometriosis == "Yes",1,NA)
 table(mp1$comorbidity)
+
+# To do the analysis I'm assuming missing as a no (limitation)
+mp1$comorbidity_cc <- ifelse(mp1$thyroid_problem_17yr == "Yes" | mp1$pcos == "Yes" | mp1$endometriosis == "Yes",1,
+                             ifelse(mp1$thyroid_problem_17yr != "Yes" & mp1$pcos != "Yes" & mp1$endometriosis != "Yes",0,NA))
+table(mp1$comorbidity_cc, mp1$cramps)
 
 # For contraception ever, I am going to combine all the puberty questions re oral contraceptives in the last 12 months
 mp1$contraception_ever <- ifelse(mp1$oral_contraceptives_pastyr_8yr == "Yes" | mp1$oral_contraceptives_pastyr_9yr == "Yes" | 
