@@ -89,6 +89,7 @@ colnames(mp1) [118] <- "cramps_17yr"
 colnames(mp1) [119] <- "dr_cramps_17yr"
 colnames(mp1) [122] <- "oral_contraceptives_pastyr_17yr"
 colnames(mp1) [123] <- "thyroid_problem_17yr"
+colnames(mp1) [124] <- "bmi_15yr"
 colnames(mp1) [128] <- "bmi_17yr_tf4"
 colnames(mp1) [133] <- "pcos"
 colnames(mp1) [134] <- "endometriosis"
@@ -713,6 +714,11 @@ mp1$thyroid_problem_17yr <- factor(mp1$thyroid_problem_17yr,
                                    levels = c(0,1), 
                                    labels = c("No","Yes"))
 table(mp1$thyroid_problem_17yr)
+
+# D2109_TF3.pdf:
+# Variable for BMI at 15 years (taken at TF3)
+table(mp1$bmi_15yr)
+mp1$bmi_15yr[mp1$bmi_15yr == -10 | mp1$bmi_15yr == -6 | mp1$bmi_15yr == -1] <- NA
 
 # D2111_TF4.pdf
 # BMI taken at the teen focus 4 clinic
