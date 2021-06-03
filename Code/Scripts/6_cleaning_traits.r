@@ -242,5 +242,9 @@ traits$kidney_disease <- ifelse(traits$kidney_disease ==2,0,
 table(traits$kidney_disease)
 # Not enough participants to include in the analysis
 
+# Pull the variables for case controls definition from mp1
+traits$hmb <- mp1$hmb
+traits$cramps <- mp1$cramps
+
 # Save the dataset cleaned ready for the analysis
 save(traits, file = "traits.Rda")
