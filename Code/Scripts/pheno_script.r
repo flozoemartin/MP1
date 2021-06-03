@@ -5,7 +5,7 @@
 #       Date started:   19/11/2020                                                                                                                           #
 #       Date finished:  27/11/2020                                                                                                                           #
 #       Description:    This script takes the Pheno.Rda file generated from merging my ALSPAC dataset with the ARIES samplesheet and generating covariates   #
-#                       based on time of methylation measure (15 or 17 years old) for use in the EWAS                                                        #
+#                       based on time of methylation measure (15 or 17 years old) for use in the adjusted EWAS (not performed just for ref)                  #
 #                                                                                                                                                            #
 ##############################################################################################################################################################
 
@@ -24,6 +24,7 @@ Pheno$age_meth <- Pheno$age
 
 # For some reason oral contraceptives in the past 12 months at 15 & 17 years was coded as 1 and 2 for no and yes so I have changed it to 0 and 1 for continuity with 
 # the other binary covariates
+
 table(as.numeric(Pheno$oral_contraceptives_pastyr_17yr))
 table(Pheno$oral_contraceptives_pastyr_17yr)
 as.numeric(Pheno$oral_contraceptives_pastyr_17yr)
@@ -39,27 +40,63 @@ Pheno$oral_contraceptives_pastyr_15yr <- ifelse(Pheno$oral_contraceptives_pastyr
 table(Pheno$oral_contraceptives_pastyr_15yr)
 
 # Then I generated a variable asking if they were taking oral contraception at the time of methylation measure
-Pheno$contraception_meth <- ifelse(Pheno$time_code == "TF3", Pheno$oral_contraceptives_pastyr_15yr, Pheno$oral_contraceptives_pastyr_17yr)
 
-contraception <- data.frame(Pheno$time_code, Pheno$oral_contraceptives_pastyr_15yr, Pheno$oral_contraceptives_pastyr_17yr, Pheno$contraception_meth)
+Pheno$contracep_pre_15 <- ifelse(Pheno$oral_contraceptives_pastyr_8yr == "Yes" | Pheno$oral_contraceptives_pastyr_9yr == "Yes" | 
+                                      Pheno$oral_contraceptives_pastyr_10yr == "Yes" | Pheno$oral_contraceptives_pastyr_11yr == "Yes" |
+                                      Pheno$oral_contraceptives_pastyr_13yr == "Yes" | Pheno$oral_contraceptives_pastyr_14yr == "Yes" |
+                                      Pheno$oral_contraceptives_pastyr_15yr == 1,1,0)
+table(Pheno$contracep_pre_15)
+Pheno$contracep_pre_15_never <- ifelse(Pheno$oral_contraceptives_pastyr_8yr == "No" | Pheno$oral_contraceptives_pastyr_9yr == "No" | Pheno$oral_contraceptives_pastyr_10yr == "No" |
+                                    Pheno$oral_contraceptives_pastyr_11yr == "No" | Pheno$oral_contraceptives_pastyr_13yr == "No" | Pheno$oral_contraceptives_pastyr_14yr == "No" |
+                                    Pheno$oral_contraceptives_pastyr_15yr == 0,1,0)
+table(Pheno$contracep_pre_15_never)
+
+# From these two variables I can generate a "ever" and "never" variable
+
+Pheno$contracep_pre_15_meth <- NA
+Pheno$contracep_pre_15_meth[Pheno$contracep_pre_15_never ==1] <- 0
+Pheno$contracep_pre_15_meth[Pheno$contracep_pre_15 ==1] <- 1
+table(Pheno$contracep_pre_15_meth)
+
+Pheno$contracep_pre_17 <- ifelse(Pheno$oral_contraceptives_pastyr_8yr == "Yes" | Pheno$oral_contraceptives_pastyr_9yr == "Yes" | 
+                                      Pheno$oral_contraceptives_pastyr_10yr == "Yes" | Pheno$oral_contraceptives_pastyr_11yr == "Yes" |
+                                      Pheno$oral_contraceptives_pastyr_13yr == "Yes" | Pheno$oral_contraceptives_pastyr_14yr == "Yes" |
+                                      Pheno$oral_contraceptives_pastyr_15yr == 1 | Pheno$oral_contraceptives_pastyr_16yr == "Yes" |
+                                      Pheno$oral_contraceptives_pastyr_17yr == 1,1,0)
+table(Pheno$contracep_pre_17)
+Pheno$contracep_pre_17_never <- ifelse(Pheno$oral_contraceptives_pastyr_8yr == "No" | Pheno$oral_contraceptives_pastyr_9yr == "No" | Pheno$oral_contraceptives_pastyr_10yr == "No" |
+                                            Pheno$oral_contraceptives_pastyr_11yr == "No" | Pheno$oral_contraceptives_pastyr_13yr == "No" | Pheno$oral_contraceptives_pastyr_14yr == "No" |
+                                            PhenoFem$oral_contraceptives_pastyr_15yr == 0 | PhenoFem$oral_contraceptives_pastyr_16yr == "No" |
+                                            PhenoFem$oral_contraceptives_pastyr_17yr == 0,1,0)
+table(Pheno$contracep_pre_17_never)
+
+# From these two variables I can generate a "ever" and "never" variable
+
+Pheno$contracep_pre_17_meth <- NA
+Pheno$contracep_pre_17_meth[Pheno$contracep_pre_17_never ==1] <- 0
+Pheno$contracep_pre_17_meth[Pheno$contracep_pre_17 ==1] <- 1
+table(Pheno$contracep_pre_17_meth)
+
+Pheno$contraception_meth <- ifelse(Pheno$time_code == "TF3", Pheno$contracep_pre_15_meth, Pheno$contracep_pre_17_meth)
+
+contraception <- data.frame(Pheno$time_code, Pheno$oral_contraceptives_pastyr_15yr, Pheno$oral_contraceptives_pastyr_17yr, 
+                            Pheno$contracep_pre_15_meth,Pheno$contracep_pre_17_meth, Pheno$contraception_meth)
 table(Pheno$contraception_meth)
 
-# For smoking and drinking, I will use the variables generated from the TF3 and F17 clinics (also funny 1 and 2 for no and yes)
+# For smoking, I will use the variables generated from the TF3 and T4 clinics (also funny 1 and 2 for no and yes)
 Pheno$reg_smoker <- ifelse(Pheno$time_code == "TF3",Pheno$cotinine_15yr,Pheno$cotinine_17yr)
 table(Pheno$reg_smoker, Pheno$time_code)
 
-table(Pheno$reg_drinker_15yr)
-table(as.numeric(Pheno$reg_drinker_15yr))
-Pheno$reg_drinker_15yr <- ifelse(Pheno$reg_drinker_15yr == "No",0,
-                                ifelse(Pheno$reg_drinker_15yr == "Yes",1, NA))
-table(Pheno$reg_drinker_15yr)
-table(as.numeric(Pheno$reg_drinker_17yr))
-Pheno$reg_drinker_17yr <- ifelse(Pheno$reg_drinker_17yr == "No",0,
-                                ifelse(Pheno$reg_drinker_17yr == "Yes",1, NA))
-table(Pheno$reg_drinker_17yr)
-
-Pheno$reg_drinker <- ifelse(Pheno$time_code == "TF3", Pheno$reg_drinker_15yr, Pheno$reg_drinker_17yr)
-table(Pheno$reg_drinker)
+# Double check how many comorbids I have before I remove them
+table(Pheno$comorbidity)
+table(Pheno$comorbidity, Pheno$cramps)
+Pheno_comorbidrm <- Pheno[!(Pheno$comorbidity == 1),]
 
 # Create a dataframe only containing women so that the EWAS takes less time to run on Bluecrystal
 PhenoFem <- Pheno[!(Pheno$Sex == "M"),]
+
+# Save dataframes for EWAS
+setwd("/Users/ti19522/Downloads/bluecrystal_files/EWAS")
+save(PhenoFem, file="Pheno.Rda")
+write.csv(PhenoFem, "Pheno.csv")
+write.csv(Pheno_comorbidrm, "Pheno_comorbidrm.csv")
