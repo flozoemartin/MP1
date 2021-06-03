@@ -4,7 +4,7 @@
 #                                                                                                                                                               #
 #   Author:       Flo Martin                                                                                                                                    #
 #   Start date:   18/01/2021                                                                                                                                    #
-#   Finish date:  22/01/2021                                                                                                                                    #         #
+#   Finish date:  03/02/2021                                                                                                                                    #         #
 #   Description:  This script describes data cleaning for traits_22jan for mini project 1                                                                       #                                                                                                                       
 #                                                                                                                                                               #
 ################################################################################################################################################################# 
@@ -193,56 +193,46 @@ traits$cognitive_score_6yr[traits$cognitive_score_6yr == -1] <- NA
 table(traits$ace_score)
 
 # BMI at 17 years
-traits$bmi_17yr[traits$bmi_17yr == -1 | traits$bmi_17yr == -10] <- NA
-traits$bmi_tf4[traits$bmi_tf4 == -1 | traits$bmi_tf4 == -4 | traits$bmi_tf4 == -10] <- NA
-traits$bmi_17yr[is.na(traits$bmi_17yr)] <- 0
-traits$bmi_tf4[is.na(traits$bmi_tf4)] <- 0
-traits$bmi <- ifelse(traits$bmi_tf4 >0,traits$bmi_tf4,
-                  ifelse(traits$bmi_tf4 ==0 & traits$bmi_17yr >0, traits$bmi_17yr,NA))
-table(traits$bmi)
-traits$bmi_17yr[traits$bmi_17yr ==0] <- NA
-traits$bmi_tf4[traits$bmi_tf4 ==0] <- NA
-
-# C-reactive protein at TF4 to proxy for inflammation
-table(traits$crp_tf4)
-traits$crp_tf4[traits$crp_tf4 == -1] <- NA
+traits$bmi <- mp1$bmi
 
 # Cotinine at 17 years old
 table(traits$cotinine_tf4)
 traits$cotinine_tf4[traits$cotinine_tf4 == -2 | traits$cotinine_tf4 == -1] <- NA
 
+# C-reactive protein at TF4 to proxy for inflammation
+table(traits$crp_tf4)
+traits$crp_tf4[traits$crp_tf4 == -1] <- NA
+
 # Total serum cholesterol at TF4
 table(traits$serum_chol_tf4)
 traits$serum_chol_tf4[traits$serum_chol_tf4 == -1] <- NA
-
-# Young person has high cholesterol at 17
-table(traits$high_chol_tf4)
-traits$high_chol_tf4[traits$high_chol_tf4 == -10 | traits$high_chol_tf4 == -4 | traits$high_chol_tf4 == -1] <- NA
-traits$high_chol_tf4[traits$high_chol_tf4 == 2] <- 0
-table(traits$high_chol_tf4)
 
 # Crohn's diagnosis at 22 years
 table(traits$crohns_22yr)
 traits$crohns_22yr <- ifelse(traits$crohns_22yr == 1 | traits$crohns_22yr == 2,1,
                              ifelse(traits$crohns_22yr == 3 | traits$crohns_22yr == 4,0,NA))
 table(traits$crohns_22yr)
+# Not enough participants to include in the analysis
 
 # Rheumatoid arthritis at 22 years
 table(traits$ra_22yr)
 traits$ra_22yr <- ifelse(traits$ra_22yr == 1 | traits$ra_22yr == 2,1,
                          ifelse(traits$ra_22yr == 3 | traits$ra_22yr == 4,0,NA))
 table(traits$ra_22yr)
+# Not enough participants to include in the analysis
 
 # Primary Sjogrens Syndrome at 22 years
 table(traits$ss_22yr)
 traits$ss_22yr <- ifelse(traits$ss_22yr == 1,1,
                          ifelse(traits$ss_22yr == 3 | traits$ss_22yr == 4,0,NA))
 table(traits$ss_22yr)
+# Not enough participants to include in the analysis
 
 # Skin cancer at 25 years
 table(traits$skin_cancer_25yr)
 traits$skin_cancer_25yr[traits$skin_cancer_25yr == -10| traits$skin_cancer_25yr == -9 | traits$skin_cancer_25yr == -1] <- NA
 table(traits$skin_cancer_25yr)
+# Not enough participants to include in the analysis
 
 # Kidney disease from the COVID questionnaire in G1
 table(traits$kidney_disease)
@@ -250,5 +240,7 @@ traits$kidney_disease[traits$kidney_disease == -10 | traits$kidney_disease == -9
 traits$kidney_disease <- ifelse(traits$kidney_disease ==2,0,
                                 ifelse(traits$kidney_disease ==1,1,NA))
 table(traits$kidney_disease)
+# Not enough participants to include in the analysis
 
-
+# Save the dataset cleaned ready for the analysis
+save(traits, file = "traits.Rda")
