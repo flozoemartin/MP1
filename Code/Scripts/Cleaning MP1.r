@@ -1,13 +1,13 @@
-#################################################################################################################################################################
-#                                                                                                                                                               #
-#   Script for cleaning mp1 dataset abstracted from ALSPAC drive                                                                                                #         
-#                                                                                                                                                               #
-#   Author:       Flo Martin                                                                                                                                    #
-#   Start Date:   02/11/2020                                                                                                                                    #
-#   Finish Date:  27/11/2020                                                                                                                                    #
-#   Description:  This script describes data cleaning for flo_27nov for mini project 1                                                                          #                                                                                                                       
-#                                                                                                                                                               #
-################################################################################################################################################################# 
+###############################################################################################################################
+#                                                                                                                             #
+#   Script for cleaning mp1 dataset abstracted from ALSPAC drive                                                              #         
+#                                                                                                                             #
+#   Author:       Flo Martin                                                                                                  #
+#   Start Date:   02/11/2020                                                                                                  #
+#   Finish Date:  02/06/2021                                                                                                  #
+#   Description:  This script describes data cleaning for flo_27nov for mini project 1                                        #                                                                                                                       
+#                                                                                                                             #
+############################################################################################################################### 
 
 rm(flo_27nov)
 rm(mp1)                         # This clears the mp1 & flo_02nov data in global environment
