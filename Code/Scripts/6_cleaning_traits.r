@@ -215,14 +215,20 @@ table(traits$mat_bmi)
 traits$mat_bmi[traits$mat_bmi == -3] <- NA
 traits$mat_bmi_z <- scale(traits$mat_bmi)
 
+traits$mat_bmi_cc <- ifelse(is.na(traits$mat_bmi),0,1)
+
 # Gestational age
 table(traits$bestgest)
 traits$gest_z <- scale(traits$bestgest)
+
+traits$gest_cc <- ifelse(is.na(traits$bestgest),0,1)
 
 # Cognitive score aged 6 years (81 months)
 table(traits$cognitive_score_6yr)
 traits$cognitive_score_6yr[traits$cognitive_score_6yr == -1] <- NA
 traits$cog_score_z <- scale(traits$cognitive_score_6yr)
+
+traits$cog_score_cc <- ifelse(is.na(traits$cognitive_score_cc),0,1)
 
 # Age at onset of menarche 
 traits$men_age_m <- mp1$men_age_m
@@ -231,6 +237,8 @@ traits$men_age_z <- scale(traits$men_age_m)
 # ACE score from useful traitsa for the trait "child abuse"
 table(traits$ace_score)
 traits$ace_z <- scale(traits$ace_score)
+
+traits$ace_cc <- ifelse(is.na(traits$ace_score),0,1)
 
 # BMI at 17 years
 traits$bmi <- mp1$bmi
@@ -246,10 +254,14 @@ table(traits$crp_tf4)
 traits$crp_tf4[traits$crp_tf4 == -1] <- NA
 traits$crp_z <- scale(traits$crp_tf4)
 
+traits$crp_cc <- ifelse(is.na(traits$crp_tf4),0,1)
+
 # Total serum cholesterol at TF4
 table(traits$serum_chol_tf4)
 traits$serum_chol_tf4[traits$serum_chol_tf4 == -1] <- NA
 traits$chol_z <- scale(traits$serum_chol_tf4)
+
+traits$chol_cc <- ifelse(is.na(traits$serum_chol_tf4),0,1)
 
 # Pull the variables for case controls definition from mp1
 traits$hmb <- mp1$hmb
