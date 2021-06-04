@@ -556,6 +556,9 @@ aggregate(x = traits$mat_bmi,
           FUN = sd,
           na.rm = TRUE) 
 
+table(traits$mat_bmi_cc, traits$cramps)
+table(traits$mat_bmi_cc, traits$hmb)
+
 # Gestational age at delivery
 aggregate(x = traits$bestgest,
           by = list(traits$cramps),
@@ -574,6 +577,9 @@ aggregate(x = traits$bestgest,
           by = list(traits$hmb),
           FUN = sd,
           na.rm = TRUE) 
+
+table(traits$gest_cc, traits$cramps)
+table(traits$gest_cc, traits$hmb)
 
 # Cognitive score at age 6
 aggregate(x = traits$cognitive_score_6yr,
@@ -594,6 +600,9 @@ aggregate(x = traits$cognitive_score_6yr,
           FUN = sd,
           na.rm = TRUE)
 
+table(traits$cog_score_cc, traits$cramps)
+table(traits$cog_score_cc, traits$hmb)
+
 # Age at onset of menarche
 aggregate(x = traits$men_age_m,
           by = list(traits$cramps),
@@ -612,6 +621,9 @@ aggregate(x = traits$men_age_m,
           by = list(traits$hmb),
           FUN = sd,
           na.rm = TRUE)
+
+table(traits$men_age_cc, traits$cramps)
+table(traits$men_age_cc, traits$hmb)
 
 # Cumulative ACE score at age 16
 aggregate(x = traits$ace_score,
@@ -632,6 +644,9 @@ aggregate(x = traits$ace_score,
           FUN = sd,
           na.rm = TRUE) 
 
+table(traits$ace_cc, traits$cramps)
+table(traits$ace_cc, traits$hmb)
+
 # BMI at 17 years old
 aggregate(x = traits$bmi,
           by = list(traits$cramps),
@@ -651,6 +666,9 @@ aggregate(x = traits$bmi,
           FUN = sd,
           na.rm = TRUE) 
 
+table(traits$bmi_cc, traits$cramps)
+table(traits$bmi_cc, traits$hmb)
+
 # Cotinine at 17 years old
 aggregate(x = traits$cotinine_tf4,
           by = list(traits$cramps),
@@ -668,7 +686,10 @@ aggregate(x = traits$cotinine_tf4,
 aggregate(x = traits$cotinine_tf4,
           by = list(traits$hmb),
           FUN = sd,
-          na.rm = TRUE) 
+          na.rm = TRUE)
+
+table(traits$reg_smoker, traits$cramps)
+table(traits$reg_smoker, traits$hmb)
 
 # CRP at 17 years old
 aggregate(x = traits$crp_tf4,
@@ -689,6 +710,9 @@ aggregate(x = traits$crp_tf4,
           FUN = sd,
           na.rm = TRUE) 
 
+table(traits$crp_cc, traits$cramps)
+table(traits$crp_cc, traits$hmb)
+
 # Total serum cholesterol at 17 years old
 aggregate(x = traits$serum_chol_tf4,
           by = list(traits$cramps),
@@ -707,5 +731,9 @@ aggregate(x = traits$serum_chol_tf4,
           by = list(traits$hmb),
           FUN = sd,
           na.rm = TRUE) 
+
+table(traits$chol_cc, traits$cramps)
+table(traits$chol_cc, traits$hmb)
+
 
 
