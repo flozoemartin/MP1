@@ -435,6 +435,8 @@ uci <- exp(upci)
 
 coeff_bin_aam <- data.frame(model,exposure,outcome,estimate,se,lowci,upci,or,lci,uci,p)
 
+# Use this dataframe to fill in supplementary table 6 & 8 - raw numbers used to build the coefficient plot
+
 # Now apply ggplot to make the coefficient plot
 p <- coeff_bin_aam %>%
   arrange(exposure) %>%
@@ -663,6 +665,8 @@ uci <- exp(upci)
 
 # OR, lci & uci derived similarly to Fig 5
 coeff_cont_aam <- data.frame(model,exposure,outcome,estimate,se,lowci,upci,or,lci,uci,p)
+
+# Use this dataframe to fill in supplementary table 7 & 9 - raw numbers used to build the coefficient plot
 
 p <- coeff_cont_aam %>%
   arrange(exposure) %>%
