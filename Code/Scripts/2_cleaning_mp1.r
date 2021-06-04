@@ -4,10 +4,24 @@
 #                                                                                                                             #
 #   Author:       Flo Martin                                                                                                  #
 #   Start Date:   02/11/2020                                                                                                  #
-#   Finish Date:  02/06/2021                                                                                                  #
+#   Finish Date:  04/06/2021                                                                                                  #
 #   Description:  This script describes data cleaning for flo_27nov for mini project 1                                        #                                                                                                                       
 #                                                                                                                             #
 ############################################################################################################################### 
+
+# Contents #
+# line 26 - Environment management #
+# line 129 - PUB1 8 years old #
+# line 187 - PUB2 9 years old #
+# line 250 - PUB3 10 years old #
+# line 314 - PUB4 11 years old #
+# line 379 - PUB5 13 years old #
+# line 444 - PUB6 14 years old #
+# line 509 - PUB7 15 years old #
+# line 584 - PUB8 16 years old #
+# line 649 - PUB9 17 years old #
+# line 731 - Deriving symptom cases & controls #
+# line 956 - Cleaning & deriving trait variables #
 
 rm(flo_27nov)
 rm(mp1)                         # This clears the mp1 & flo_02nov data in global environment
@@ -16,9 +30,10 @@ setwd("/Users/ti19522/OneDrive - University of Bristol/Documents/PhD/Year 1/Mini
 
 load("flo_27nov.Rda")           # Load in the raw dataset as pulled from R:/Data
 mp1 <- data.frame(flo_27nov)    # ...and the create a copy of flo_02nov (blank - no labels) which will allow any changes made to 
-                                # the following code be properly implemented in mp1. At the end of this script, R will save the newest copy of mp1.Rda in the R
-                                # file in OneDrive. 
-colnames(mp1)                   # This allows me to check all the column names and category labels are as they were when pulled from R:/Data
+                                # the following code be properly implemented in mp1. At the end of this script, R will save the 
+                                # newest copy of mp1.Rda in the R file in OneDrive.  
+colnames(mp1)                   # This allows me to check all the column names and category labels are as they were when pulled 
+                                # from R:/Data
 
 colnames(mp1) [4] <- "men_age_m"
 colnames(mp1) [6] <- "mat_edu"
@@ -99,23 +114,6 @@ colnames(mp1) [141] <- "smoked_reg_during_preg"
 colnames(mp1) [142] <- "smoked_in_t1"
 colnames(mp1) [143] <- "smoked_18wkgest"
 
-# Now, explore each of the variables:
-# Variable maternal education is coded -1, 1, 2, 3, 4, 5 using D1104_C.pdf the labels are as shown below:
-table(mp1$mat_edu)
-mp1$mat_edu <- ifelse(mp1$mat_edu == 1,1, 
-                      ifelse(mp1$mat_edu == 2,2, 
-                             ifelse(mp1$mat_edu == 3,3, 
-                                    ifelse(mp1$mat_edu == 4,4, 
-                                           ifelse(mp1$mat_edu == 5,5, NA)))))
-mp1$mat_edu <- factor(mp1$mat_edu, 
-                      levels = c(1,2,3,4,5), 
-                      labels = c("CSE/none","Vocational","O level","A level","Degree"))
-table(mp1$mat_edu)
-
-# Variable for cotinine measurements at teen focus 4
-table(mp1$cotinine_17yr)
-mp1$cotinine_17yr[mp1$cotinine_17yr == -2 | mp1$cotinine_17yr == -1] <- NA
-
 # Variable for participant sex, labels are as shown below:
 table(mp1$sex)
 table(mp1$sex,mp1$cramps_15yr)  # Used this table to deduce which number was male - no. 1 had no answers for this part of the questionnaire => 2 is female
@@ -127,6 +125,8 @@ mp1$sex <- factor(mp1$sex,
 table(mp1$sex)
 table(mp1$sex,mp1$cramps_15yr)  # Check the labels in the context of a period-related variable to make sure there aren't lots of answers for men which there are 
                                 # not!
+
+# Using the D1501_PUB1.pdf (participant 8 years old):
 
 # Variable for whether child has started her period yet:
 table(mp1$started_period_8yr, mp1$sex)  # Used sex in here to see if -10 referred to males which it does
@@ -728,32 +728,6 @@ mp1$thyroid_problem_17yr <- factor(mp1$thyroid_problem_17yr,
                                    labels = c("No","Yes"))
 table(mp1$thyroid_problem_17yr)
 
-# D2109_TF3.pdf:
-# Variable for BMI at 15 years (taken at TF3)
-table(mp1$bmi_15yr)
-mp1$bmi_15yr[mp1$bmi_15yr == -10 | mp1$bmi_15yr == -6 | mp1$bmi_15yr == -1] <- NA
-
-# Using D1426_YPB.pdf
-# Variable for ever been diagnosed with PCOS
-table(mp1$pcos)
-mp1$pcos <- ifelse(mp1$pcos == 1,1,
-                   ifelse(mp1$pcos == 2,1,
-                          ifelse(mp1$pcos == 3,0, NA)))
-mp1$pcos <- factor(mp1$pcos,
-                   levels = c(0,1),
-                   labels = c("No","Yes"))
-table(mp1$pcos)
-
-# Variable for ever been diagnosed with endometrosis
-table(mp1$endometriosis)
-mp1$endometriosis <- ifelse(mp1$endometriosis == 1,1,
-                            ifelse(mp1$endometriosis == 2,1,
-                                   ifelse(mp1$endometriosis == 3,0, NA)))
-mp1$endometriosis <- factor(mp1$endometriosis,
-                            levels = c(0,1),
-                            labels = c("No","Yes"))
-table(mp1$endometriosis)
-
 # Here, I have gone through each timepoint and asked if the young woman answered yes to menorrhagia but no to visiting a doctor then code her as a 1.
 # Next, coded women who had reported not having menorrhagia at each timepoint
 
@@ -1017,6 +991,22 @@ mp1$contraception_ewas <- factor(mp1$contraception_ewas,
                           labels = c("Never", "Ever"))
 table(mp1$contraception_ewas)
 
+# Variable maternal education is coded -1, 1, 2, 3, 4, 5 using D1104_C.pdf the labels are as shown below:
+table(mp1$mat_edu)
+mp1$mat_edu <- ifelse(mp1$mat_edu == 1,1, 
+                      ifelse(mp1$mat_edu == 2,2, 
+                             ifelse(mp1$mat_edu == 3,3, 
+                                    ifelse(mp1$mat_edu == 4,4, 
+                                           ifelse(mp1$mat_edu == 5,5, NA)))))
+mp1$mat_edu <- factor(mp1$mat_edu, 
+                      levels = c(1,2,3,4,5), 
+                      labels = c("CSE/none","Vocational","O level","A level","Degree"))
+table(mp1$mat_edu)
+
+# Variable for cotinine measurements at teen focus 4
+table(mp1$cotinine_17yr)
+mp1$cotinine_17yr[mp1$cotinine_17yr == -2 | mp1$cotinine_17yr == -1] <- NA
+
 # Binary maternal education variable
 
 mp1$mat_degree <- ifelse(mp1$mat_edu == "Degree",1,
@@ -1025,6 +1015,32 @@ mp1$mat_degree <- factor(mp1$mat_degree,
                           levels = c(0,1),
                           labels = c("A levels or lower","Degree"))
 table(mp1$mat_degree, mp1$cramps)
+
+# D2109_TF3.pdf:
+# Variable for BMI at 15 years (taken at TF3)
+table(mp1$bmi_15yr)
+mp1$bmi_15yr[mp1$bmi_15yr == -10 | mp1$bmi_15yr == -6 | mp1$bmi_15yr == -1] <- NA
+
+# Using D1426_YPB.pdf
+# Variable for ever been diagnosed with PCOS
+table(mp1$pcos)
+mp1$pcos <- ifelse(mp1$pcos == 1,1,
+                   ifelse(mp1$pcos == 2,1,
+                          ifelse(mp1$pcos == 3,0, NA)))
+mp1$pcos <- factor(mp1$pcos,
+                   levels = c(0,1),
+                   labels = c("No","Yes"))
+table(mp1$pcos)
+
+# Variable for ever been diagnosed with endometrosis
+table(mp1$endometriosis)
+mp1$endometriosis <- ifelse(mp1$endometriosis == 1,1,
+                            ifelse(mp1$endometriosis == 2,1,
+                                   ifelse(mp1$endometriosis == 3,0, NA)))
+mp1$endometriosis <- factor(mp1$endometriosis,
+                            levels = c(0,1),
+                            labels = c("No","Yes"))
+table(mp1$endometriosis)
 
 # Save cleaned dataset for the generation of the Pheno file for the EWAS
 save(mp1, file="mp1.Rda")
