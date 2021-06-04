@@ -1,21 +1,33 @@
-#################################################################################################################################################################
-#                                                                                                                                                               #
-#   Script for generating a "factor-less" mp1 dataset abstracted from ALSPAC drive for the creation of figures 3 & 4                                            #
-#   Only need the started period, symptom and dr visits for symptom variables for this dataset                                                                  #
-#                                                                                                                                                               #
-#   Author:       Flo Martin                                                                                                                                    #
-#   Start Date:   23/11/2020                                                                                                                                    #
-#   Finish Date:  24/11/2020                                                                                                                                    #
-#   Description:  This script describes generating a cleaned dataset with no factor variable for generating plots of MP1 data                                   #                                                                                                                       
-#                                                                                                                                                               #
-################################################################################################################################################################# 
+##############################################################################################################################################################
+#                                                                                                                                                            #
+#   Script for generating a "factor-less" mp1 dataset abstracted from ALSPAC drive for the creation of figures 3 & 4                                         #
+#   Only need the started period, symptom and dr visits for symptom variables for this dataset                                                               #
+#                                                                                                                                                            #
+#   Author:       Flo Martin                                                                                                                                 #
+#   Start Date:   23/11/2020                                                                                                                                 #
+#   Finish Date:  24/11/2020                                                                                                                                 #
+#   Description:  This script describes generating a cleaned dataset with no factor variable for generating plots of MP1 data                                #                                                                                                                       
+#                                                                                                                                                            #
+############################################################################################################################################################## 
+
+# Contents #
+# line 25 - Environment management #
+# line 81 - PUB1 8 years old #
+# line 109 - PUB2 9 years old #
+# line 134 - PUB3 10 years old #
+# line 161 - PUB4 11 years old #
+# line 188 - PUB5 13 years old #
+# line 215 - PUB6 14 years old #
+# line 242 - PUB7 15 years old #
+# line 275 - PUB8 16 years old #
+# line 302 - PUB9 17 years old #
 
 setwd("/Users/ti19522/OneDrive - University of Bristol/Documents/PhD/Year 1/Mini Project 1/R Data/Data")
 
-load("flo_27nov.Rda")           # Load in the raw dataset as pulled from R:/Data
+load("flo_27nov.Rda")                    # Load in the raw dataset as pulled from R:/Data
 mp1_nofactor <- data.frame(flo_27nov)    # ...and the create a copy of flo_02nov (blank - no labels) which will allow any changes made to 
-                                # the following code be properly implemented in mp1. At the end of this script, R will save the newest copy of mp1.Rda in the R
-                                # file in OneDrive. 
+                                         # the following code be properly implemented in mp1. At the end of this script, R will save the newest copy of 
+                                         # mp1.Rda in the R file in OneDrive. 
 colnames(mp1_nofactor)                   # This allows me to check all the column names and category labels are as they were when pulled from R:/Data
 
 colnames(mp1_nofactor) [20] <- "started_period_8yr"
