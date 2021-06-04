@@ -707,3 +707,5 @@ aggregate(x = traits$serum_chol_tf4,
           by = list(traits$hmb),
           FUN = sd,
           na.rm = TRUE) 
+
+
