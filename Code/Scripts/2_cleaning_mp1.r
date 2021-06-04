@@ -1,13 +1,13 @@
-###############################################################################################################################
-#                                                                                                                             #
-#   Script for cleaning mp1 dataset abstracted from ALSPAC drive                                                              #         
-#                                                                                                                             #
-#   Author:       Flo Martin                                                                                                  #
-#   Start Date:   02/11/2020                                                                                                  #
-#   Finish Date:  04/06/2021                                                                                                  #
-#   Description:  This script describes data cleaning for flo_27nov for mini project 1                                        #                                                                                                                       
-#                                                                                                                             #
-############################################################################################################################### 
+##############################################################################################################################################################
+#                                                                                                                                                            #
+#   Script for cleaning mp1 dataset abstracted from ALSPAC drive                                                                                             #         
+#                                                                                                                                                            #
+#   Author:       Flo Martin                                                                                                                                 #
+#   Start Date:   02/11/2020                                                                                                                                 #
+#   Finish Date:  04/06/2021                                                                                                                                 #
+#   Description:  This script describes data cleaning for flo_27nov for mini project 1                                                                       #                                                                                                                       
+#                                                                                                                                                            # 
+##############################################################################################################################################################
 
 # Contents #
 # line 26 - Environment management #
