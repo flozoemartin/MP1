@@ -4,7 +4,7 @@ Mini Project 1 - a hypothesis-generating epigenetic approach to characterize pre
 Author: Flo Martin
 
 # Supervisors 
-Dr Gemma Sharp (lead), Dr Kayleigh Easey, Dr Abi Fraser, Dr Laura Howe & Professor Deborah Lawlor
+Dr Gemma Sharp (lead), Dr Kayleigh Easey, Professor Abigail Fraser, Dr Laura Howe, Professor Caroline Relton & Professor Deborah Lawlor
 
 # Rationale
 Menstrual pain, heavy menstrual bleeding (menorrhagia), irregular periods (metrorrhagia), painful periods (dysmenorrhea) and premenstrual syndrome (PMS) are thought to affect a high proportion of
