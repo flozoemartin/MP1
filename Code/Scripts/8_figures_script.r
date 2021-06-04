@@ -7,6 +7,15 @@
 #                                                                                                                                                            #
 ##############################################################################################################################################################
 
+# Contents #
+# line 19 - Environment management #
+# line 31 - Figure 1 #
+# line 48 - Figure 3 #
+# line 129 - Figure 4 #
+# line 152 - Table 1 #
+# line 214 - Figure 5 #
+# line 480 - Figure 6 #
+
 # Load in mp1 for the characteristcs comparison, mp1_nofactor for prevalence figures & traits for coefficient plots
 setwd("/Users/ti19522/OneDrive - University of Bristol/Documents/PhD/Year 1/Mini Project 1/R Data/Data")
 load("mp1.Rda")
@@ -36,7 +45,7 @@ table(mp1$menorr_prev)
 table(mp1$cramps)
 table(mp1$hmb)
 
-# Figure 2 - graph showing prevalence of dysmenorrhea & menorrhagia across time (8 - 17 years old). Make a dataframe for ggplot to use using mp1_nofactor
+# Figure 3 - graph showing prevalence of dysmenorrhea & menorrhagia across time (8 - 17 years old). Make a dataframe for ggplot to use using mp1_nofactor
 timepoints <- c(8,9,10,11,13,14,15,16,17)
 
 men <- c(sum(mp1_nofactor$hmb_8yr,na.rm = TRUE),sum(mp1_nofactor$hmb_9yr,na.rm = TRUE),sum(mp1_nofactor$hmb_10yr,na.rm = TRUE),sum(mp1_nofactor$hmb_11yr,na.rm = TRUE),
