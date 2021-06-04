@@ -1,14 +1,14 @@
-#################################################################################################################################################################
-#                                                                                                                                                               #
-#   Script for building MP1 dataset from ALSPAC files using the GitHub repository by Gibran Hermani                                                             #
-#                                                                                                                                                               #
-#   Author:       Flo Martin                                                                                                                                    #
-#   Start Date:   28/10/2020                                                                                                                                    #
-#   Finish Date:  27/11/2020                                                                                                                                    #
-#   Description:  This script describes the paths necessary to build the dataset for my mini project 1: a hypothesis-generating epigenetic approach to          #
-#                 characterize premenstrual and menstrual symptoms using ALSPAC, using the instructions available on GitHub                                     #
-#                                                                                                                                                               #
-#################################################################################################################################################################
+##############################################################################################################################################################
+#                                                                                                                                                            #
+#   Script for building MP1 dataset from ALSPAC files using the GitHub repository by Gibran Hermani                                                          #
+#                                                                                                                                                            #
+#   Author:       Flo Martin                                                                                                                                 #
+#   Start Date:   28/10/2020                                                                                                                                 #
+#   Finish Date:  27/11/2020                                                                                                                                 #
+#   Description:  This script describes the paths necessary to build the dataset for my mini project 1: a hypothesis-generating epigenetic approach to       #
+#                 characterize premenstrual and menstrual symptoms using ALSPAC, using the instructions available on GitHub                                  #
+#                                                                                                                                                            #
+##############################################################################################################################################################
 
 # First install version 0.6.1
 install.packages("devtools")
