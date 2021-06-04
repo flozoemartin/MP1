@@ -7,6 +7,14 @@
 #                                                                                                                                                            #
 ##############################################################################################################################################################
 
+# Contents #
+# line 18 - Environment management #
+# line 27 - Figure 1 #
+# line 220 - Figure 2 #
+# line 447 - Table 3 #
+# line 514 - Table 4 #
+# line 547 - Table 5 #
+
 setwd("/Users/ti19522/OneDrive - University of Bristol/Documents/PhD/Year 1/Mini Project 1/R Data/Data")
 load("mp1.Rda")
 load("traits.Rda")
