@@ -4,10 +4,15 @@
 #                                                                                                                                                               #
 #   Author:       Flo Martin                                                                                                                                    #
 #   Start date:   18/01/2021                                                                                                                                    #
-#   Finish date:  03/02/2021                                                                                                                                    #         #
+#   Finish date:  04/06/2021                                                                                                                                    #         #
 #   Description:  This script describes data cleaning for traits_22jan for mini project 1                                                                       #                                                                                                                       
 #                                                                                                                                                               #
 ################################################################################################################################################################# 
+
+# Contents #
+# line 17 - Environment management #
+# line 49 - Cleaning binary traits #
+# line 219 - Cleaning continuous traits #
 
 # Load in the data abstraction from ALSPAC of traits identified from the EWAS
 setwd("/Users/ti19522/OneDrive - University of Bristol/Documents/PhD/Year 1/Mini Project 1/R data/")
@@ -15,6 +20,9 @@ load("traits_25jan.Rda")
 
 # Load in mp1.Rda to pull pre-cleaned variables
 load("mp1.Rda")
+
+# Load necessary packages
+library(dplyr)
 
 colnames(traits) [5] <- "ace_score"
 colnames(traits) [6] <- "mat_edu"
