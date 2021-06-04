@@ -19,23 +19,18 @@ install_github("explodecomputer/alspac")
 # Then load the package
 library(alspac)
 
-# There are two data objects that come with the package - current & useful - 
-# that contain all the variables available in the R:/Current/ and R:/Useful_data
-# directories, respectively. You can search through them manually by loading 
-# them directly:
+# There are two data objects that come with the package - current & useful - that contain all the variables available in the R:/Current/ and R:/Useful_data
+# directories, respectively. You can search through them manually by loading them directly:
 data(current)
 data(useful)
 
-# obj is the filename, name is the variable name, lab is the description of the
-# variable, counts is the number of non-missing values, type is the data type,
-# cat1 - cat4 are the folder names in which the object is found (used here 
-# loosely as categories for the data) and path is the path to the obj file
+# obj is the filename, name is the variable name, lab is the description of the variable, counts is the number of non-missing values, type is the data type,
+# cat1 - cat4 are the folder names in which the object is found (used here loosely as categories for the data) and path is the path to the obj file
 
 # Documentation for the function findVars:
 ?findVars
 
-# To search for all the variables with the word "bleeding" in the description
-# from the current data:
+# To search for all the variables with the word "bleeding" in the description from the current data:
 vars <- findVars("bleeding")
 vars
 
@@ -47,9 +42,7 @@ vars
 vars <- findVars("bleeding", "doctor", logic="and", whole.world=TRUE, ignore.case=TRUE)
 vars
 
-# findVars may identify multiple variables with the same name so the filterVars
-# function can be used to select among these duplicates e.g. c645a 
-# (maternal edu)
+# findVars may identify multiple variables with the same name so the filterVars function can be used to select among these duplicates e.g. c645a (maternal edu)
 varnames <- c("c645a")
 vars <- findVars(varnames)
 vars
@@ -58,8 +51,7 @@ vars
 vars <- filterVars(vars, c645a=c(cat2="Quest"))
 vars
 
-# Now I'm going to try and compose the list of variables in the required format
-# i.e. the output from findVars to extract:
+# Now I'm going to try and compose the list of variables in the required format i.e. the output from findVars to extract:
 
 varnames <- c("men_age","men_agey","ccxf2000","ccxf2001","ccxf2002","ccxf2003","ccxf2004","ccxf3004","ccxf3005","pub127","pub227","pub327","pub427","pub527","pub627","pub727","pub827","pub927",
               "pub128","pub228","pub328","pub428","pub528","pub628","pub728","pub828","pub928","ypb1216","ypb1216_imputeno","ypb1217","ypb1217_imputeno","ypa3310","pub105","pub205","pub305","pub405",
@@ -74,8 +66,7 @@ options(max.print=999999)   # So that the list doesn't cut off at a certain numb
 vars <- filterVars(vars, kz021=c(obj="^cp", lab="Participant"), c645a=c(cat2="Quest"))
 vars
 
-# Now that the list of variables is in the required format I can extract them. 
-# I need the R:/Data drive mapped to the computer whilst connected to the VPN.
+# Now that the list of variables is in the required format I can extract them. I need the R:/Data drive mapped to the computer whilst connected to the VPN.
 # Extract the variables from the R drive:
 setwd("/Users/ti19522/OneDrive - University of Bristol/Documents/PhD/Year 1/Mini Project 1/R Data")
 setDataDir("/Volumes/Data")
