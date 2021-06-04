@@ -1,13 +1,13 @@
-#################################################################################################################################################################
-#                                                                                                                                                               #
-#   Script for cleaning traits dataset abstracted from ALSPAC drive                                                                                             #         
-#                                                                                                                                                               #
-#   Author:       Flo Martin                                                                                                                                    #
-#   Start date:   18/01/2021                                                                                                                                    #
-#   Finish date:  04/06/2021                                                                                                                                    #         #
-#   Description:  This script describes data cleaning for traits_22jan for mini project 1                                                                       #                                                                                                                       
-#                                                                                                                                                               #
-################################################################################################################################################################# 
+##############################################################################################################################################################
+#                                                                                                                                                            #
+#   Script for cleaning traits dataset abstracted from ALSPAC drive                                                                                          #         
+#                                                                                                                                                            #
+#   Author:       Flo Martin                                                                                                                                 #
+#   Start date:   18/01/2021                                                                                                                                 #
+#   Finish date:  04/06/2021                                                                                                                                 #         #
+#   Description:  This script describes data cleaning for traits_22jan for mini project 1                                                                    #                                                                                                                       
+#                                                                                                                                                            #
+############################################################################################################################################################## 
 
 # Contents #
 # line 17 - Environment management #
