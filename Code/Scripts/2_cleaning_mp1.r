@@ -652,15 +652,16 @@ table(mp1$thyroid_problem_16yr)
 table(mp1$bmi_17yr)
 mp1$bmi_17yr[mp1$bmi_17yr == -10  | mp1$bmi_17yr == -1] <- NA
 
-mp1$bmi_tf4[mp1$bmi_tf4 == -1 | mp1$bmi_tf4 == -4 | mp1$bmi_tf4 == -10] <- NA
+table(mp1$bmi_17yr_tf4)
+mp1$bmi_17yr_tf4[mp1$bmi_17yr_tf4 == -1 | mp1$bmi_17yr_tf4 == -4 | mp1$bmi_17yr_tf4 == -10] <- NA
 
 mp1$bmi_17yr[is.na(mp1$bmi_17yr)] <- 0
-mp1$bmi_tf4[is.na(mp1$bmi_tf4)] <- 0
-mp1$bmi <- ifelse(mp1$bmi_tf4 >0,mp1$bmi_tf4,
-                  ifelse(mp1$bmi_tf4 ==0 & mp1$bmi_17yr >0, mp1$bmi_17yr,NA))
+mp1$bmi_17yr_tf4[is.na(mp1$bmi_17yr_tf4)] <- 0
+mp1$bmi <- ifelse(mp1$bmi_17yr_tf4 >0,mp1$bmi_17yr_tf4,
+                  ifelse(mp1$bmi_17yr_tf4 ==0 & mp1$bmi_17yr >0, mp1$bmi_17yr,NA))
 table(mp1$bmi)
 mp1$bmi_17yr[mp1$bmi_17yr ==0] <- NA
-mp1$bmi_tf4[mp1$bmi_tf4 ==0] <- NA
+mp1$bmi_17yr_tf4[mp1$bmi_17yr_tf4 ==0] <- NA
 
 mp1$bmi_cc <- ifelse(is.na(mp1$bmi),0,1)
 table(mp1$bmi_cc)
