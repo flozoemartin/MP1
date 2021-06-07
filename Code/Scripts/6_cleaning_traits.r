@@ -18,7 +18,7 @@
 setwd("/Users/ti19522/OneDrive - University of Bristol/Documents/PhD/Year 1/Mini Project 1/R data/")
 load("traits_25jan.Rda")
 
-traits <- data.frame("traits_25jan.Rda")
+traits <- data.frame(traits_25jan)
 
 # Load in mp1.Rda to pull pre-cleaned variables
 load("mp1.Rda")
@@ -181,7 +181,7 @@ table(traits$reg_drinker)
 traits$contraception <- mp1$contraception_ewas
 
 # Comorbidity reported by the age of 22 years
-traits$comorbidity <- mp1$comorbidity
+traits$comorbidity <- mp1$comorbidity_cc
 
 # Crohn's diagnosis at 22 years
 table(traits$crohns_22yr)
