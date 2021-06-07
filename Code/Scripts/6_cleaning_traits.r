@@ -18,6 +18,8 @@
 setwd("/Users/ti19522/OneDrive - University of Bristol/Documents/PhD/Year 1/Mini Project 1/R data/")
 load("traits_25jan.Rda")
 
+traits <- data.frame("traits_25jan.Rda")
+
 # Load in mp1.Rda to pull pre-cleaned variables
 load("mp1.Rda")
 
