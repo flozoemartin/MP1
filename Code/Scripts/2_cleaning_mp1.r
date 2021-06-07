@@ -1043,6 +1043,9 @@ table(mp1$mat_degree, mp1$cramps)
 table(mp1$bmi_15yr)
 mp1$bmi_15yr[mp1$bmi_15yr == -10 | mp1$bmi_15yr == -6 | mp1$bmi_15yr == -1] <- NA
 
+# Cotinine measurement binarised from TF4
+mp1$reg_smoker <- ifelse(mp1$cotinine_17yr >10,1,0)
+
 # Save cleaned dataset for the generation of the Pheno file for the EWAS
 save(mp1, file="mp1.Rda")
 
