@@ -954,6 +954,27 @@ mp1$cramps_sens <- factor(mp1$cramps_sens,
                      labels = c("Controls", "Cases"))
 table(mp1$cramps_sens)
 
+# Using D1426_YPB.pdf
+# Variable for ever been diagnosed with PCOS
+table(mp1$pcos)
+mp1$pcos <- ifelse(mp1$pcos == 1,1,
+                   ifelse(mp1$pcos == 2,1,
+                          ifelse(mp1$pcos == 3,0, NA)))
+mp1$pcos <- factor(mp1$pcos,
+                   levels = c(0,1),
+                   labels = c("No","Yes"))
+table(mp1$pcos)
+
+# Variable for ever been diagnosed with endometrosis
+table(mp1$endometriosis)
+mp1$endometriosis <- ifelse(mp1$endometriosis == 1,1,
+                            ifelse(mp1$endometriosis == 2,1,
+                                   ifelse(mp1$endometriosis == 3,0, NA)))
+mp1$endometriosis <- factor(mp1$endometriosis,
+                            levels = c(0,1),
+                            labels = c("No","Yes"))
+table(mp1$endometriosis)
+
 # For comorbidities, thyroid problems, PCOS or endometriosis by the end of puberty, I am making a binary variable covering whether a thyroid problem was present at
 # 17 years and whether PCOS or endometriosis had been diagnosed at 22 years (only info we have)
 
@@ -1021,27 +1042,6 @@ table(mp1$mat_degree, mp1$cramps)
 # Variable for BMI at 15 years (taken at TF3)
 table(mp1$bmi_15yr)
 mp1$bmi_15yr[mp1$bmi_15yr == -10 | mp1$bmi_15yr == -6 | mp1$bmi_15yr == -1] <- NA
-
-# Using D1426_YPB.pdf
-# Variable for ever been diagnosed with PCOS
-table(mp1$pcos)
-mp1$pcos <- ifelse(mp1$pcos == 1,1,
-                   ifelse(mp1$pcos == 2,1,
-                          ifelse(mp1$pcos == 3,0, NA)))
-mp1$pcos <- factor(mp1$pcos,
-                   levels = c(0,1),
-                   labels = c("No","Yes"))
-table(mp1$pcos)
-
-# Variable for ever been diagnosed with endometrosis
-table(mp1$endometriosis)
-mp1$endometriosis <- ifelse(mp1$endometriosis == 1,1,
-                            ifelse(mp1$endometriosis == 2,1,
-                                   ifelse(mp1$endometriosis == 3,0, NA)))
-mp1$endometriosis <- factor(mp1$endometriosis,
-                            levels = c(0,1),
-                            labels = c("No","Yes"))
-table(mp1$endometriosis)
 
 # Save cleaned dataset for the generation of the Pheno file for the EWAS
 save(mp1, file="mp1.Rda")
