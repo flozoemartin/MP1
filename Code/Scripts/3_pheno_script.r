@@ -11,7 +11,7 @@
 
 # Load in the phenofile generated from merging ALSPAC dataset with samplesheet
 getwd()
-setwd("/location/of/the/data")
+setwd("/location/of/the/data/")
 load("Pheno.Rda")
 
 # So, for each person, I need to derive the right covariate information at each timepoint: if time_code == TF3 use 15yr covariates and if time_code == F17 use
