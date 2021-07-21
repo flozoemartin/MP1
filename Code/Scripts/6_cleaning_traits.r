@@ -15,7 +15,7 @@
 # line 219 - Cleaning continuous traits #
 
 # Load in the data abstraction from ALSPAC of traits identified from the EWAS
-setwd("/Users/ti19522/OneDrive - University of Bristol/Documents/PhD/Year 1/Mini Project 1/R data/")
+setwd("/location/of/the/data/")
 load("traits_25jan.Rda")
 
 traits <- data.frame(traits_25jan)
