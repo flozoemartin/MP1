@@ -26,7 +26,7 @@
 rm(flo_27nov)
 rm(mp1)                         # This clears the mp1 & flo_02nov data in global environment
 
-setwd("/location/of/the/data")
+setwd("/location/of/the/data/")
 
 load("flo_27nov.Rda")           # Load in the raw dataset as pulled from R:/Data
 mp1 <- data.frame(flo_27nov)    # ...and the create a copy of flo_02nov (blank - no labels) which will allow any changes made to 
