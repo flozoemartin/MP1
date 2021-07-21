@@ -22,7 +22,7 @@
 # line 275 - PUB8 16 years old #
 # line 302 - PUB9 17 years old #
 
-setwd("/Users/ti19522/OneDrive - University of Bristol/Documents/PhD/Year 1/Mini Project 1/R Data/Data")
+setwd("location/of/the/data/")
 
 load("flo_27nov.Rda")                    # Load in the raw dataset as pulled from R:/Data
 mp1_nofactor <- data.frame(flo_27nov)    # ...and the create a copy of flo_02nov (blank - no labels) which will allow any changes made to 
