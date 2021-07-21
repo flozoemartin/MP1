@@ -17,7 +17,7 @@
 # line 480 - Figure 6 #
 
 # Load in mp1 for the characteristcs comparison, mp1_nofactor for prevalence figures & traits for coefficient plots
-setwd("/Users/ti19522/OneDrive - University of Bristol/Documents/PhD/Year 1/Mini Project 1/R Data/Data")
+setwd("location/of/the/data/")
 load("mp1.Rda")
 load("mp1_nofactor.Rda")
 load("traits.Rda")
