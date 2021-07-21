@@ -15,7 +15,7 @@
 # line 514 - Table 4 #
 # line 547 - Table 5 #
 
-setwd("/Users/ti19522/OneDrive - University of Bristol/Documents/PhD/Year 1/Mini Project 1/R Data/Data")
+setwd("location/of/the/data/")
 load("mp1.Rda")
 load("traits.Rda")
 load("traits_comorbidrm.Rda")
