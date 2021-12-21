@@ -212,273 +212,6 @@ table(mp1$comorbidity_cc, mp1$cramps, useNA = "always")
 table(mp1$comorbidity_cc, mp1$hmb, useNA = "always")
 
 # Figure 5 - coefficient plot for binary traits identified a priori and in the hypothesis-gen EWAS
-# Need to make a dataframe containing the different elements of the plot
-
-model <- c("Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted",
-           "Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP",
-           "Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM",
-           "Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted",
-           "Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP",
-           "Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM")
-
-exposure <- c("Maternal education*","Maternal alcohol use in pregnancy","Maternal smoking in pregnancy","Maternal HDP","Maternal preeclampsia","Participant alcohol use at 17 years","Participant contraception use ever in puberty*","Participant thyroid problem, endometriosis or PCOS*",
-              "Maternal education*","Maternal alcohol use in pregnancy","Maternal smoking in pregnancy","Maternal HDP","Maternal preeclampsia","Participant alcohol use at 17 years","Participant contraception use ever in puberty*","Participant thyroid problem, endometriosis or PCOS*",
-              "Maternal education*","Maternal alcohol use in pregnancy","Maternal smoking in pregnancy","Maternal HDP","Maternal preeclampsia","Participant alcohol use at 17 years","Participant contraception use ever in puberty*","Participant thyroid problem, endometriosis or PCOS*",
-              "Maternal education*","Maternal alcohol use in pregnancy","Maternal smoking in pregnancy","Maternal HDP","Maternal preeclampsia","Participant alcohol use at 17 years","Participant contraception use ever in puberty*","Participant thyroid problem, endometriosis or PCOS*",
-              "Maternal education*","Maternal alcohol use in pregnancy","Maternal smoking in pregnancy","Maternal HDP","Maternal preeclampsia","Participant alcohol use at 17 years","Participant contraception use ever in puberty*","Participant thyroid problem, endometriosis or PCOS*",
-              "Maternal education*","Maternal alcohol use in pregnancy","Maternal smoking in pregnancy","Maternal HDP","Maternal preeclampsia","Participant alcohol use at 17 years","Participant contraception use ever in puberty*","Participant thyroid problem, endometriosis or PCOS*")
-
-outcome <- c("Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia",
-             "Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia",
-             "Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia",
-             "Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea",
-             "Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea",
-             "Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea")
-
-estimate <- c((coef(summary(glm(data = traits, hmb ~ mat_degree, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ hdp, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ preeclampsia, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ reg_drinker, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ contraception, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ comorbidity, family = binomial)))[2,1]),
-              NA,
-              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ reg_drinker + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu, family = binomial)))[2,1]),
-              NA,
-              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ reg_drinker + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ mat_degree, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ hdp, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ preeclampsia, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ reg_drinker, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ contraception, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ comorbidity, family = binomial)))[2,1]),
-              NA,
-              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ reg_drinker + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu, family = binomial)))[2,1]),
-              NA,
-              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ reg_drinker + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,1]))
-
-
-se <- c((coef(summary(glm(data = traits, hmb ~ mat_degree, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ hdp, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ preeclampsia, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ reg_drinker, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ contraception, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ comorbidity, family = binomial)))[2,2]),
-              NA,
-              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ reg_drinker + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu, family = binomial)))[2,2]),
-              NA,
-              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ reg_drinker + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ mat_degree, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ hdp, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ preeclampsia, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ reg_drinker, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ contraception, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ comorbidity, family = binomial)))[2,2]),
-              NA,
-              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ reg_drinker + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu, family = binomial)))[2,2]),
-              NA,
-              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ reg_drinker + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,2]))
-se <- c((coef(summary(glm(data = traits, hmb ~ mat_degree, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ hdp, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ preeclampsia, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ reg_drinker, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ contraception, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ comorbidity, family = binomial)))[2,2]),
-              NA,
-              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ reg_drinker + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu, family = binomial)))[2,2]),
-              NA,
-              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ reg_drinker + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ mat_degree, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ hdp, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ preeclampsia, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ reg_drinker, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ contraception, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ comorbidity, family = binomial)))[2,2]),
-              NA,
-              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ reg_drinker + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu, family = binomial)))[2,2]),
-              NA,
-              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ reg_drinker + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,2]))
-
-
-p <- c((coef(summary(glm(data = traits, hmb ~ mat_degree, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ hdp, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ preeclampsia, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ reg_drinker, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ contraception, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ comorbidity, family = binomial)))[2,4]),
-              NA,
-              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ reg_drinker + mat_edu, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu, family = binomial)))[2,4]),
-              NA,
-              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ reg_drinker + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ mat_degree, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ hdp, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ preeclampsia, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ reg_drinker, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ contraception, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ comorbidity, family = binomial)))[2,4]),
-              NA,
-              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ reg_drinker + mat_edu, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu, family = binomial)))[2,4]),
-              NA,
-              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ reg_drinker + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu + men_age_m, family = binomial)))[2,4]),
-              (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,4]))
-            
-lowci <- (estimate-(1.96*se))
-upci <- (estimate+(1.96*se))
-
-or <- exp(estimate)
-lci <- exp(lowci)
-uci <- exp(upci)
-
-# Save as a dataframe - model, exposure & outcome are string, estimate, se & p are pulled from the coef summary and lowci & upci are calculated from estimate & se.
-# I then exponentiate these indepently using exp for or, lci & uci
-
-coeff_bin_aam <- data.frame(model,exposure,outcome,estimate,se,lowci,upci,or,lci,uci,p)
-
-# Use this dataframe to fill in supplementary table 6 & 8 - raw numbers used to build the coefficient plot
-
-# Now apply ggplot to make the coefficient plot
-p <- coeff_bin_aam %>%
-  arrange(exposure) %>%
-  mutate(exposure = factor(exposure, levels=c("Participant thyroid problem, endometriosis or PCOS*","Participant contraception use ever in puberty*","Participant alcohol use at 17 years","Maternal preeclampsia","Maternal HDP","Maternal smoking in pregnancy","Maternal alcohol use in pregnancy", 
-                                              "Maternal education*"))) %>%
-  arrange(model) %>%
-  mutate(model = factor(model, levels=c("Unadjusted","Adjusted for SEP", "Adjusted for SEP & AAM"))) %>%
-  ggplot(aes(y=exposure,x=or,colour=p<0.05, xmin=lci, xmax=uci)) +
-  geom_pointrange() +
-  geom_vline(xintercept = 1) +
-  facet_grid(outcome~model) +
-  scale_x_continuous(trans='log10') +
-  geom_errorbar(aes(xmin=lci, xmax=uci), width=.2, position=position_dodge(.5)) +
-  theme_bw() +
-  labs(x="Odds ratio (95% CI)",y="Trait", title="Binary traits associated with dysmenorrhea & menorrhagia") +
-  scale_colour_manual(values=c("#999999", "#660000"), name = "P < 0.05", labels =c("False","True")) +
-  theme(plot.title = element_text(hjust = 0.5)) +
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-        panel.background = element_blank(), axis.line = element_line(colour = "black"))
-
-g <- ggplot_gtable(ggplot_build(p))
-strip_both <- which(grepl('strip-', g$layout$name))
-fills <- c("#FFFFFF","#FFFFFF","#FFFFFF","#9999CC","#CC6666")
-k <- 1
-for (i in strip_both) {
-  j <- which(grepl('rect', g$grobs[[i]]$grobs[[1]]$childrenOrder))
-  g$grobs[[i]]$grobs[[1]]$children[[j]]$gp$fill <- fills[k]
-  k <- k+1
-}
-grid::grid.draw(g)
-
-# Figure 6 - coefficient plot for continous traits identified a priori and in hypothesis-gen EWAS
-
 model <- c("Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted",
            "Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP",
            "Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM",
@@ -486,12 +219,244 @@ model <- c("Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Una
            "Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP",
            "Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM")
 
-exposure <- c("Maternal BMI (kg/m²)","Gestational age at birth","Cognitive score at 6 years","Age at menarche (months)*","ACE score at 16 years","BMI (kg/m²) at 17 years*","Cotinine (ng/mL) at 17 years","C-reactive protein (mmol/L) at 17 years","Cholesterol (mmol/L) at 17 years",
-              "Maternal BMI (kg/m²)","Gestational age at birth","Cognitive score at 6 years","Age at menarche (months)*","ACE score at 16 years","BMI (kg/m²) at 17 years*","Cotinine (ng/mL) at 17 years","C-reactive protein (mmol/L) at 17 years","Cholesterol (mmol/L) at 17 years",
-              "Maternal BMI (kg/m²)","Gestational age at birth","Cognitive score at 6 years","Age at menarche (months)*","ACE score at 16 years","BMI (kg/m²) at 17 years*","Cotinine (ng/mL) at 17 years","C-reactive protein (mmol/L) at 17 years","Cholesterol (mmol/L) at 17 years",
-              "Maternal BMI (kg/m²)","Gestational age at birth","Cognitive score at 6 years","Age at menarche (months)*","ACE score at 16 years","BMI (kg/m²) at 17 years*","Cotinine (ng/mL) at 17 years","C-reactive protein (mmol/L) at 17 years","Cholesterol (mmol/L) at 17 years",
-              "Maternal BMI (kg/m²)","Gestational age at birth","Cognitive score at 6 years","Age at menarche (months)*","ACE score at 16 years","BMI (kg/m²) at 17 years*","Cotinine (ng/mL) at 17 years","C-reactive protein (mmol/L) at 17 years","Cholesterol (mmol/L) at 17 years",
-              "Maternal BMI (kg/m²)","Gestational age at birth","Cognitive score at 6 years","Age at menarche (months)*","ACE score at 16 years","BMI (kg/m²) at 17 years*","Cotinine (ng/mL) at 17 years","C-reactive protein (mmol/L) at 17 years","Cholesterol (mmol/L) at 17 years")
+exposure <- c("Maternal education*","Maternal alcohol use in pregnancy","Maternal smoking in pregnancy","Maternal HDP","Maternal preeclampsia","Participant alcohol use at 13 years","Participant smoking at 13 years*","Participant contraception use ever in puberty*","Participant thyroid problem, endometriosis or PCOS*",
+              "Maternal education*","Maternal alcohol use in pregnancy","Maternal smoking in pregnancy","Maternal HDP","Maternal preeclampsia","Participant alcohol use at 13 years","Participant smoking at 13 years*","Participant contraception use ever in puberty*","Participant thyroid problem, endometriosis or PCOS*",
+              "Maternal education*","Maternal alcohol use in pregnancy","Maternal smoking in pregnancy","Maternal HDP","Maternal preeclampsia","Participant alcohol use at 13 years","Participant smoking at 13 years*","Participant contraception use ever in puberty*","Participant thyroid problem, endometriosis or PCOS*",
+              "Maternal education*","Maternal alcohol use in pregnancy","Maternal smoking in pregnancy","Maternal HDP","Maternal preeclampsia","Participant alcohol use at 13 years","Participant smoking at 13 years*","Participant contraception use ever in puberty*","Participant thyroid problem, endometriosis or PCOS*",
+              "Maternal education*","Maternal alcohol use in pregnancy","Maternal smoking in pregnancy","Maternal HDP","Maternal preeclampsia","Participant alcohol use at 13 years","Participant smoking at 13 years*","Participant contraception use ever in puberty*","Participant thyroid problem, endometriosis or PCOS*",
+              "Maternal education*","Maternal alcohol use in pregnancy","Maternal smoking in pregnancy","Maternal HDP","Maternal preeclampsia","Participant alcohol use at 13 years","Participant smoking at 13 years*","Participant contraception use ever in puberty*","Participant thyroid problem, endometriosis or PCOS*")
+
+outcome <- c("Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia",
+             "Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia",
+             "Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia",
+             "Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea",
+             "Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea",
+             "Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea")
+
+estimate <- c((coef(summary(glm(data = traits, hmb ~ mat_degree, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ hdp, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ preeclampsia, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ alcohol_tf1, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ smoked_tf1, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ contraception, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ comorbidity, family = binomial)))[2,1]),
+              NA,
+              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ alcohol_tf1 + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ smoked_tf1 + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu, family = binomial)))[2,1]),
+              NA,
+              (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ alcohol_tf1 + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ smoked_tf1 + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ mat_degree, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ hdp, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ preeclampsia, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ alcohol_tf1, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ smoked_tf1, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ contraception, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ comorbidity, family = binomial)))[2,1]),
+              NA,
+              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ alcohol_tf1 + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ smoked_tf1 + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu, family = binomial)))[2,1]),
+              NA,
+              (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ alcohol_tf1 + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ smoked_tf1 + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,1]))
+
+se <- c((coef(summary(glm(data = traits, hmb ~ mat_degree, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ hdp, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ preeclampsia, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ alcohol_tf1, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ smoked_tf1, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ contraception, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ comorbidity, family = binomial)))[2,2]),
+        NA,
+        (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ alcohol_tf1 + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ smoked_tf1 + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu, family = binomial)))[2,2]),
+        NA,
+        (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ alcohol_tf1 + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ smoked_tf1 + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ mat_degree, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ hdp, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ preeclampsia, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ alcohol_tf1, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ smoked_tf1, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ contraception, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ comorbidity, family = binomial)))[2,2]),
+        NA,
+        (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ alcohol_tf1 + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ smoked_tf1 + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu, family = binomial)))[2,2]),
+        NA,
+        (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ alcohol_tf1 + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ smoked_tf1 + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,2]))
+
+p <- c((coef(summary(glm(data = traits, hmb ~ mat_degree, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ hdp, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ preeclampsia, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ alcohol_tf1, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ smoked_tf1, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ contraception, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ comorbidity, family = binomial)))[2,4]),
+       NA,
+       (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ alcohol_tf1 + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ smoked_tf1 + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu, family = binomial)))[2,4]),
+       NA,
+       (coef(summary(glm(data = traits, hmb ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ hdp + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ alcohol_tf1 + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ smoked_tf1 + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ contraception + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ mat_degree, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ hdp, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ preeclampsia, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ alcohol_tf1, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ smoked_tf1, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ contraception, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ comorbidity, family = binomial)))[2,4]),
+       NA,
+       (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ alcohol_tf1 + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ smoked_tf1 + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu, family = binomial)))[2,4]),
+       NA,
+       (coef(summary(glm(data = traits, cramps ~ ever_alcohol_preg + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ smoking_mother_ever_pregnancy_binary + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ hdp + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ preeclampsia + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ alcohol_tf1 + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ smoked_tf1 + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ contraception + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ comorbidity + mat_edu + men_age_m, family = binomial)))[2,4]))
+
+lowci <- (estimate-(1.96*se))
+upci <- (estimate+(1.96*se))
+
+or <- exp(estimate)
+lci <- exp(lowci)
+uci <- exp(upci)
+
+coeff_bin_aam <- data.frame(model,exposure,outcome,estimate,se,lowci,upci,or,lci,uci,p)
+
+library(ggplot2)
+library(ggstance)
+library(dplyr)
+
+p <- coeff_bin_aam %>%
+  arrange(exposure) %>%
+  mutate(exposure = factor(exposure, levels=c("Participant thyroid problem, endometriosis or PCOS*","Participant contraception use ever in puberty*","Participant smoking at 13 years*","Participant alcohol use at 13 years","Maternal preeclampsia","Maternal HDP","Maternal smoking in pregnancy","Maternal alcohol use in pregnancy", 
+                                              "Maternal education*"))) %>%
+  arrange(model) %>%
+  mutate(model = factor(model, levels=c("Unadjusted","Adjusted for SEP", "Adjusted for SEP & AAM"))) %>%
+  ggplot(aes(y=exposure,x=or, xmin=lci, xmax=uci)) +
+  geom_pointrange() +
+  geom_vline(xintercept = 1, linetype = "dashed", colour = "red") +
+  facet_grid(outcome~model) +
+  scale_x_continuous(trans='log10') +
+  geom_errorbar(aes(xmin=lci, xmax=uci), width=.2, position=position_dodge(.5)) +
+  theme_bw() +
+  labs(x="Odds ratio (95% CI)",y="Trait") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"))
+
+p
+
+# g <- ggplot_gtable(ggplot_build(p))
+# strip_both <- which(grepl('strip-', g$layout$name))
+# fills <- c("#FFFFFF","#FFFFFF","#FFFFFF","#FFFFFF","#FFFFFF")
+# k <- 1
+# for (i in strip_both) {
+#  j <- which(grepl('rect', g$grobs[[i]]$grobs[[1]]$childrenOrder))
+#  g$grobs[[i]]$grobs[[1]]$children[[j]]$gp$fill <- fills[k]
+#  k <- k+1
+# }
+# grid::grid.draw(g)
+
+
+# Figure 6 continuous
+model <- c("Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted",
+           "Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP",
+           "Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM",
+           "Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted","Unadjusted",
+           "Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP","Adjusted for SEP",
+           "Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM","Adjusted for SEP & AAM")
+
+exposure <- c("Maternal BMI (kg/m²)","Participant gestational age at birth","Participant BMI (kg/m²) at 7 years*","Participant cholesterol (mmol/L) at 7 years","Participant cotinine (ng/mL) at 7 years","Participant non-word repetition scores at 8 years","Participant C-reactive protein (mmol/L) at 9 years","Participant age at menarche (months)*","Participant ACE score at 16 years",
+              "Maternal BMI (kg/m²)","Participant gestational age at birth","Participant BMI (kg/m²) at 7 years*","Participant cholesterol (mmol/L) at 7 years","Participant cotinine (ng/mL) at 7 years","Participant non-word repetition scores at 8 years","Participant C-reactive protein (mmol/L) at 9 years","Participant age at menarche (months)*","Participant ACE score at 16 years",
+              "Maternal BMI (kg/m²)","Participant gestational age at birth","Participant BMI (kg/m²) at 7 years*","Participant cholesterol (mmol/L) at 7 years","Participant cotinine (ng/mL) at 7 years","Participant non-word repetition scores at 8 years","Participant C-reactive protein (mmol/L) at 9 years","Participant age at menarche (months)*","Participant ACE score at 16 years",
+              "Maternal BMI (kg/m²)","Participant gestational age at birth","Participant BMI (kg/m²) at 7 years*","Participant cholesterol (mmol/L) at 7 years","Participant cotinine (ng/mL) at 7 years","Participant non-word repetition scores at 8 years","Participant C-reactive protein (mmol/L) at 9 years","Participant age at menarche (months)*","Participant ACE score at 16 years",
+              "Maternal BMI (kg/m²)","Participant gestational age at birth","Participant BMI (kg/m²) at 7 years*","Participant cholesterol (mmol/L) at 7 years","Participant cotinine (ng/mL) at 7 years","Participant non-word repetition scores at 8 years","Participant C-reactive protein (mmol/L) at 9 years","Participant age at menarche (months)*","Participant ACE score at 16 years",
+              "Maternal BMI (kg/m²)","Participant gestational age at birth","Participant BMI (kg/m²) at 7 years*","Participant cholesterol (mmol/L) at 7 years","Participant cotinine (ng/mL) at 7 years","Participant non-word repetition scores at 8 years","Participant C-reactive protein (mmol/L) at 9 years","Participant age at menarche (months)*","Participant ACE score at 16 years")
 
 outcome <- c("Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia",
              "Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia",
@@ -501,169 +466,169 @@ outcome <- c("Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagia","Menorrhagi
              "Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea","Dysmenorrhea")
 
 estimate <- c((coef(summary(glm(data = traits, hmb ~ mat_bmi_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ gest_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ cog_score_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ men_age_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ ace_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ bmi_17_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ cotinine_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ crp_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ chol_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ bestgest_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ bmi_7yr_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ chol_7yr_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ cotinine_7yr_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ nonword_8yr_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ crp_9yr_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ men_age_m_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ ace_score_z, family = binomial)))[2,1]),
               (coef(summary(glm(data = traits, hmb ~ mat_bmi_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ gest_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ cog_score_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ men_age_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ ace_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ bmi_17_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ cotinine_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ crp_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ chol_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ bestgest_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ bmi_7yr_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ chol_7yr_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ cotinine_7yr_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ nonword_8yr_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ crp_9yr_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ men_age_m_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ ace_score_z + mat_edu, family = binomial)))[2,1]),
               (coef(summary(glm(data = traits, hmb ~ mat_bmi_z + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ gest_z + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ cog_score_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ bestgest_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ bmi_7yr_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ chol_7yr_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ cotinine_7yr_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ nonword_8yr_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ crp_9yr_z + mat_edu + men_age_m, family = binomial)))[2,1]),
               NA,
-              (coef(summary(glm(data = traits, hmb ~ ace_z + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ bmi_17_z + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ cotinine_z + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ crp_z + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, hmb ~ chol_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, hmb ~ ace_score_z + mat_edu + men_age_m, family = binomial)))[2,1]),
               (coef(summary(glm(data = traits, cramps ~ mat_bmi_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ gest_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ cog_score_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ men_age_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ ace_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ bmi_17_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ cotinine_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ crp_z, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ chol_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ bestgest_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ bmi_7yr_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ chol_7yr_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ cotinine_7yr_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ nonword_8yr_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ crp_9yr_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ men_age_m_z, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ ace_score_z, family = binomial)))[2,1]),
               (coef(summary(glm(data = traits, cramps ~ mat_bmi_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ gest_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ cog_score_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ men_age_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ ace_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ bmi_17_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ cotinine_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ crp_z + mat_edu, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ chol_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ bestgest_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ bmi_7yr_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ chol_7yr_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ cotinine_7yr_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ nonword_8yr_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ crp_9yr_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ men_age_m_z + mat_edu, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ ace_score_z + mat_edu, family = binomial)))[2,1]),
               (coef(summary(glm(data = traits, cramps ~ mat_bmi_z + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ gest_z + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ cog_score_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ bestgest_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ bmi_7yr_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ chol_7yr_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ cotinine_7yr_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ nonword_8yr_z + mat_edu + men_age_m, family = binomial)))[2,1]),
+              (coef(summary(glm(data = traits, cramps ~ crp_9yr_z + mat_edu + men_age_m, family = binomial)))[2,1]),
               NA,
-              (coef(summary(glm(data = traits, cramps ~ ace_z + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ bmi_17_z + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ cotinine_z + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ crp_z + mat_edu + men_age_m, family = binomial)))[2,1]),
-              (coef(summary(glm(data = traits, cramps ~ chol_z + mat_edu + men_age_m, family = binomial)))[2,1]))
+              (coef(summary(glm(data = traits, cramps ~ ace_score_z + mat_edu + men_age_m, family = binomial)))[2,1]))
 
 se <- c((coef(summary(glm(data = traits, hmb ~ mat_bmi_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ gest_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ cog_score_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ men_age_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ ace_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ bmi_17_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ cotinine_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ crp_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ chol_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ mat_bmi_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ gest_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ cog_score_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ men_age_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ ace_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ bmi_17_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ cotinine_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ crp_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ chol_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ mat_bmi_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ gest_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ cog_score_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              NA,
-              (coef(summary(glm(data = traits, hmb ~ ace_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ bmi_17_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ cotinine_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ crp_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, hmb ~ chol_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ mat_bmi_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ gest_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ cog_score_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ men_age_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ ace_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ bmi_17_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ cotinine_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ crp_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ chol_z, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ mat_bmi_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ gest_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ cog_score_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ men_age_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ ace_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ bmi_17_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ cotinine_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ crp_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ chol_z + mat_edu, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ mat_bmi_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ gest_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ cog_score_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              NA,
-              (coef(summary(glm(data = traits, cramps ~ ace_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ bmi_17_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ cotinine_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ crp_z + mat_edu + men_age_m, family = binomial)))[2,2]),
-              (coef(summary(glm(data = traits, cramps ~ chol_z + mat_edu + men_age_m, family = binomial)))[2,2]))
+        (coef(summary(glm(data = traits, hmb ~ bestgest_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ bmi_7yr_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ chol_7yr_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ cotinine_7yr_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ nonword_8yr_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ crp_9yr_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ men_age_m_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ ace_score_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ mat_bmi_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ bestgest_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ bmi_7yr_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ chol_7yr_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ cotinine_7yr_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ nonword_8yr_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ crp_9yr_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ men_age_m_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ ace_score_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ mat_bmi_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ bestgest_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ bmi_7yr_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ chol_7yr_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ cotinine_7yr_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ nonword_8yr_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, hmb ~ crp_9yr_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        NA,
+        (coef(summary(glm(data = traits, hmb ~ ace_score_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ mat_bmi_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ bestgest_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ bmi_7yr_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ chol_7yr_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ cotinine_7yr_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ nonword_8yr_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ crp_9yr_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ men_age_m_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ ace_score_z, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ mat_bmi_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ bestgest_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ bmi_7yr_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ chol_7yr_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ cotinine_7yr_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ nonword_8yr_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ crp_9yr_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ men_age_m_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ ace_score_z + mat_edu, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ mat_bmi_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ bestgest_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ bmi_7yr_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ chol_7yr_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ cotinine_7yr_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ nonword_8yr_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        (coef(summary(glm(data = traits, cramps ~ crp_9yr_z + mat_edu + men_age_m, family = binomial)))[2,2]),
+        NA,
+        (coef(summary(glm(data = traits, cramps ~ ace_score_z + mat_edu + men_age_m, family = binomial)))[2,2]))
 
 p <- c((coef(summary(glm(data = traits, hmb ~ mat_bmi_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ gest_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ cog_score_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ men_age_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ ace_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ bmi_17_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ cotinine_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ crp_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ chol_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ mat_bmi_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ gest_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ cog_score_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ men_age_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ ace_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ bmi_17_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ cotinine_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ crp_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ chol_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ mat_bmi_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ gest_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ cog_score_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        NA,
-        (coef(summary(glm(data = traits, hmb ~ ace_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ bmi_17_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ cotinine_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ crp_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, hmb ~ chol_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ mat_bmi_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ gest_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ cog_score_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ men_age_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ ace_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ bmi_17_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ cotinine_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ crp_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ chol_z, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ mat_bmi_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ gest_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ cog_score_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ men_age_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ ace_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ bmi_17_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ cotinine_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ crp_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ chol_z + mat_edu, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ mat_bmi_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ gest_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ cog_score_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        NA,
-        (coef(summary(glm(data = traits, cramps ~ ace_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ bmi_17_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ cotinine_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ crp_z + mat_edu + men_age_m, family = binomial)))[2,4]),
-        (coef(summary(glm(data = traits, cramps ~ chol_z + mat_edu + men_age_m, family = binomial)))[2,4]))
+       (coef(summary(glm(data = traits, hmb ~ bestgest_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ bmi_7yr_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ chol_7yr_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ cotinine_7yr_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ nonword_8yr_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ crp_9yr_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ men_age_m_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ ace_score_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ mat_bmi_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ bestgest_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ bmi_7yr_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ chol_7yr_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ cotinine_7yr_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ nonword_8yr_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ crp_9yr_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ men_age_m_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ ace_score_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ mat_bmi_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ bestgest_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ bmi_7yr_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ chol_7yr_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ cotinine_7yr_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ nonword_8yr_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, hmb ~ crp_9yr_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       NA,
+       (coef(summary(glm(data = traits, hmb ~ ace_score_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ mat_bmi_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ bestgest_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ bmi_7yr_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ chol_7yr_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ cotinine_7yr_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ nonword_8yr_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ crp_9yr_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ men_age_m_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ ace_score_z, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ mat_bmi_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ bestgest_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ bmi_7yr_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ chol_7yr_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ cotinine_7yr_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ nonword_8yr_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ crp_9yr_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ men_age_m_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ ace_score_z + mat_edu, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ mat_bmi_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ bestgest_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ bmi_7yr_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ chol_7yr_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ cotinine_7yr_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ nonword_8yr_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       (coef(summary(glm(data = traits, cramps ~ crp_9yr_z + mat_edu + men_age_m, family = binomial)))[2,4]),
+       NA,
+       (coef(summary(glm(data = traits, cramps ~ ace_score_z + mat_edu + men_age_m, family = binomial)))[2,4]))
 
 lowci <- (estimate-(1.96*se))
 upci <- (estimate+(1.96*se))
@@ -675,35 +640,23 @@ uci <- exp(upci)
 # OR, lci & uci derived similarly to Fig 5
 coeff_cont_aam <- data.frame(model,exposure,outcome,estimate,se,lowci,upci,or,lci,uci,p)
 
-# Use this dataframe to fill in supplementary table 7 & 9 - raw numbers used to build the coefficient plot
-
 p <- coeff_cont_aam %>%
   arrange(exposure) %>%
-  mutate(exposure = factor(exposure, levels=c("Cholesterol (mmol/L) at 17 years","C-reactive protein (mmol/L) at 17 years","Cotinine (ng/mL) at 17 years","BMI (kg/m²) at 17 years*",
-                                              "ACE score at 16 years","Age at menarche (months)*","Cognitive score at 6 years","Gestational age at birth","Maternal BMI (kg/m²)"))) %>%
+  mutate(exposure = factor(exposure, levels=c("Participant ACE score at 16 years","Participant age at menarche (months)*","Participant C-reactive protein (mmol/L) at 9 years","Participant non-word repetition scores at 8 years",
+                                              "Participant cotinine (ng/mL) at 7 years","Participant cholesterol (mmol/L) at 7 years","Participant BMI (kg/m²) at 7 years*","Participant gestational age at birth","Maternal BMI (kg/m²)"))) %>%
   arrange(model) %>%
   mutate(model = factor(model, levels=c("Unadjusted","Adjusted for SEP","Adjusted for SEP & AAM"))) %>%
-  ggplot(aes(y=exposure,x=or,colour=p<0.05, xmin=lci, xmax=uci)) +
+  ggplot(aes(y=exposure,x=or, xmin=lci, xmax=uci)) +
   geom_pointrange() +
-  geom_vline(xintercept = 1) +
+  geom_vline(xintercept = 1, linetype = "dashed", colour = "red") +
   facet_grid(outcome~model) +
   scale_x_continuous(trans='log10') +
   geom_errorbar(aes(xmin=lci, xmax=uci), width=.2, position=position_dodge(.5)) +
   theme_bw() +
-  labs(x="Odds ratio (95%CI)",y="Trait", title="Continuous traits associated with dysmenorrhea & menorrhagia") +
-  scale_colour_manual(values=c("#999999", "#660000"), name = "P < 0.05", labels =c("False","True")) +
+  labs(x="Odds ratio (95%CI)",y="Trait") +
   theme(plot.title = element_text(hjust = 0.5)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
 
-g <- ggplot_gtable(ggplot_build(p))
-strip_both <- which(grepl('strip-', g$layout$name))
-fills <- c("#FFFFFF","#FFFFFF", "#FFFFFF","#9999CC","#CC6666")
-k <- 1
-for (i in strip_both) {
-  j <- which(grepl('rect', g$grobs[[i]]$grobs[[1]]$childrenOrder))
-  g$grobs[[i]]$grobs[[1]]$children[[j]]$gp$fill <- fills[k]
-  k <- k+1
-}
-grid::grid.draw(g)
+p
 
